@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎀 ألعاب مودة ومريم - بناتي</title>
+    <title>🎀 ألعاب مودة ومريم</title>
     
     <style>
         * {
@@ -18,21 +18,6 @@
             color: #4a2c2c;
             direction: rtl;
             padding: 20px;
-            min-height: 100vh;
-        }
-
-        /* خلفية باسمائكم */
-        body::before {
-            content: "❤️ مودة ومريم ❤️";
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
-            font-size: 100px;
-            color: rgba(255, 105, 180, 0.1);
-            z-index: -1;
-            white-space: nowrap;
-            pointer-events: none;
         }
 
         /* الهيدر */
@@ -45,8 +30,6 @@
             justify-content: space-between;
             align-items: center;
             border: 3px solid white;
-            position: relative;
-            z-index: 1;
         }
 
         .logo {
@@ -62,27 +45,6 @@
             border-radius: 50px;
             font-weight: bold;
             font-size: 20px;
-        }
-
-        /* الأزرار */
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            background: white;
-            color: #ff69b4;
-            border: 2px solid #ff69b4;
-            transition: 0.2s;
-        }
-
-        button:hover {
-            background: #ff69b4;
-            color: white;
-            transform: scale(1.05);
         }
 
         /* شبكة الألعاب */
@@ -130,23 +92,49 @@
             min-height: 400px;
         }
 
-        /* ألعاب البنات */
-        .doll-container {
-            position: relative;
-            width: 300px;
-            height: 400px;
+        /* الأزرار */
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #ff69b4;
+            color: white;
+            border: 2px solid white;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: white;
+            color: #ff69b4;
+            transform: scale(1.05);
+        }
+
+        /* إكس-أو */
+        .tic-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 300px;
             margin: 20px auto;
         }
 
-        .doll-part {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .tic-cell {
+            aspect-ratio: 1;
+            background: #ffe4e1;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
         }
 
+        /* ألعاب البنات */
         .style-options {
             display: flex;
             flex-wrap: wrap;
@@ -189,25 +177,6 @@
             border: 3px solid white;
         }
 
-        .color-circle:hover {
-            transform: scale(1.1);
-        }
-
-        .nail {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            margin: 5px;
-            display: inline-block;
-            cursor: pointer;
-        }
-
-        .outfit-part {
-            font-size: 60px;
-            margin: 10px;
-            cursor: pointer;
-        }
-
         .status {
             font-size: 20px;
             margin: 20px;
@@ -219,13 +188,13 @@
 <body>
 
 <header>
-    <div class="logo">🎀 مودة ومريم ستايل 🎀</div>
+    <div class="logo">🎀 مودة ومريم</div>
     <div class="points-box" id="points">0</div>
 </header>
 
 <!-- القائمة الرئيسية -->
-<div id="menu" style="display: block;">
-    <h2 style="text-align: center; color: white; margin: 20px;">🎀 ألعاب البنات الحلوة 🎀</h2>
+<div id="menu">
+    <h2 style="text-align: center; color: white; margin: 20px;">🎀 اختاروا لعبتكم 🎀</h2>
     <div class="games-grid" id="gamesGrid"></div>
 </div>
 
@@ -250,64 +219,36 @@ function addPoints(p) {
     points += p;
     localStorage.setItem('points', points);
     document.getElementById('points').textContent = points;
-    alert(`🎀 +${p} نقطة! المجموع: ${points}`);
+    alert(`🎀 +${p} نقطة!`);
 }
 
 ///////////////////////////////////////////
-// 35 لعبة (27 قديمة + 8 ألعاب بنات)
+// 10 ألعاب أساسية (مضمونة)
 ///////////////////////////////////////////
 const games = [
-    // الألعاب القديمة
     { id: 1, name: 'إكس-أو', icon: '❌⭕' },
-    { id: 2, name: 'الذاكرة', icon: '🎴' },
-    { id: 3, name: 'تخمين الأرقام', icon: '🔢' },
-    { id: 4, name: 'حجر ورقة مقص', icon: '✂️' },
-    { id: 5, name: 'عملة معدنية', icon: '🪙' },
-    { id: 6, name: 'الجمع السريع', icon: '➕' },
-    { id: 7, name: 'الطرح السريع', icon: '➖' },
-    { id: 8, name: 'جدول الضرب', icon: '✖️' },
-    { id: 9, name: 'القسمة', icon: '➗' },
-    { id: 10, name: 'الأكبر والأصغر', icon: '📊' },
-    { id: 11, name: 'تسلسل الأرقام', icon: '📈' },
-    { id: 12, name: 'الرقم المفقود', icon: '🔍' },
-    { id: 13, name: 'العد التنازلي', icon: '⏱️' },
-    { id: 14, name: 'مضاعفات الرقم', icon: '🔄' },
-    { id: 15, name: 'تحليل الرقم', icon: '🔬' },
-    { id: 16, name: 'الحرف الناقص', icon: '📝' },
-    { id: 17, name: 'ترتيب الحروف', icon: '🔤' },
-    { id: 18, name: 'كلمة السر', icon: '🔐' },
-    { id: 19, name: 'عكس الكلمة', icon: '🔄' },
-    { id: 20, name: 'أطول كلمة', icon: '📏' },
-    { id: 21, name: 'الزوجي والفردي', icon: '2️⃣' },
-    { id: 22, name: 'مربع العدد', icon: '■' },
-    { id: 23, name: 'جذر العدد', icon: '√' },
-    { id: 24, name: 'النسبة المئوية', icon: '%' },
-    { id: 25, name: 'الكسور', icon: '½' },
-    { id: 26, name: 'الأعداد العشرية', icon: '🔟' },
-    { id: 27, name: 'الأعداد السالبة', icon: '➖' },
-    
-    // ألعاب بنات جديدة
-    { id: 28, name: 'تسريحة شعر', icon: '💇' },
-    { id: 29, name: 'تلوين أظافر', icon: '💅' },
-    { id: 30, name: 'فستان أميرة', icon: '👗' },
-    { id: 31, name: 'مكياج عيون', icon: '👁️' },
-    { id: 32, name: 'تزيين كعكة', icon: '🍰' },
-    { id: 33, name: 'غرفة بنات', icon: '🛏️' },
-    { id: 34, name: 'حيوانات أليفة', icon: '🐱' },
-    { id: 35, name: 'مجوهرات', icon: '💎' }
+    { id: 2, name: 'تخمين الأرقام', icon: '🔢' },
+    { id: 3, name: 'حجر ورقة مقص', icon: '✂️' },
+    { id: 4, name: 'الجمع السريع', icon: '➕' },
+    { id: 5, name: 'تسريحة شعر', icon: '💇' },
+    { id: 6, name: 'تلوين أظافر', icon: '💅' },
+    { id: 7, name: 'فستان أميرة', icon: '👗' },
+    { id: 8, name: 'مكياج عيون', icon: '👁️' },
+    { id: 9, name: 'تزيين كعكة', icon: '🍰' },
+    { id: 10, name: 'مجوهرات', icon: '💎' }
 ];
 
 // عرض الألعاب في القائمة
 function displayGames() {
     let html = '';
-    games.forEach(game => {
+    for(let i = 0; i < games.length; i++) {
         html += `
-            <div class="game-card" onclick="playGame(${game.id})">
-                <div class="game-icon">${game.icon}</div>
-                <div class="game-title">${game.name}</div>
+            <div class="game-card" onclick="playGame(${games[i].id})">
+                <div class="game-icon">${games[i].icon}</div>
+                <div class="game-title">${games[i].name}</div>
             </div>
         `;
-    });
+    }
     document.getElementById('gamesGrid').innerHTML = html;
 }
 
@@ -327,49 +268,17 @@ function playGame(id) {
     
     let content = '';
     
-    if (id <= 27) {
-        // الألعاب القديمة
-        switch(id) {
-            case 1: content = ticTacToeGame(); break;
-            case 2: content = memoryGame(); break;
-            case 3: content = guessNumberGame(); break;
-            case 4: content = rpsGame(); break;
-            case 5: content = coinGame(); break;
-            case 6: content = additionGame(); break;
-            case 7: content = subtractionGame(); break;
-            case 8: content = multiplicationGame(); break;
-            case 9: content = divisionGame(); break;
-            case 10: content = compareGame(); break;
-            case 11: content = sequenceGame(); break;
-            case 12: content = missingNumberGame(); break;
-            case 13: content = countdownGame(); break;
-            case 14: content = multiplesGame(); break;
-            case 15: content = factorsGame(); break;
-            case 16: content = missingLetterGame(); break;
-            case 17: content = arrangeLettersGame(); break;
-            case 18: content = passwordGame(); break;
-            case 19: content = reverseWordGame(); break;
-            case 20: content = longestWordGame(); break;
-            case 21: content = oddEvenGame(); break;
-            case 22: content = squareGame(); break;
-            case 23: content = sqrtGame(); break;
-            case 24: content = percentageGame(); break;
-            case 25: content = fractionGame(); break;
-            case 26: content = decimalGame(); break;
-            case 27: content = negativeGame(); break;
-        }
-    } else {
-        // ألعاب البنات الجديدة
-        switch(id) {
-            case 28: content = hairGame(); break;
-            case 29: content = nailsGame(); break;
-            case 30: content = dressGame(); break;
-            case 31: content = makeupGame(); break;
-            case 32: content = cakeGame(); break;
-            case 33: content = roomGame(); break;
-            case 34: content = petsGame(); break;
-            case 35: content = jewelryGame(); break;
-        }
+    switch(id) {
+        case 1: content = ticTacToeGame(); break;
+        case 2: content = guessNumberGame(); break;
+        case 3: content = rpsGame(); break;
+        case 4: content = additionGame(); break;
+        case 5: content = hairGame(); break;
+        case 6: content = nailsGame(); break;
+        case 7: content = dressGame(); break;
+        case 8: content = makeupGame(); break;
+        case 9: content = cakeGame(); break;
+        case 10: content = jewelryGame(); break;
     }
     
     document.getElementById('gameContent').innerHTML = content;
@@ -379,19 +288,19 @@ function playGame(id) {
 function resetCurrentGame() {
     let title = document.getElementById('gameTitle').textContent;
     let game = games.find(g => g.name === title);
-    if (game) playGame(game.id);
+    if(game) playGame(game.id);
 }
 
 ///////////////////////////////////////////
-// الألعاب القديمة (موجودة)
+// لعبة إكس-أو
 ///////////////////////////////////////////
-
-// 1. إكس-أو
 function ticTacToeGame() {
     return `
         <div style="text-align: center;">
+            <h3 style="color: #ff69b4;">❌⭕ إكس-أو</h3>
             <div class="tic-grid" id="ticGrid"></div>
-            <div class="status" id="ticStatus">دورك يا بطل</div>
+            <div class="status" id="ticStatus">دور X</div>
+            <button onclick="resetTic()">🔄 إعادة</button>
         </div>
         <script>
             let ticBoard = ['','','','','','','','',''];
@@ -431,10 +340,10 @@ function ticTacToeGame() {
                     if(ticBoard[w[0]] && ticBoard[w[0]] === ticBoard[w[1]] && ticBoard[w[0]] === ticBoard[w[2]]) {
                         ticGameOver = true;
                         if(ticBoard[w[0]] === 'X') {
-                            document.getElementById('ticStatus').innerHTML = '🎉 فزت! +5 نقاط';
+                            document.getElementById('ticStatus').innerHTML = '🎉 فزتي! +5 نقاط';
                             addPoints(5);
                         } else {
-                            document.getElementById('ticStatus').innerHTML = 'خسرت';
+                            document.getElementById('ticStatus').innerHTML = 'الكمبيوتر فاز';
                         }
                         return true;
                     }
@@ -447,87 +356,32 @@ function ticTacToeGame() {
                 return false;
             }
             
+            window.resetTic = function() {
+                ticBoard = ['','','','','','','','',''];
+                ticTurn = 'X';
+                ticGameOver = false;
+                renderTic();
+                document.getElementById('ticStatus').innerHTML = 'دور X';
+            };
+            
             renderTic();
         <\/script>
     `;
 }
 
-// 2. الذاكرة
-function memoryGame() {
-    return `
-        <div style="text-align: center;">
-            <div class="memory-grid" id="memoryGrid"></div>
-            <div class="status">المحاولات: <span id="memoryMoves">0</span></div>
-        </div>
-        <script>
-            let memCards = ['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼'];
-            memCards = [...memCards, ...memCards].sort(() => Math.random() - 0.5);
-            let memFlipped = new Array(16).fill(false);
-            let memMatched = new Array(16).fill(false);
-            let memMoves = 0;
-            let memLock = false;
-            
-            function renderMemory() {
-                let html = '';
-                for(let i = 0; i < 16; i++) {
-                    let cls = 'memory-card';
-                    if(memFlipped[i] || memMatched[i]) cls += ' flipped';
-                    html += '<div class="'+cls+'" onclick="window.memoryFlip('+i+')">';
-                    html += memFlipped[i] || memMatched[i] ? memCards[i] : '❓';
-                    html += '</div>';
-                    if((i+1) % 4 === 0) html += '<br>';
-                }
-                document.getElementById('memoryGrid').innerHTML = html;
-            }
-            
-            window.memoryFlip = function(i) {
-                if(memLock || memMatched[i] || memFlipped[i]) return;
-                
-                memFlipped[i] = true;
-                renderMemory();
-                
-                let flipped = [];
-                for(let j = 0; j < 16; j++) if(memFlipped[j] && !memMatched[j]) flipped.push(j);
-                
-                if(flipped.length === 2) {
-                    memLock = true;
-                    memMoves++;
-                    document.getElementById('memoryMoves').textContent = memMoves;
-                    
-                    if(memCards[flipped[0]] === memCards[flipped[1]]) {
-                        memMatched[flipped[0]] = memMatched[flipped[1]] = true;
-                        memFlipped[flipped[0]] = memFlipped[flipped[1]] = false;
-                        memLock = false;
-                        renderMemory();
-                        
-                        if(memMatched.every(v => v)) {
-                            alert('🎉 فزت! +10 نقاط');
-                            addPoints(10);
-                        }
-                    } else {
-                        setTimeout(() => {
-                            memFlipped[flipped[0]] = memFlipped[flipped[1]] = false;
-                            memLock = false;
-                            renderMemory();
-                        }, 1000);
-                    }
-                }
-            };
-            
-            renderMemory();
-        <\/script>
-    `;
-}
-
-// 3. تخمين الأرقام
+///////////////////////////////////////////
+// لعبة تخمين الأرقام
+///////////////////////////////////////////
 function guessNumberGame() {
     let secret = Math.floor(Math.random() * 100) + 1;
     return `
         <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">خمن الرقم من 1 ل 100</h3>
-            <input type="number" id="guessInput" placeholder="تخمينك">
+            <h3 style="color: #ff69b4;">🔢 خمني الرقم</h3>
+            <p>رقم من 1 إلى 100</p>
+            <input type="number" id="guessInput" placeholder="تخمينك" style="padding: 10px; width: 200px;">
             <button onclick="window.checkGuess(${secret})">تحقق</button>
             <div class="status" id="guessStatus"></div>
+            <button onclick="resetGuess()">🔄 رقم جديد</button>
         </div>
         <script>
             window.checkGuess = function(s) {
@@ -542,18 +396,26 @@ function guessNumberGame() {
                     status.innerHTML = 'الرقم أصغر';
                 }
             };
+            
+            window.resetGuess = function() {
+                location.reload();
+            };
         <\/script>
     `;
 }
 
-// 4. حجر ورقة مقص
+///////////////////////////////////////////
+// لعبة حجر ورقة مقص
+///////////////////////////////////////////
 function rpsGame() {
     return `
         <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">اختار:</h3>
-            <button onclick="window.playRPS('حجر')">🪨 حجر</button>
-            <button onclick="window.playRPS('ورقة')">📄 ورقة</button>
-            <button onclick="window.playRPS('مقص')">✂️ مقص</button>
+            <h3 style="color: #ff69b4;">✂️ حجر ورقة مقص</h3>
+            <div style="margin: 30px;">
+                <button onclick="window.playRPS('حجر')">🪨 حجر</button>
+                <button onclick="window.playRPS('ورقة')">📄 ورقة</button>
+                <button onclick="window.playRPS('مقص')">✂️ مقص</button>
+            </div>
             <div class="status" id="rpsStatus"></div>
         </div>
         <script>
@@ -568,50 +430,33 @@ function rpsGame() {
                     (player === 'ورقة' && computer === 'حجر') ||
                     (player === 'مقص' && computer === 'ورقة')
                 ) {
-                    result = '🎉 فزت! +3 نقاط';
+                    result = '🎉 فزتي! +3 نقاط';
                     addPoints(3);
                 } else {
-                    result = 'خسرت';
+                    result = 'خسرتي';
                 }
                 
                 document.getElementById('rpsStatus').innerHTML = 
-                    'اخترت: ' + player + ' - الكمبيوتر: ' + computer + '<br>' + result;
+                    'اخترتي: ' + player + '<br>الكمبيوتر: ' + computer + '<br>' + result;
             };
         <\/script>
     `;
 }
 
-// 5. عملة معدنية
-function coinGame() {
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">اختر:</h3>
-            <button onclick="window.playCoin('صورة')">👤 صورة</button>
-            <button onclick="window.playCoin('كتابة')">💰 كتابة</button>
-            <div class="status" id="coinStatus"></div>
-        </div>
-        <script>
-            window.playCoin = function(player) {
-                let coin = Math.random() < 0.5 ? 'صورة' : 'كتابة';
-                let result = coin === player ? '🎉 فزت! +2 نقاط' : 'خسرت';
-                if(coin === player) addPoints(2);
-                document.getElementById('coinStatus').innerHTML = 
-                    'النتيجة: ' + coin + '<br>' + result;
-            };
-        <\/script>
-    `;
-}
-
-// 6. الجمع السريع
+///////////////////////////////////////////
+// لعبة الجمع السريع
+///////////////////////////////////////////
 function additionGame() {
     let a = Math.floor(Math.random() * 20) + 1;
     let b = Math.floor(Math.random() * 20) + 1;
     return `
         <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${a} + ${b} = ؟</h3>
-            <input type="number" id="addInput" placeholder="الإجابة">
+            <h3 style="color: #ff69b4;">➕ جمع سريع</h3>
+            <h2>${a} + ${b} = ؟</h2>
+            <input type="number" id="addInput" placeholder="الإجابة" style="padding: 10px; width: 200px;">
             <button onclick="window.checkAdd(${a}, ${b})">تحقق</button>
             <div class="status" id="addStatus"></div>
+            <button onclick="resetAdd()">🔄 مسألة جديدة</button>
         </div>
         <script>
             window.checkAdd = function(a, b) {
@@ -623,634 +468,42 @@ function additionGame() {
                     document.getElementById('addStatus').innerHTML = '❌ خطأ';
                 }
             };
-        <\/script>
-    `;
-}
-
-// 7. الطرح السريع
-function subtractionGame() {
-    let a = Math.floor(Math.random() * 20) + 10;
-    let b = Math.floor(Math.random() * 10) + 1;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${a} - ${b} = ؟</h3>
-            <input type="number" id="subInput" placeholder="الإجابة">
-            <button onclick="window.checkSub(${a}, ${b})">تحقق</button>
-            <div class="status" id="subStatus"></div>
-        </div>
-        <script>
-            window.checkSub = function(a, b) {
-                let answer = parseInt(document.getElementById('subInput').value);
-                if(answer === a - b) {
-                    document.getElementById('subStatus').innerHTML = '🎉 صح! +1 نقطة';
-                    addPoints(1);
-                } else {
-                    document.getElementById('subStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 8. جدول الضرب
-function multiplicationGame() {
-    let a = Math.floor(Math.random() * 10) + 1;
-    let b = Math.floor(Math.random() * 10) + 1;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${a} × ${b} = ؟</h3>
-            <input type="number" id="mulInput" placeholder="الإجابة">
-            <button onclick="window.checkMul(${a}, ${b})">تحقق</button>
-            <div class="status" id="mulStatus"></div>
-        </div>
-        <script>
-            window.checkMul = function(a, b) {
-                let answer = parseInt(document.getElementById('mulInput').value);
-                if(answer === a * b) {
-                    document.getElementById('mulStatus').innerHTML = '🎉 صح! +2 نقاط';
-                    addPoints(2);
-                } else {
-                    document.getElementById('mulStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 9. القسمة
-function divisionGame() {
-    let b = Math.floor(Math.random() * 5) + 1;
-    let a = b * (Math.floor(Math.random() * 5) + 1);
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${a} ÷ ${b} = ؟</h3>
-            <input type="number" id="divInput" placeholder="الإجابة">
-            <button onclick="window.checkDiv(${a}, ${b})">تحقق</button>
-            <div class="status" id="divStatus"></div>
-        </div>
-        <script>
-            window.checkDiv = function(a, b) {
-                let answer = parseInt(document.getElementById('divInput').value);
-                if(answer === a / b) {
-                    document.getElementById('divStatus').innerHTML = '🎉 صح! +3 نقاط';
-                    addPoints(3);
-                } else {
-                    document.getElementById('divStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 10. الأكبر والأصغر
-function compareGame() {
-    let a = Math.floor(Math.random() * 50) + 1;
-    let b = Math.floor(Math.random() * 50) + 1;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${a} _ ${b}</h3>
-            <button onclick="window.checkCompare(${a}, ${b}, '>')">أكبر ></button>
-            <button onclick="window.checkCompare(${a}, ${b}, '<')">أصغر <</button>
-            <button onclick="window.checkCompare(${a}, ${b}, '=')">يساوي =</button>
-            <div class="status" id="compStatus"></div>
-        </div>
-        <script>
-            window.checkCompare = function(a, b, op) {
-                let correct = false;
-                if(op === '>' && a > b) correct = true;
-                if(op === '<' && a < b) correct = true;
-                if(op === '=' && a === b) correct = true;
-                
-                if(correct) {
-                    document.getElementById('compStatus').innerHTML = '🎉 صح! +2 نقاط';
-                    addPoints(2);
-                } else {
-                    document.getElementById('compStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 11. تسلسل الأرقام
-function sequenceGame() {
-    let start = Math.floor(Math.random() * 10) + 1;
-    let step = Math.floor(Math.random() * 3) + 1;
-    let next = start + step * 3;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${start} , ${start+step} , ${start+step*2} , __</h3>
-            <input type="number" id="seqInput" placeholder="الرقم التالي">
-            <button onclick="window.checkSeq(${next})">تحقق</button>
-            <div class="status" id="seqStatus"></div>
-        </div>
-        <script>
-            window.checkSeq = function(answer) {
-                let guess = parseInt(document.getElementById('seqInput').value);
-                if(guess === answer) {
-                    document.getElementById('seqStatus').innerHTML = '🎉 صح! +3 نقاط';
-                    addPoints(3);
-                } else {
-                    document.getElementById('seqStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 12. الرقم المفقود
-function missingNumberGame() {
-    let nums = [1,2,3,4,5,6,7,8,9];
-    let missing = nums.splice(Math.floor(Math.random() * nums.length), 1)[0];
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${nums.join(' , ')}</h3>
-            <h4 style="color: #4a2c2c;">ما هو الرقم المفقود؟</h4>
-            <input type="number" id="missingInput" placeholder="الرقم">
-            <button onclick="window.checkMissing(${missing})">تحقق</button>
-            <div class="status" id="missingStatus"></div>
-        </div>
-        <script>
-            window.checkMissing = function(answer) {
-                let guess = parseInt(document.getElementById('missingInput').value);
-                if(guess === answer) {
-                    document.getElementById('missingStatus').innerHTML = '🎉 صح! +3 نقاط';
-                    addPoints(3);
-                } else {
-                    document.getElementById('missingStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 13. العد التنازلي
-function countdownGame() {
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">اضغط على الأرقام بالترتيب التنازلي</h3>
-            <div class="numbers-grid" id="countGrid"></div>
-            <div class="status" id="countStatus"></div>
-        </div>
-        <script>
-            let countNums = [9,8,7,6,5,4,3,2,1,0];
-            let currentIndex = 0;
             
-            function renderCount() {
-                let shuffled = [...countNums].sort(() => Math.random() - 0.5);
-                let html = '';
-                for(let n of shuffled) {
-                    html += '<div class="number-cell" onclick="window.checkCount('+n+')">'+n+'</div>';
-                }
-                document.getElementById('countGrid').innerHTML = html;
-            }
-            
-            window.checkCount = function(n) {
-                if(n === countNums[currentIndex]) {
-                    currentIndex++;
-                    if(currentIndex >= countNums.length) {
-                        document.getElementById('countStatus').innerHTML = '🎉 أحسنت! +5 نقاط';
-                        addPoints(5);
-                        currentIndex = 0;
-                    }
-                    renderCount();
-                }
-            };
-            
-            renderCount();
-        <\/script>
-    `;
-}
-
-// 14. مضاعفات الرقم
-function multiplesGame() {
-    let num = Math.floor(Math.random() * 5) + 2;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">اضغط على مضاعفات الرقم ${num}</h3>
-            <div class="numbers-grid" id="multiGrid"></div>
-            <div class="status" id="multiStatus"></div>
-        </div>
-        <script>
-            let multiNums = [];
-            for(let i = 1; i <= 20; i++) multiNums.push(i);
-            let multiScore = 0;
-            
-            function renderMulti() {
-                let shuffled = [...multiNums].sort(() => Math.random() - 0.5);
-                let html = '';
-                for(let n of shuffled) {
-                    html += '<div class="number-cell" onclick="window.checkMulti('+n+')">'+n+'</div>';
-                }
-                document.getElementById('multiGrid').innerHTML = html;
-            }
-            
-            window.checkMulti = function(n) {
-                if(n % ${num} === 0) {
-                    multiScore += 10;
-                    document.getElementById('multiStatus').innerHTML = 'النتيجة: ' + multiScore;
-                    if(multiScore >= 50) {
-                        document.getElementById('multiStatus').innerHTML = '🎉 +5 نقاط';
-                        addPoints(5);
-                        multiScore = 0;
-                    }
-                }
-            };
-            
-            renderMulti();
-        <\/script>
-    `;
-}
-
-// 15. تحليل الرقم
-function factorsGame() {
-    let num = Math.floor(Math.random() * 12) + 4;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">اضغط على عوامل الرقم ${num}</h3>
-            <div class="numbers-grid" id="factorGrid"></div>
-            <div class="status" id="factorStatus"></div>
-        </div>
-        <script>
-            let factorNums = [];
-            for(let i = 1; i <= ${num}; i++) factorNums.push(i);
-            
-            function renderFactor() {
-                let shuffled = [...factorNums].sort(() => Math.random() - 0.5);
-                let html = '';
-                for(let n of shuffled) {
-                    html += '<div class="number-cell" onclick="window.checkFactor('+n+')">'+n+'</div>';
-                }
-                document.getElementById('factorGrid').innerHTML = html;
-            }
-            
-            window.checkFactor = function(n) {
-                if(${num} % n === 0) {
-                    document.getElementById('factorStatus').innerHTML = '🎉 صح! +2 نقاط';
-                    addPoints(2);
-                }
-            };
-            
-            renderFactor();
-        <\/script>
-    `;
-}
-    // 16. الحرف الناقص
-function missingLetterGame() {
-    let words = ['مودة', 'مريم', 'ألعاب', 'مرح'];
-    let word = words[Math.floor(Math.random() * words.length)];
-    let pos = Math.floor(Math.random() * word.length);
-    let display = word.split('').map((c, i) => i === pos ? '_' : c).join('');
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${display}</h3>
-            <input type="text" id="letterInput" maxlength="1" placeholder="الحرف الناق// 16. الحرف الناقص (مكمل)
-function missingLetterGame() {
-    let words = ['مودة', 'مريم', 'ألعاب', 'مرح'];
-    let word = words[Math.floor(Math.random() * words.length)];
-    let pos = Math.floor(Math.random() * word.length);
-    let display = word.split('').map((c, i) => i === pos ? '_' : c).join('');
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${display}</h3>
-            <input type="text" id="letterInput" maxlength="1" placeholder="الحرف الناقص" style="width: 100px;">
-            <button onclick="window.checkLetter('${word[pos]}')">تحقق</button>
-            <div class="status" id="letterStatus"></div>
-        </div>
-        <script>
-            window.checkLetter = function(answer) {
-                let guess = document.getElementById('letterInput').value;
-                if(guess === answer) {
-                    document.getElementById('letterStatus').innerHTML = '🎉 صح! +3 نقاط';
-                    addPoints(3);
-                } else {
-                    document.getElementById('letterStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 17. ترتيب الحروف
-function arrangeLettersGame() {
-    let words = ['مودة', 'مريم', 'ألعاب', 'مرح'];
-    let word = words[Math.floor(Math.random() * words.length)];
-    let shuffled = word.split('').sort(() => Math.random() - 0.5).join('');
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">رتب الحروف: ${shuffled}</h3>
-            <input type="text" id="arrangeInput" placeholder="الكلمة">
-            <button onclick="window.checkArrange('${word}')">تحقق</button>
-            <div class="status" id="arrangeStatus"></div>
-        </div>
-        <script>
-            window.checkArrange = function(answer) {
-                let guess = document.getElementById('arrangeInput').value;
-                if(guess === answer) {
-                    document.getElementById('arrangeStatus').innerHTML = '🎉 صح! +5 نقاط';
-                    addPoints(5);
-                } else {
-                    document.getElementById('arrangeStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 18. كلمة السر
-function passwordGame() {
-    let words = ['مودة', 'مريم', 'ألعاب', 'مرح', 'حب'];
-    let word = words[Math.floor(Math.random() * words.length)];
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">خمن كلمة السر</h3>
-            <p style="color: #4a2c2c;">تلميح: كلمة من ${word.length} حروف</p>
-            <input type="text" id="passInput" placeholder="كلمة السر">
-            <button onclick="window.checkPass('${word}')">تحقق</button>
-            <div class="status" id="passStatus"></div>
-        </div>
-        <script>
-            window.checkPass = function(answer) {
-                let guess = document.getElementById('passInput').value;
-                if(guess === answer) {
-                    document.getElementById('passStatus').innerHTML = '🎉 صح! +10 نقاط';
-                    addPoints(10);
-                } else {
-                    document.getElementById('passStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 19. عكس الكلمة
-function reverseWordGame() {
-    let words = ['مودة', 'مريم', 'ألعاب', 'مرح'];
-    let word = words[Math.floor(Math.random() * words.length)];
-    let reversed = word.split('').reverse().join('');
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">ما عكس كلمة: ${word}</h3>
-            <input type="text" id="reverseInput" placeholder="العكس">
-            <button onclick="window.checkReverse('${reversed}')">تحقق</button>
-            <div class="status" id="reverseStatus"></div>
-        </div>
-        <script>
-            window.checkReverse = function(answer) {
-                let guess = document.getElementById('reverseInput').value;
-                if(guess === answer) {
-                    document.getElementById('reverseStatus').innerHTML = '🎉 صح! +3 نقاط';
-                    addPoints(3);
-                } else {
-                    document.getElementById('reverseStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 20. أطول كلمة
-function longestWordGame() {
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">اكتب أطول كلمة تعرفها</h3>
-            <input type="text" id="wordInput" placeholder="الكلمة">
-            <button onclick="window.checkLongest()">تحقق</button>
-            <div class="status" id="wordStatus"></div>
-        </div>
-        <script>
-            window.checkLongest = function() {
-                let word = document.getElementById('wordInput').value;
-                if(word.length >= 3) {
-                    let points = word.length;
-                    document.getElementById('wordStatus').innerHTML = '🎀 أحسنت! +' + points + ' نقاط';
-                    addPoints(points);
-                } else {
-                    document.getElementById('wordStatus').innerHTML = 'حاولي كتابة كلمة أطول';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 21. الزوجي والفردي
-function oddEvenGame() {
-    let num = Math.floor(Math.random() * 20) + 1;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">الرقم ${num} هو:</h3>
-            <button onclick="window.checkOddEven(${num}, 'زوجي')">زوجي</button>
-            <button onclick="window.checkOddEven(${num}, 'فردي')">فردي</button>
-            <div class="status" id="oeStatus"></div>
-        </div>
-        <script>
-            window.checkOddEven = function(num, choice) {
-                let isEven = num % 2 === 0;
-                if((isEven && choice === 'زوجي') || (!isEven && choice === 'فردي')) {
-                    document.getElementById('oeStatus').innerHTML = '🎉 صح! +2 نقاط';
-                    addPoints(2);
-                } else {
-                    document.getElementById('oeStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 22. مربع العدد
-function squareGame() {
-    let num = Math.floor(Math.random() * 10) + 1;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">مربع العدد ${num} = ؟</h3>
-            <input type="number" id="squareInput" placeholder="الإجابة">
-            <button onclick="window.checkSquare(${num})">تحقق</button>
-            <div class="status" id="squareStatus"></div>
-        </div>
-        <script>
-            window.checkSquare = function(num) {
-                let answer = parseInt(document.getElementById('squareInput').value);
-                if(answer === num * num) {
-                    document.getElementById('squareStatus').innerHTML = '🎉 صح! +3 نقاط';
-                    addPoints(3);
-                } else {
-                    document.getElementById('squareStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 23. جذر العدد
-function sqrtGame() {
-    let num = Math.floor(Math.random() * 5) + 1;
-    let square = num * num;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">جذر ${square} = ؟</h3>
-            <input type="number" id="sqrtInput" placeholder="الإجابة">
-            <button onclick="window.checkSqrt(${num})">تحقق</button>
-            <div class="status" id="sqrtStatus"></div>
-        </div>
-        <script>
-            window.checkSqrt = function(answer) {
-                let guess = parseInt(document.getElementById('sqrtInput').value);
-                if(guess === answer) {
-                    document.getElementById('sqrtStatus').innerHTML = '🎉 صح! +4 نقاط';
-                    addPoints(4);
-                } else {
-                    document.getElementById('sqrtStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 24. النسبة المئوية
-function percentageGame() {
-    let percent = (Math.floor(Math.random() * 9) + 1) * 10;
-    let num = Math.floor(Math.random() * 50) + 10;
-    let answer = (percent / 100) * num;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${percent}% من ${num} = ؟</h3>
-            <input type="number" id="percentInput" step="0.1" placeholder="الإجابة">
-            <button onclick="window.checkPercent(${answer})">تحقق</button>
-            <div class="status" id="percentStatus"></div>
-        </div>
-        <script>
-            window.checkPercent = function(answer) {
-                let guess = parseFloat(document.getElementById('percentInput').value);
-                if(Math.abs(guess - answer) < 0.1) {
-                    document.getElementById('percentStatus').innerHTML = '🎉 صح! +5 نقاط';
-                    addPoints(5);
-                } else {
-                    document.getElementById('percentStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 25. الكسور
-function fractionGame() {
-    let numerator = Math.floor(Math.random() * 5) + 1;
-    let denominator = Math.floor(Math.random() * 5) + 2;
-    let answer = numerator / denominator;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${numerator}/${denominator} = (كعدد عشري)</h3>
-            <input type="number" id="fractionInput" step="0.01" placeholder="الإجابة">
-            <button onclick="window.checkFraction(${answer})">تحقق</button>
-            <div class="status" id="fractionStatus"></div>
-        </div>
-        <script>
-            window.checkFraction = function(answer) {
-                let guess = parseFloat(document.getElementById('fractionInput').value);
-                if(Math.abs(guess - answer) < 0.01) {
-                    document.getElementById('fractionStatus').innerHTML = '🎉 صح! +4 نقاط';
-                    addPoints(4);
-                } else {
-                    document.getElementById('fractionStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 26. الأعداد العشرية
-function decimalGame() {
-    let num = (Math.random() * 10).toFixed(1);
-    let answer = parseFloat(num) * 10;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${num} × 10 = ؟</h3>
-            <input type="number" id="decimalInput" step="0.1" placeholder="الإجابة">
-            <button onclick="window.checkDecimal(${answer})">تحقق</button>
-            <div class="status" id="decimalStatus"></div>
-        </div>
-        <script>
-            window.checkDecimal = function(answer) {
-                let guess = parseFloat(document.getElementById('decimalInput').value);
-                if(Math.abs(guess - answer) < 0.1) {
-                    document.getElementById('decimalStatus').innerHTML = '🎉 صح! +2 نقاط';
-                    addPoints(2);
-                } else {
-                    document.getElementById('decimalStatus').innerHTML = '❌ خطأ';
-                }
-            };
-        <\/script>
-    `;
-}
-
-// 27. الأعداد السالبة
-function negativeGame() {
-    let a = Math.floor(Math.random() * 10) + 1;
-    let b = Math.floor(Math.random() * 10) + a + 1;
-    let answer = a - b;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">${a} - ${b} = ؟</h3>
-            <input type="number" id="negInput" placeholder="الإجابة">
-            <button onclick="window.checkNeg(${answer})">تحقق</button>
-            <div class="status" id="negStatus"></div>
-        </div>
-        <script>
-            window.checkNeg = function(answer) {
-                let guess = parseInt(document.getElementById('negInput').value);
-                if(guess === answer) {
-                    document.getElementById('negStatus').innerHTML = '🎉 صح! +3 نقاط';
-                    addPoints(3);
-                } else {
-                    document.getElementById('negStatus').innerHTML = '❌ خطأ';
-                }
+            window.resetAdd = function() {
+                location.reload();
             };
         <\/script>
     `;
 }
 
 ///////////////////////////////////////////
-// ألعاب البنات الجديدة
+// لعبة تسريحة شعر
 ///////////////////////////////////////////
-
-// 28. تسريحة شعر
 function hairGame() {
     return `
         <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">🎀 تسريحة شعر الأميرة 🎀</h3>
-            <div style="display: flex; justify-content: center; gap: 20px;">
-                <div style="font-size: 150px;" id="hairModel">👧</div>
-                <div style="font-size: 150px;" id="hairStyle">💇</div>
-            </div>
+            <h3 style="color: #ff69b4;">💇 تسريحة شعر</h3>
+            <div style="font-size: 120px; margin: 20px;" id="hairModel">👧</div>
             <div class="style-options">
-                <div class="style-item" onclick="window.changeHair('💇')">💇 عادي</div>
+                <div class="style-item" onclick="window.changeHair('👧')">👧 قصير</div>
+                <div class="style-item" onclick="window.changeHair('👩')">👩 طويل</div>
                 <div class="style-item" onclick="window.changeHair('👸')">👸 تاج</div>
                 <div class="style-item" onclick="window.changeHair('🦰')">🦰 أحمر</div>
-                <div class="style-item" onclick="window.changeHair('👱‍♀️')">👱 شقراء</div>
-                <div class="style-item" onclick="window.changeHair('👩')">👩 طويل</div>
-                <div class="style-item" onclick="window.changeHair('👧')">👧 قصير</div>
             </div>
             <div class="color-picker">
                 <div class="color-circle" style="background: #000;" onclick="window.changeHairColor('#000')"></div>
                 <div class="color-circle" style="background: #8B4513;" onclick="window.changeHairColor('#8B4513')"></div>
                 <div class="color-circle" style="background: #FFD700;" onclick="window.changeHairColor('#FFD700')"></div>
-                <div class="color-circle" style="background: #FF4500;" onclick="window.changeHairColor('#FF4500')"></div>
-                <div class="color-circle" style="background: #C0C0C0;" onclick="window.changeHairColor('#C0C0C0')"></div>
             </div>
-            <div class="status" id="hairStatus">اختاري تسريحة شعر جميلة</div>
-            <button onclick="window.saveHair()">💾 حفظ التسريحة +5 نقاط</button>
+            <div class="status" id="hairStatus"></div>
+            <button onclick="window.saveHair()">💾 حفظ +5 نقاط</button>
         </div>
         <script>
-            let currentHair = '💇';
-            let currentColor = '#000';
-            
             window.changeHair = function(style) {
-                currentHair = style;
-                document.getElementById('hairStyle').innerHTML = style;
+                document.getElementById('hairModel').innerHTML = style;
             };
             
             window.changeHairColor = function(color) {
-                currentColor = color;
                 document.getElementById('hairModel').style.color = color;
             };
             
@@ -1262,81 +515,65 @@ function hairGame() {
     `;
 }
 
-// 29. تلوين أظافر
+///////////////////////////////////////////
+// لعبة تلوين أظافر
+///////////////////////////////////////////
 function nailsGame() {
     return `
         <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">💅 صالون الأظافر 💅</h3>
-            <div style="font-size: 100px;" id="nails">🖐️</div>
+            <h3 style="color: #ff69b4;">💅 تلوين أظافر</h3>
+            <div style="font-size: 120px; margin: 20px;" id="nails">🖐️</div>
             <div class="style-options">
                 <div class="style-item" onclick="window.paintNail('red')">🔴 أحمر</div>
                 <div class="style-item" onclick="window.paintNail('pink')">💗 وردي</div>
-                <div class="style-item" onclick="window.paintNail('purple')">🟣 بنفسجي</div>
-                <div class="style-item" onclick="window.paintNail('blue')">🔵 أزرق</div>
-                <div class="style-item" onclick="window.paintNail('gold')">🟡 ذهبي</div>
-                <div class="style-item" onclick="window.paintNail('silver')">⚪ فضي</div>
+                <div class="style-item" onclick="window.paintNail('purple')">💜 بنفسجي</div>
+                <div class="style-item" onclick="window.paintNail('gold')">💛 ذهبي</div>
             </div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.addNailSticker('⭐')">⭐ نجمة</div>
-                <div class="style-item" onclick="window.addNailSticker('❤️')">❤️ قلب</div>
-                <div class="style-item" onclick="window.addNailSticker('🌸')">🌸 وردة</div>
-                <div class="style-item" onclick="window.addNailSticker('🦋')">🦋 فراشة</div>
-            </div>
-            <div class="status" id="nailsStatus">اختاري لون رائع لأظافرك</div>
-            <button onclick="window.saveNails()">💾 حفظ الطلاء +3 نقاط</button>
+            <div class="status" id="nailsStatus"></div>
+            <button onclick="window.saveNails()">💾 حفظ +3 نقاط</button>
         </div>
         <script>
-            let nailColor = 'pink';
-            
             window.paintNail = function(color) {
-                nailColor = color;
                 document.getElementById('nails').style.color = color;
-            };
-            
-            window.addNailSticker = function(sticker) {
-                document.getElementById('nails').innerHTML = '🖐️' + sticker;
+                document.getElementById('nailsStatus').innerHTML = 'لون جميل';
             };
             
             window.saveNails = function() {
-                document.getElementById('nailsStatus').innerHTML = '💅 أظافر جميلة! +3 نقاط';
+                document.getElementById('nailsStatus').innerHTML = '💅 أظافر رائعة! +3 نقاط';
                 addPoints(3);
             };
         <\/script>
     `;
 }
 
-// 30. فستان أميرة
+///////////////////////////////////////////
+// لعبة فستان أميرة
+///////////////////////////////////////////
 function dressGame() {
     return `
         <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">👗 فستان الأميرة 👗</h3>
-            <div style="display: flex; justify-content: center; gap: 20px;">
-                <div style="font-size: 150px;">👸</div>
-                <div style="font-size: 150px;" id="dress">👗</div>
-            </div>
+            <h3 style="color: #ff69b4;">👗 فستان أميرة</h3>
+            <div style="font-size: 120px; margin: 20px;" id="dressModel">👸</div>
             <div class="style-options">
                 <div class="style-item" onclick="window.changeDress('👗')">👗 قصير</div>
                 <div class="style-item" onclick="window.changeDress('👘')">👘 طويل</div>
                 <div class="style-item" onclick="window.changeDress('👰')">👰 زفاف</div>
-                <div class="style-item" onclick="window.changeDress('🦺')">🦺 سهرة</div>
             </div>
             <div class="color-picker">
                 <div class="color-circle" style="background: #FF69B4;" onclick="window.changeDressColor('#FF69B4')"></div>
-                <div class="color-circle" style="background: #FF1493;" onclick="window.changeDressColor('#FF1493')"></div>
-                <div class="color-circle" style="background: #FFD700;" onclick="window.changeDressColor('#FFD700')"></div>
                 <div class="color-circle" style="background: #87CEEB;" onclick="window.changeDressColor('#87CEEB')"></div>
                 <div class="color-circle" style="background: #98FB98;" onclick="window.changeDressColor('#98FB98')"></div>
             </div>
-            <div class="status" id="dressStatus">اختاري فستان أحلامك</div>
-            <button onclick="window.saveDress()">💾 حفظ الإطلالة +7 نقاط</button>
+            <div class="status" id="dressStatus"></div>
+            <button onclick="window.saveDress()">💾 حفظ +7 نقاط</button>
         </div>
         <script>
             window.changeDress = function(dress) {
-                document.getElementById('dress').innerHTML = dress;
+                document.getElementById('dressModel').innerHTML = '👸' + dress;
             };
             
             window.changeDressColor = function(color) {
-                document.getElementById('dress').style.color = color;
+                document.getElementById('dressModel').style.color = color;
             };
             
             window.saveDress = function() {
@@ -1347,45 +584,27 @@ function dressGame() {
     `;
 }
 
-// 31. مكياج عيون
+///////////////////////////////////////////
+// لعبة مكياج عيون
+///////////////////////////////////////////
 function makeupGame() {
     return `
         <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">👁️ مكياج العيون 👁️</h3>
-            <div style="font-size: 150px;" id="eyes">👀</div>
+            <h3 style="color: #ff69b4;">👁️ مكياج عيون</h3>
+            <div style="font-size: 120px; margin: 20px;" id="eyes">👀</div>
             <div class="style-options">
                 <div class="style-item" onclick="window.addEyeshadow('pink')">💗 وردي</div>
                 <div class="style-item" onclick="window.addEyeshadow('purple')">💜 بنفسجي</div>
                 <div class="style-item" onclick="window.addEyeshadow('blue')">💙 أزرق</div>
                 <div class="style-item" onclick="window.addEyeshadow('gold')">💛 ذهبي</div>
             </div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.addMascara()">👁️ ماسكارا</div>
-                <div class="style-item" onclick="window.addEyeliner()">✏️ آيلاينر</div>
-                <div class="style-item" onclick="window.addGlitter()">✨ لمعة</div>
-            </div>
-            <div class="status" id="makeupStatus">طبقي مكياج رائع</div>
-            <button onclick="window.saveMakeup()">💾 حفظ المكياج +6 نقاط</button>
+            <div class="status" id="makeupStatus"></div>
+            <button onclick="window.saveMakeup()">💾 حفظ +6 نقاط</button>
         </div>
         <script>
             window.addEyeshadow = function(color) {
                 document.getElementById('eyes').innerHTML = '👁️✨';
-                document.getElementById('makeupStatus').innerHTML = 'أضفتي ظل عيون ' + color;
-            };
-            
-            window.addMascara = function() {
-                document.getElementById('eyes').innerHTML = '👁️👁️';
-                document.getElementById('makeupStatus').innerHTML = 'رموش طويلة';
-            };
-            
-            window.addEyeliner = function() {
-                document.getElementById('eyes').innerHTML = '◀️👁️';
-                document.getElementById('makeupStatus').innerHTML = 'آيلاينر جميل';
-            };
-            
-            window.addGlitter = function() {
-                document.getElementById('eyes').innerHTML = '✨👁️✨';
-                document.getElementById('makeupStatus').innerHTML = 'عيون لامعة';
+                document.getElementById('makeupStatus').innerHTML = 'مكياج ' + color;
             };
             
             window.saveMakeup = function() {
@@ -1396,177 +615,56 @@ function makeupGame() {
     `;
 }
 
-// 32. تزيين كعكة
+///////////////////////////////////////////
+// لعبة تزيين كعكة
+///////////////////////////////////////////
 function cakeGame() {
     return `
         <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">🍰 تزيين الكعكة 🍰</h3>
-            <div style="font-size: 150px;" id="cake">🎂</div>
+            <h3 style="color: #ff69b4;">🍰 تزيين كعكة</h3>
+            <div style="font-size: 120px; margin: 20px;" id="cake">🎂</div>
             <div class="style-options">
-                <div class="style-item" onclick="window.addCakeTopping('🍓')">🍓 فراولة</div>
-                <div class="style-item" onclick="window.addCakeTopping('🍫')">🍫 شوكولاتة</div>
-                <div class="style-item" onclick="window.addCakeTopping('🍒')">🍒 كرز</div>
-                <div class="style-item" onclick="window.addCakeTopping('🍊')">🍊 برتقال</div>
+                <div class="style-item" onclick="window.addTopping('🍓')">🍓 فراولة</div>
+                <div class="style-item" onclick="window.addTopping('🍫')">🍫 شوكولاتة</div>
+                <div class="style-item" onclick="window.addTopping('🍒')">🍒 كرز</div>
+                <div class="style-item" onclick="window.addTopping('🕯️')">🕯️ شمعة</div>
             </div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.addCakeCandle('🕯️')">🕯️ شمعة</div>
-                <div class="style-item" onclick="window.addCakeCandle('✨')">✨ لمعة</div>
-                <div class="style-item" onclick="window.addCakeCandle('🌸')">🌸 ورد</div>
-            </div>
-            <div class="color-picker">
-                <div class="color-circle" style="background: #FFB6C1;" onclick="window.changeCakeColor('#FFB6C1')"></div>
-                <div class="color-circle" style="background: #FFDAB9;" onclick="window.changeCakeColor('#FFDAB9')"></div>
-                <div class="color-circle" style="background: #E6E6FA;" onclick="window.changeCakeColor('#E6E6FA')"></div>
-            </div>
-            <div class="status" id="cakeStatus">زيني الكعكة أحلى تزيين</div>
-            <button onclick="window.saveCake()">💾 حفظ الكعكة +8 نقاط</button>
+            <div class="status" id="cakeStatus"></div>
+            <button onclick="window.saveCake()">💾 حفظ +8 نقاط</button>
         </div>
         <script>
-            window.addCakeTopping = function(topping) {
+            window.addTopping = function(topping) {
                 document.getElementById('cake').innerHTML = '🎂' + topping;
             };
             
-            window.addCakeCandle = function(candle) {
-                document.getElementById('cake').innerHTML = '🎂' + candle;
-            };
-            
-            window.changeCakeColor = function(color) {
-                document.getElementById('cake').style.color = color;
-            };
-            
             window.saveCake = function() {
-                document.getElementById('cakeStatus').innerHTML = '🍰 كعكة رائعة! +8 نقاط';
+                document.getElementById('cakeStatus').innerHTML = '🍰 كعكة جميلة! +8 نقاط';
                 addPoints(8);
             };
         <\/script>
     `;
 }
 
-// 33. غرفة بنات
-function roomGame() {
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">🛏️ تزيين الغرفة 🛏️</h3>
-            <div style="font-size: 100px;" id="room">🛏️</div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.addRoomItem('🪑')">🪑 كرسي</div>
-                <div class="style-item" onclick="window.addRoomItem('🚪')">🚪 باب</div>
-                <div class="style-item" onclick="window.addRoomItem('🪟')">🪟 شباك</div>
-                <div class="style-item" onclick="window.addRoomItem('💡')">💡 لمبة</div>
-            </div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.addRoomItem('🧸')">🧸 دبدوب</div>
-                <div class="style-item" onclick="window.addRoomItem('🌸')">🌸 وردة</div>
-                <div class="style-item" onclick="window.addRoomItem('🖼️')">🖼️ صورة</div>
-                <div class="style-item" onclick="window.addRoomItem('🪴')">🪴 نبتة</div>
-            </div>
-            <div class="status" id="roomStatus">ديكوري غرفتك</div>
-            <button onclick="window.saveRoom()">💾 حفظ الديكور +10 نقاط</button>
-        </div>
-        <script>
-            window.addRoomItem = function(item) {
-                document.getElementById('room').innerHTML += item;
-            };
-            
-            window.saveRoom = function() {
-                document.getElementById('roomStatus').innerHTML = '🛏️ غرفة جميلة! +10 نقاط';
-                addPoints(10);
-            };
-        <\/script>
-    `;
-}
-
-// 34. حيوانات أليفة
-function petsGame() {
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">🐱 رعاية الحيوانات 🐱</h3>
-            <div style="font-size: 150px;" id="pet">🐱</div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.changePet('🐱')">🐱 قطة</div>
-                <div class="style-item" onclick="window.changePet('🐶')">🐶 كلب</div>
-                <div class="style-item" onclick="window.changePet('🐰')">🐰 أرنب</div>
-                <div class="style-item" onclick="window.changePet('🐹')">🐹 هامستر</div>
-                <div class="style-item" onclick="window.changePet('🐦')">🐦 عصفور</div>
-                <div class="style-item" onclick="window.changePet('🐠')">🐠 سمكة</div>
-            </div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.feedPet()">🍼 إطعام</div>
-                <div class="style-item" onclick="window.playPet()">🎾 لعب</div>
-                <div class="style-item" onclick="window.bathPet()">🛁 استحمام</div>
-                <div class="style-item" onclick="window.sleepPet()">😴 نوم</div>
-            </div>
-            <div class="status" id="petStatus">♥️ العناية بالحيوان الأليف</div>
-            <button onclick="window.savePet()">💾 رعاية كاملة +5 نقاط</button>
-        </div>
-        <script>
-            window.changePet = function(pet) {
-                document.getElementById('pet').innerHTML = pet;
-            };
-            
-            window.feedPet = function() {
-                document.getElementById('pet').innerHTML += '🍼';
-                document.getElementById('petStatus').innerHTML = 'الحيوان سعيد';
-            };
-            
-            window.playPet = function() {
-                document.getElementById('pet').innerHTML += '🎾';
-                document.getElementById('petStatus').innerHTML = 'يلعب مرح';
-            };
-            
-            window.bathPet = function() {
-                document.getElementById('pet').innerHTML += '🧼';
-                document.getElementById('petStatus').innerHTML = 'نظيف وجميل';
-            };
-            
-            window.sleepPet = function() {
-                document.getElementById('pet').innerHTML += '💤';
-                document.getElementById('petStatus').innerHTML = 'نائم هادئ';
-            };
-            
-            window.savePet = function() {
-                document.getElementById('petStatus').innerHTML = '🐱 حيوان سعيد! +5 نقاط';
-                addPoints(5);
-            };
-        <\/script>
-    `;
-}
-
-// 35. مجوهرات
+///////////////////////////////////////////
+// لعبة مجوهرات
+///////////////////////////////////////////
 function jewelryGame() {
     return `
         <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">💎 مجوهرات الأميرة 💎</h3>
-            <div style="display: flex; justify-content: center; gap: 20px;">
-                <div style="font-size: 150px;">👸</div>
-                <div style="font-size: 150px;" id="jewelry">💎</div>
-            </div>
+            <h3 style="color: #ff69b4;">💎 مجوهرات</h3>
+            <div style="font-size: 120px; margin: 20px;" id="jewelryModel">👸💎</div>
             <div class="style-options">
                 <div class="style-item" onclick="window.addJewelry('💍')">💍 خاتم</div>
                 <div class="style-item" onclick="window.addJewelry('📿')">📿 عقد</div>
                 <div class="style-item" onclick="window.addJewelry('👑')">👑 تاج</div>
-                <div class="style-item" onclick="window.addJewelry('⌚')">⌚ ساعة</div>
-            </div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.addJewelry('🔮')">🔮 كريستال</div>
-                <div class="style-item" onclick="window.addJewelry('💎')">💎 ألماس</div>
                 <div class="style-item" onclick="window.addJewelry('✨')">✨ لمعان</div>
             </div>
-            <div class="color-picker">
-                <div class="color-circle" style="background: gold;" onclick="window.changeJewelryColor('gold')"></div>
-                <div class="color-circle" style="background: silver;" onclick="window.changeJewelryColor('silver')"></div>
-                <div class="color-circle" style="background: #FF69B4;" onclick="window.changeJewelryColor('#FF69B4')"></div>
-            </div>
-            <div class="status" id="jewelryStatus">تألقي بالمجوهرات</div>
-            <button onclick="window.saveJewelry()">💾 حفظ الإطلالة +6 نقاط</button>
+            <div class="status" id="jewelryStatus"></div>
+            <button onclick="window.saveJewelry()">💾 حفظ +6 نقاط</button>
         </div>
         <script>
             window.addJewelry = function(jewel) {
-                document.getElementById('jewelry').innerHTML = jewel;
-            };
-            
-            window.changeJewelryColor = function(color) {
-                document.getElementById('jewelry').style.color = color;
+                document.getElementById('jewelryModel').innerHTML = '👸' + jewel;
             };
             
             window.saveJewelry = function() {
