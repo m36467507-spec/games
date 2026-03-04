@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎀 ألعاب مودة ومريم</title>
+    <title>🎀 صالون مودة ومريم للتجميل</title>
     
     <style>
         * {
@@ -14,198 +14,452 @@
         }
 
         body {
-            background: linear-gradient(135deg, #ffc0cb, #ffb6c1);
-            color: #4a2c2c;
+            background: linear-gradient(135deg, #f8e1e8, #fad0d9);
+            min-height: 100vh;
             direction: rtl;
-            padding: 20px;
         }
 
         /* الهيدر */
         header {
-            background: #ff69b4;
-            padding: 20px;
-            border-radius: 20px;
-            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 3px solid white;
+            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
-            font-size: 30px;
-            font-weight: bold;
-            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .points-box {
-            background: white;
+        .logo-icon {
+            font-size: 40px;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .logo-text h1 {
+            color: #ff1493;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .logo-text p {
             color: #ff69b4;
-            padding: 10px 25px;
+            font-size: 14px;
+        }
+
+        .points-card {
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            padding: 15px 30px;
             border-radius: 50px;
+            color: white;
             font-weight: bold;
             font-size: 20px;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
         }
 
-        /* شبكة الألعاب */
+        /* القائمة الرئيسية */
+        .menu-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #ff1493;
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.2);
+        }
+
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .game-card {
             background: white;
-            border: 2px solid #ff69b4;
-            border-radius: 15px;
-            padding: 20px 10px;
-            text-align: center;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.3s;
+            border: 3px solid transparent;
         }
 
         .game-card:hover {
-            transform: translateY(-5px);
-            background: #ffe4e1;
-            box-shadow: 0 0 20px #ff69b4;
+            transform: translateY(-10px);
+            border-color: #ff1493;
+            box-shadow: 0 20px 40px rgba(255, 20, 147, 0.3);
         }
 
-        .game-icon {
+        .card-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 20px;
+            color: white;
+        }
+
+        .card-overlay h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .card-points {
+            display: inline-block;
+            background: #ff1493;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 14px;
+        }
+
+        /* منطقة اللعبة */
+        .game-section {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            background: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff1493;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #ff1493;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .game-title {
+            font-size: 32px;
+            color: #ff1493;
+        }
+
+        .reset-btn {
+            background: #ff1493;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+            transition: 0.2s;
+        }
+
+        .reset-btn:hover {
+            transform: scale(1.05);
+            background: #ff69b4;
+        }
+
+        /* صالون التجميل */
+        .salon-container {
+            background: white;
+            border-radius: 40px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.2);
+        }
+
+        .model-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .model-card {
+            text-align: center;
+        }
+
+        .model-title {
+            color: #ff1493;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .model-display {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+            border: 3px solid white;
+        }
+
+        .tools-panel {
+            background: #fff0f5;
+            border-radius: 30px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .tools-title {
+            color: #ff1493;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+        }
+
+        .tool-item {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .tool-item:hover {
+            border-color: #ff1493;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        .tool-icon {
             font-size: 40px;
             margin-bottom: 10px;
         }
 
-        .game-title {
-            font-size: 14px;
+        .tool-name {
+            color: #ff1493;
             font-weight: bold;
-            color: #ff69b4;
+            font-size: 14px;
         }
 
-        /* منطقة اللعبة */
-        .game-area {
-            background: white;
-            border: 3px solid #ff69b4;
-            border-radius: 20px;
-            padding: 20px;
+        .color-palette {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
             margin: 20px 0;
-            min-height: 400px;
+            flex-wrap: wrap;
         }
 
-        /* الأزرار */
-        button {
-            padding: 10px 20px;
-            margin: 5px;
+        .color-swatch {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            color: white;
             border: none;
+            padding: 15px 40px;
             border-radius: 50px;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: bold;
             cursor: pointer;
-            background: #ff69b4;
-            color: white;
-            border: 2px solid white;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 10px 20px rgba(255, 20, 147, 0.3);
             transition: 0.2s;
         }
 
-        button:hover {
+        .action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 20, 147, 0.4);
+        }
+
+        .status-message {
+            text-align: center;
+            color: #ff1493;
+            font-size: 20px;
+            margin: 20px;
+            padding: 15px;
             background: white;
-            color: #ff69b4;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
+        }
+
+        /* ألعاب كلاسيكية */
+        .classic-game {
+            background: white;
+            border-radius: 40px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.2);
+        }
+
+        .game-input {
+            padding: 15px 25px;
+            border: 3px solid #ff1493;
+            border-radius: 50px;
+            font-size: 18px;
+            margin: 15px;
+            width: 250px;
+            outline: none;
+        }
+
+        .game-input:focus {
+            box-shadow: 0 0 0 3px rgba(255, 20, 147, 0.3);
+        }
+
+        .choice-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .choice-btn {
+            background: white;
+            border: 3px solid #ff1493;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff1493;
+            cursor: pointer;
+            transition: 0.2s;
+            min-width: 120px;
+        }
+
+        .choice-btn:hover {
+            background: #ff1493;
+            color: white;
             transform: scale(1.05);
         }
 
-        /* إكس-أو */
         .tic-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            max-width: 300px;
-            margin: 20px auto;
+            grid-template-columns: repeat(3, 120px);
+            gap: 15px;
+            justify-content: center;
+            margin: 30px auto;
         }
 
         .tic-cell {
-            aspect-ratio: 1;
-            background: #ffe4e1;
-            border: 2px solid #ff69b4;
-            border-radius: 10px;
+            width: 120px;
+            height: 120px;
+            background: #fff0f5;
+            border: 3px solid #ff1493;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            cursor: pointer;
-        }
-
-        /* ألعاب البنات */
-        .style-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        .style-item {
-            width: 80px;
-            height: 80px;
-            background: #ffe4e1;
-            border: 2px solid #ff69b4;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 30px;
-        }
-
-        .style-item:hover {
-            background: #ff69b4;
-            color: white;
-        }
-
-        .color-picker {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        .color-circle {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 3px solid white;
-        }
-
-        .status {
-            font-size: 20px;
-            margin: 20px;
-            color: #ff69b4;
+            font-size: 60px;
             font-weight: bold;
+            color: #ff1493;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .tic-cell:hover {
+            background: #ff1493;
+            color: white;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">🎀 مودة ومريم</div>
-    <div class="points-box" id="points">0</div>
+    <div class="logo">
+        <span class="logo-icon">💄</span>
+        <div class="logo-text">
+            <h1>صالون مودة ومريم</h1>
+            <p>أجمل ألعاب التجميل للبنوتات</p>
+        </div>
+    </div>
+    <div class="points-card" id="points">
+        💎 0 نقطة
+    </div>
 </header>
 
 <!-- القائمة الرئيسية -->
-<div id="menu">
-    <h2 style="text-align: center; color: white; margin: 20px;">🎀 اختاروا لعبتكم 🎀</h2>
+<div id="menuSection" class="menu-section">
+    <h2 class="section-title">🎀 اختاري لعبتك المفضلة 🎀</h2>
     <div class="games-grid" id="gamesGrid"></div>
 </div>
 
-<!-- منطقة عرض اللعبة -->
-<div id="gameContainer" style="display: none;">
-    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-        <button onclick="backToMenu()">🔙 رجوع</button>
-        <h2 id="gameTitle" style="color: white;"></h2>
-        <button onclick="resetCurrentGame()">🔄 إعادة</button>
+<!-- منطقة اللعبة -->
+<div id="gameSection" class="game-section" style="display: none;">
+    <div class="game-header">
+        <button class="back-btn" onclick="backToMenu()">
+            <span>🔙</span> رجوع
+        </button>
+        <h2 class="game-title" id="currentGameTitle"></h2>
+        <button class="reset-btn" onclick="resetCurrentGame()">
+            <span>🔄</span> لعبة جديدة
+        </button>
     </div>
-    <div id="gameContent" class="game-area"></div>
+    <div id="gameContent"></div>
 </div>
 
 <script>
@@ -213,82 +467,565 @@
 // نظام النقاط
 ///////////////////////////////////////////
 let points = parseInt(localStorage.getItem('points')) || 0;
-document.getElementById('points').textContent = points;
+updatePointsDisplay();
+
+function updatePointsDisplay() {
+    document.getElementById('points').innerHTML = `💎 ${points} نقطة`;
+}
 
 function addPoints(p) {
     points += p;
     localStorage.setItem('points', points);
-    document.getElementById('points').textContent = points;
-    alert(`🎀 +${p} نقطة!`);
+    updatePointsDisplay();
+    
+    // رسالة منبثقة لطيفة
+    const message = document.createElement('div');
+    message.style.cssText = `
+        position: fixed;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #ff1493, #ff69b4);
+        color: white;
+        padding: 15px 40px;
+        border-radius: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        z-index: 1000;
+        box-shadow: 0 10px 30px rgba(255,20,147,0.3);
+        animation: slideDown 0.5s ease;
+    `;
+    message.innerHTML = `🎀 +${p} نقطة!`;
+    document.body.appendChild(message);
+    
+    setTimeout(() => {
+        message.style.animation = 'slideUp 0.5s ease';
+        setTimeout(() => message.remove(), 500);
+    }, 2000);
 }
 
 ///////////////////////////////////////////
-// 10 ألعاب أساسية (مضمونة)
+// الألعاب - تصميم واقعي
 ///////////////////////////////////////////
 const games = [
-    { id: 1, name: 'إكس-أو', icon: '❌⭕' },
-    { id: 2, name: 'تخمين الأرقام', icon: '🔢' },
-    { id: 3, name: 'حجر ورقة مقص', icon: '✂️' },
-    { id: 4, name: 'الجمع السريع', icon: '➕' },
-    { id: 5, name: 'تسريحة شعر', icon: '💇' },
-    { id: 6, name: 'تلوين أظافر', icon: '💅' },
-    { id: 7, name: 'فستان أميرة', icon: '👗' },
-    { id: 8, name: 'مكياج عيون', icon: '👁️' },
-    { id: 9, name: 'تزيين كعكة', icon: '🍰' },
-    { id: 10, name: 'مجوهرات', icon: '💎' }
+    {
+        id: 1,
+        name: 'صالون الشعر',
+        icon: '💇',
+        description: 'قصفي وصبغي شعرك بتسريحات عصرية',
+        points: '5-10 نقاط',
+        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917996.png',
+        bgColor: '#FFB6C1'
+    },
+    {
+        id: 2,
+        name: 'مانيكير الأظافر',
+        icon: '💅',
+        description: 'تزيين الأظافر بأجمل الألوان',
+        points: '3-8 نقاط',
+        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917980.png',
+        bgColor: '#FFC0CB'
+    },
+    {
+        id: 3,
+        name: 'فساتين الأميرات',
+        icon: '👗',
+        description: 'تصميم فساتين ساحرة للأميرات',
+        points: '7-15 نقاط',
+        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917994.png',
+        bgColor: '#DDA0DD'
+    },
+    {
+        id: 4,
+        name: 'مكياج احترافي',
+        icon: '👁️',
+        description: 'تطبيق أجمل مكياج للعيون',
+        points: '6-12 نقاط',
+        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917985.png',
+        bgColor: '#E6E6FA'
+    },
+    {
+        id: 5,
+        name: 'تزيين الكعكات',
+        icon: '🍰',
+        description: 'ديكورات كعكات عيد الميلاد',
+        points: '8-15 نقاط',
+        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917992.png',
+        bgColor: '#FFE4E1'
+    },
+    {
+        id: 6,
+        name: 'مجوهرات فاخرة',
+        icon: '💎',
+        description: 'تصميم إكسسوارات براقة',
+        points: '6-10 نقاط',
+        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917988.png',
+        bgColor: '#F0E68C'
+    },
+    {
+        id: 7,
+        name: 'لعبة إكس-أو',
+        icon: '❌⭕',
+        description: 'لعبة كلاسيكية ضد الكمبيوتر',
+        points: '5 نقاط',
+        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917975.png',
+        bgColor: '#B0E0E6'
+    },
+    {
+        id: 8,
+        name: 'مقهى الحلوى',
+        icon: '🧁',
+        description: 'تحضير أشهى الحلويات',
+        points: '10-20 نقاط',
+        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917983.png',
+        bgColor: '#F0FFF0'
+    }
 ];
 
-// عرض الألعاب في القائمة
+// عرض الألعاب
 function displayGames() {
     let html = '';
-    for(let i = 0; i < games.length; i++) {
+    games.forEach(game => {
         html += `
-            <div class="game-card" onclick="playGame(${games[i].id})">
-                <div class="game-icon">${games[i].icon}</div>
-                <div class="game-title">${games[i].name}</div>
+            <div class="game-card" onclick="playGame(${game.id})">
+                <div class="card-image" style="background-image: url('${game.image}'); background-color: ${game.bgColor};">
+                    <div class="card-overlay">
+                        <h3>${game.name}</h3>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>${game.description}</p>
+                    <span class="card-points">🏆 ${game.points}</span>
+                </div>
             </div>
         `;
-    }
+    });
     document.getElementById('gamesGrid').innerHTML = html;
 }
 
-// العودة للقائمة
+// التنقل
 function backToMenu() {
-    document.getElementById('menu').style.display = 'block';
-    document.getElementById('gameContainer').style.display = 'none';
+    document.getElementById('menuSection').style.display = 'block';
+    document.getElementById('gameSection').style.display = 'none';
 }
 
-// تشغيل لعبة معينة
 function playGame(id) {
-    document.getElementById('menu').style.display = 'none';
-    document.getElementById('gameContainer').style.display = 'block';
+    document.getElementById('menuSection').style.display = 'none';
+    document.getElementById('gameSection').style.display = 'block';
     
-    let game = games.find(g => g.id === id);
-    document.getElementById('gameTitle').textContent = game.name;
+    const game = games.find(g => g.id === id);
+    document.getElementById('currentGameTitle').innerHTML = game.name;
     
     let content = '';
     
     switch(id) {
-        case 1: content = ticTacToeGame(); break;
-        case 2: content = guessNumberGame(); break;
-        case 3: content = rpsGame(); break;
-        case 4: content = additionGame(); break;
-        case 5: content = hairGame(); break;
-        case 6: content = nailsGame(); break;
-        case 7: content = dressGame(); break;
-        case 8: content = makeupGame(); break;
-        case 9: content = cakeGame(); break;
-        case 10: content = jewelryGame(); break;
+        case 1: content = hairSalonGame(); break;
+        case 2: content = nailsGame(); break;
+        case 3: content = dressGame(); break;
+        case 4: content = makeupGame(); break;
+        case 5: content = cakeGame(); break;
+        case 6: content = jewelryGame(); break;
+        case 7: content = ticTacToeGame(); break;
+        case 8: content = candyGame(); break;
     }
     
     document.getElementById('gameContent').innerHTML = content;
 }
 
-// إعادة تشغيل اللعبة الحالية
 function resetCurrentGame() {
-    let title = document.getElementById('gameTitle').textContent;
-    let game = games.find(g => g.name === title);
+    const title = document.getElementById('currentGameTitle').innerHTML;
+    const game = games.find(g => g.name === title);
     if(game) playGame(game.id);
+}
+
+///////////////////////////////////////////
+// صالون الشعر (واقعي)
+///////////////////////////////////////////
+function hairSalonGame() {
+    return `
+        <div class="salon-container">
+            <div class="model-container">
+                <div class="model-card">
+                    <div class="model-title">قبل</div>
+                    <div class="model-display" id="beforeHair">👧</div>
+                </div>
+                <div class="model-card">
+                    <div class="model-title">بعد</div>
+                    <div class="model-display" id="afterHair">👩‍🦰</div>
+                </div>
+            </div>
+            
+            <div class="tools-panel">
+                <h3 class="tools-title">أدوات التصفيف</h3>
+                <div class="tools-grid">
+                    <div class="tool-item" onclick="applyHairTool('💇', 'قص')">
+                        <div class="tool-icon">💇</div>
+                        <div class="tool-name">قص الشعر</div>
+                    </div>
+                    <div class="tool-item" onclick="applyHairTool('👩‍🦰', 'تمليس')">
+                        <div class="tool-icon">👩‍🦰</div>
+                        <div class="tool-name">تمليس</div>
+                    </div>
+                    <div class="tool-item" onclick="applyHairTool('👩‍🦱', 'تجعيد')">
+                        <div class="tool-icon">👩‍🦱</div>
+                        <div class="tool-name">تجعيد</div>
+                    </div>
+                    <div class="tool-item" onclick="applyHairTool('👸', 'تاج')">
+                        <div class="tool-icon">👸</div>
+                        <div class="tool-name">تاج أميرة</div>
+                    </div>
+                </div>
+                
+                <h3 class="tools-title" style="margin-top: 30px;">ألوان الصبغة</h3>
+                <div class="color-palette">
+                    <div class="color-swatch" style="background: #000000;" onclick="applyHairColor('#000000')"></div>
+                    <div class="color-swatch" style="background: #8B4513;" onclick="applyHairColor('#8B4513')"></div>
+                    <div class="color-swatch" style="background: #FFD700;" onclick="applyHairColor('#FFD700')"></div>
+                    <div class="color-swatch" style="background: #FF69B4;" onclick="applyHairColor('#FF69B4')"></div>
+                    <div class="color-swatch" style="background: #FF4500;" onclick="applyHairColor('#FF4500')"></div>
+                </div>
+            </div>
+            
+            <div class="status-message" id="hairStatus">⚡ اختاري تسريحة وألوان</div>
+            <button class="action-btn" onclick="saveHairStyle()">✨ حفظ التسريحة ✨</button>
+        </div>
+        <script>
+            window.applyHairTool = function(tool, name) {
+                document.getElementById('afterHair').innerHTML = tool;
+                document.getElementById('hairStatus').innerHTML = '🎀 تم تطبيق: ' + name;
+            };
+            
+            window.applyHairColor = function(color) {
+                document.getElementById('afterHair').style.color = color;
+                document.getElementById('hairStatus').innerHTML = '💗 لون رائع!';
+            };
+            
+            window.saveHairStyle = function() {
+                const points = Math.floor(Math.random() * 6) + 5;
+                document.getElementById('hairStatus').innerHTML = '🎉 تسريحة رائعة! +' + points + ' نقاط';
+                addPoints(points);
+            };
+        <\/script>
+    `;
+}
+
+///////////////////////////////////////////
+// مانيكير الأظافر
+///////////////////////////////////////////
+function nailsGame() {
+    return `
+        <div class="salon-container">
+            <div class="model-container">
+                <div class="model-card">
+                    <div class="model-title">أظافرك</div>
+                    <div class="model-display" id="nails">🖐️</div>
+                </div>
+            </div>
+            
+            <div class="tools-panel">
+                <h3 class="tools-title">ألوان الطلاء</h3>
+                <div class="color-palette">
+                    <div class="color-swatch" style="background: #FF1493;" onclick="applyNailColor('#FF1493')"></div>
+                    <div class="color-swatch" style="background: #FF0000;" onclick="applyNailColor('#FF0000')"></div>
+                    <div class="color-swatch" style="background: #FF69B4;" onclick="applyNailColor('#FF69B4')"></div>
+                    <div class="color-swatch" style="background: #9370DB;" onclick="applyNailColor('#9370DB')"></div>
+                    <div class="color-swatch" style="background: #4169E1;" onclick="applyNailColor('#4169E1')"></div>
+                </div>
+                
+                <h3 class="tools-title" style="margin-top: 30px;">إكسسوارات</h3>
+                <div class="tools-grid">
+                    <div class="tool-item" onclick="applyNailSticker('⭐')">
+                        <div class="tool-icon">⭐</div>
+                        <div class="tool-name">نجمة</div>
+                    </div>
+                    <div class="tool-item" onclick="applyNailSticker('❤️')">
+                        <div class="tool-icon">❤️</div>
+                        <div class="tool-name">قلب</div>
+                    </div>
+                    <div class="tool-item" onclick="applyNailSticker('💎')">
+                        <div class="tool-icon">💎</div>
+                        <div class="tool-name">كريستال</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="status-message" id="nailsStatus">💅 اختاري لون رائع</div>
+            <button class="action-btn" onclick="saveNails()">✨ حفظ التصميم ✨</button>
+        </div>
+        <script>
+            window.applyNailColor = function(color) {
+                document.getElementById('nails').style.color = color;
+                document.getElementById('nailsStatus').innerHTML = 'لون جميل!';
+            };
+            
+            window.applyNailSticker = function(sticker) {
+                document.getElementById('nails').innerHTML = '🖐️' + sticker;
+                document.getElementById('nailsStatus').innerHTML = 'إضافة ' + sticker;
+            };
+            
+            window.saveNails = function() {
+                const points = Math.floor(Math.random() * 6) + 3;
+                document.getElementById('nailsStatus').innerHTML = '💅 أظافر رائعة! +' + points + ' نقاط';
+                addPoints(points);
+            };
+        <\/script>
+    `;
+}
+
+///////////////////////////////////////////
+// فساتين الأميرات
+///////////////////////////////////////////
+function dressGame() {
+    return `
+        <div class="salon-container">
+            <div class="model-container">
+                <div class="model-card">
+                    <div class="model-display" id="princess">👸</div>
+                </div>
+            </div>
+            
+            <div class="tools-panel">
+                <h3 class="tools-title">فساتين ساحرة</h3>
+                <div class="tools-grid">
+                    <div class="tool-item" onclick="applyDress('👗')">
+                        <div class="tool-icon">👗</div>
+                        <div class="tool-name">فستان قصير</div>
+                    </div>
+                    <div class="tool-item" onclick="applyDress('👘')">
+                        <div class="tool-icon">👘</div>
+                        <div class="tool-name">فستان طويل</div>
+                    </div>
+                    <div class="tool-item" onclick="applyDress('👰')">
+                        <div class="tool-icon">👰</div>
+                        <div class="tool-name">فستان زفاف</div>
+                    </div>
+                    <div class="tool-item" onclick="applyDress('👸')">
+                        <div class="tool-icon">👸</div>
+                        <div class="tool-name">فستان ملكي</div>
+                    </div>
+                </div>
+                
+                <h3 class="tools-title" style="margin-top: 30px;">ألوان الفستان</h3>
+                <div class="color-palette">
+                    <div class="color-swatch" style="background: #FF69B4;" onclick="applyDressColor('#FF69B4')"></div>
+                    <div class="color-swatch" style="background: #87CEEB;" onclick="applyDressColor('#87CEEB')"></div>
+                    <div class="color-swatch" style="background: #98FB98;" onclick="applyDressColor('#98FB98')"></div>
+                    <div class="color-swatch" style="background: #FFD700;" onclick="applyDressColor('#FFD700')"></div>
+                </div>
+            </div>
+            
+            <div class="status-message" id="dressStatus">👗 صممي فستان أحلامك</div>
+            <button class="action-btn" onclick="saveDress()">✨ حفظ الفستان ✨</button>
+        </div>
+        <script>
+            window.applyDress = function(dress) {
+                document.getElementById('princess').innerHTML = dress;
+                document.getElementById('dressStatus').innerHTML = 'فستان جميل!';
+            };
+            
+            window.applyDressColor = function(color) {
+                document.getElementById('princess').style.color = color;
+            };
+            
+            window.saveDress = function() {
+                const points = Math.floor(Math.random() * 9) + 7;
+                document.getElementById('dressStatus').innerHTML = '👸 أميرة متألقة! +' + points + ' نقاط';
+                addPoints(points);
+            };
+        <\/script>
+    `;
+}
+
+///////////////////////////////////////////
+// مكياج عيون
+///////////////////////////////////////////
+function makeupGame() {
+    return `
+        <div class="salon-container">
+            <div class="model-container">
+                <div class="model-display" id="eyes">👀</div>
+            </div>
+            
+            <div class="tools-panel">
+                <h3 class="tools-title">ظلال العيون</h3>
+                <div class="color-palette">
+                    <div class="color-swatch" style="background: #FFB6C1;" onclick="applyEyeshadow('#FFB6C1')"></div>
+                    <div class="color-swatch" style="background: #9370DB;" onclick="applyEyeshadow('#9370DB')"></div>
+                    <div class="color-swatch" style="background: #4169E1;" onclick="applyEyeshadow('#4169E1')"></div>
+                    <div class="color-swatch" style="background: #32CD32;" onclick="applyEyeshadow('#32CD32')"></div>
+                </div>
+                
+                <h3 class="tools-title" style="margin-top: 30px;">أدوات المكياج</h3>
+                <div class="tools-grid">
+                    <div class="tool-item" onclick="applyMascara()">
+                        <div class="tool-icon">👁️</div>
+                        <div class="tool-name">ماسكارا</div>
+                    </div>
+                    <div class="tool-item" onclick="applyEyeliner()">
+                        <div class="tool-icon">✏️</div>
+                        <div class="tool-name">آيلاينر</div>
+                    </div>
+                    <div class="tool-item" onclick="applyGlitter()">
+                        <div class="tool-icon">✨</div>
+                        <div class="tool-name">جليتر</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="status-message" id="makeupStatus">👁️ طبقي مكياج رائع</div>
+            <button class="action-btn" onclick="saveMakeup()">✨ حفظ المكياج ✨</button>
+        </div>
+        <script>
+            window.applyEyeshadow = function(color) {
+                document.getElementById('eyes').innerHTML = '👁️✨';
+                document.getElementById('eyes').style.color = color;
+                document.getElementById('makeupStatus').innerHTML = 'ظلال عيون جميلة';
+            };
+            
+            window.applyMascara = function() {
+                document.getElementById('eyes').innerHTML = '👁️👁️';
+                document.getElementById('makeupStatus').innerHTML = 'رموش طويلة';
+            };
+            
+            window.applyEyeliner = function() {
+                document.getElementById('eyes').innerHTML = '◀️👁️';
+                document.getElementById('makeupStatus').innerHTML = 'آيلاينر مثالي';
+            };
+            
+            window.applyGlitter = function() {
+                document.getElementById('eyes').innerHTML = '✨👁️✨';
+                document.getElementById('makeupStatus').innerHTML = 'عيون لامعة';
+            };
+            
+            window.saveMakeup = function() {
+                const points = Math.floor(Math.random() * 7) + 6;
+                document.getElementById('makeupStatus').innerHTML = '🎉 مكياج رائع! +' + points + ' نقاط';
+                addPoints(points);
+            };
+        <\/script>
+    `;
+}
+
+///////////////////////////////////////////
+// تزيين الكعكات
+///////////////////////////////////////////
+function cakeGame() {
+    return `
+        <div class="salon-container">
+            <div class="model-container">
+                <div class="model-display" id="cake">🎂</div>
+            </div>
+            
+            <div class="tools-panel">
+                <h3 class="tools-title">زينة الكعكة</h3>
+                <div class="tools-grid">
+                    <div class="tool-item" onclick="addCakeTopping('🍓')">
+                        <div class="tool-icon">🍓</div>
+                        <div class="tool-name">فراولة</div>
+                    </div>
+                    <div class="tool-item" onclick="addCakeTopping('🍫')">
+                        <div class="tool-icon">🍫</div>
+                        <div class="tool-name">شوكولاتة</div>
+                    </div>
+                    <div class="tool-item" onclick="addCakeTopping('🍒')">
+                        <div class="tool-icon">🍒</div>
+                        <div class="tool-name">كرز</div>
+                    </div>
+                    <div class="tool-item" onclick="addCakeTopping('🕯️')">
+                        <div class="tool-icon">🕯️</div>
+                        <div class="tool-name">شمعة</div>
+                    </div>
+                </div>
+                
+                <h3 class="tools-title" style="margin-top: 30px;">ألوان الكريمة</h3>
+                <div class="color-palette">
+                    <div class="color-swatch" style="background: #FF69B4;" onclick="changeCakeColor('#FF69B4')"></div>
+                    <div class="color-swatch" style="background: #87CEEB;" onclick="changeCakeColor('#87CEEB')"></div>
+                    <div class="color-swatch" style="background: #98FB98;" onclick="changeCakeColor('#98FB98')"></div>
+                </div>
+            </div>
+            
+            <div class="status-message" id="cakeStatus">🍰 زيني كعكتك</div>
+            <button class="action-btn" onclick="saveCake()">✨ حفظ الكعكة ✨</button>
+        </div>
+        <script>
+            window.addCakeTopping = function(topping) {
+                document.getElementById('cake').innerHTML = '🎂' + topping;
+                document.getElementById('cakeStatus').innerHTML = 'إضافة ' + topping;
+            };
+            
+            window.changeCakeColor = function(color) {
+                document.getElementById('cake').style.color = color;
+            };
+            
+            window.saveCake = function() {
+                const points = Math.floor(Math.random() * 8) + 8;
+                document.getElementById('cakeStatus').innerHTML = '🍰 كعكة رائعة! +' + points + ' نقاط';
+                addPoints(points);
+            };
+        <\/script>
+    `;
+}
+
+///////////////////////////////////////////
+// مجوهرات فاخرة
+///////////////////////////////////////////
+function jewelryGame() {
+    return `
+        <div class="salon-container">
+            <div class="model-container">
+                <div class="model-display" id="jewelry">👸💎</div>
+            </div>
+            
+            <div class="tools-panel">
+                <h3 class="tools-title">مجوهرات فاخرة</h3>
+                <div class="tools-grid">
+                    <div class="tool-item" onclick="addJewelry('💍')">
+                        <div class="tool-icon">💍</div>
+                        <div class="tool-name">خاتم</div>
+                    </div>
+                    <div class="tool-item" onclick="addJewelry('📿')">
+                        <div class="tool-icon">📿</div>
+                        <div class="tool-name">عقد</div>
+                    </div>
+                    <div class="tool-item" onclick="addJewelry('👑')">
+                        <div class="tool-icon">👑</div>
+                        <div class="tool-name">تاج</div>
+                    </div>
+                    <div class="tool-item" onclick="addJewelry('✨')">
+                        <div class="tool-icon">✨</div>
+                        <div class="tool-name">لمعان</div>
+                    </div>
+                </div>
+                
+                <h3 class="tools-title" style="margin-top: 30px;">ألوان المجوهرات</h3>
+                <div class="color-palette">
+                    <div class="color-swatch" style="background: gold;" onclick="changeJewelryColor('gold')"></div>
+                    <div class="color-swatch" style="background: silver;" onclick="changeJewelryColor('silver')"></div>
+                    <div class="color-swatch" style="background: #FF69B4;" onclick="changeJewelryColor('#FF69B4')"></div>
+                </div>
+            </div>
+            
+            <div class="status-message" id="jewelryStatus">💎 تألقي بالمجوهرات</div>
+            <button class="action-btn" onclick="saveJewelry()">✨ حفظ الإطلالة ✨</button>
+        </div>
+        <script>
+            window.addJewelry = function(item) {
+                document.getElementById('jewelry').innerHTML = '👸' + item;
+                document.getElementById('jewelryStatus').innerHTML = 'إضافة ' + item;
+            };
+            
+            window.changeJewelryColor = function(color) {
+                document.getElementById('jewelry').style.color = color;
+            };
+            
+            window.saveJewelry = function() {
+                const points = Math.floor(Math.random() * 5) + 6;
+                document.getElementById('jewelryStatus').innerHTML = '👸 أميرة متألقة! +' + points + ' نقاط';
+                addPoints(points);
+            };
+        <\/script>
+    `;
 }
 
 ///////////////////////////////////////////
@@ -296,11 +1033,10 @@ function resetCurrentGame() {
 ///////////////////////////////////////////
 function ticTacToeGame() {
     return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">❌⭕ إكس-أو</h3>
+        <div class="classic-game">
+            <h2 style="color: #ff1493; margin-bottom: 20px;">❌⭕ إكس-أو</h2>
             <div class="tic-grid" id="ticGrid"></div>
-            <div class="status" id="ticStatus">دور X</div>
-            <button onclick="resetTic()">🔄 إعادة</button>
+            <div class="status-message" id="ticStatus">دورك</div>
         </div>
         <script>
             let ticBoard = ['','','','','','','','',''];
@@ -356,320 +1092,49 @@ function ticTacToeGame() {
                 return false;
             }
             
-            window.resetTic = function() {
-                ticBoard = ['','','','','','','','',''];
-                ticTurn = 'X';
-                ticGameOver = false;
-                renderTic();
-                document.getElementById('ticStatus').innerHTML = 'دور X';
-            };
-            
             renderTic();
         <\/script>
     `;
 }
 
 ///////////////////////////////////////////
-// لعبة تخمين الأرقام
+// مقهى الحلوى
 ///////////////////////////////////////////
-function guessNumberGame() {
-    let secret = Math.floor(Math.random() * 100) + 1;
+function candyGame() {
     return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">🔢 خمني الرقم</h3>
-            <p>رقم من 1 إلى 100</p>
-            <input type="number" id="guessInput" placeholder="تخمينك" style="padding: 10px; width: 200px;">
-            <button onclick="window.checkGuess(${secret})">تحقق</button>
-            <div class="status" id="guessStatus"></div>
-            <button onclick="resetGuess()">🔄 رقم جديد</button>
+        <div class="classic-game">
+            <h2 style="color: #ff1493; margin-bottom: 20px;">🧁 مقهى الحلوى</h2>
+            <div style="font-size: 120px; margin: 30px;" id="candy">🧁</div>
+            <div class="tools-grid" style="max-width: 400px; margin: 0 auto;">
+                <div class="tool-item" onclick="makeCandy('🍪')">
+                    <div class="tool-icon">🍪</div>
+                    <div class="tool-name">بسكويت</div>
+                </div>
+                <div class="tool-item" onclick="makeCandy('🍩')">
+                    <div class="tool-icon">🍩</div>
+                    <div class="tool-name">دونات</div>
+                </div>
+                <div class="tool-item" onclick="makeCandy('🍫')">
+                    <div class="tool-icon">🍫</div>
+                    <div class="tool-name">شوكولاتة</div>
+                </div>
+                <div class="tool-item" onclick="makeCandy('🍦')">
+                    <div class="tool-icon">🍦</div>
+                    <div class="tool-name">آيس كريم</div>
+                </div>
+            </div>
+            <div class="status-message" id="candyStatus">🍭 حضري أشهى الحلويات</div>
+            <button class="action-btn" onclick="saveCandy()">✨ تحضير +10 نقاط ✨</button>
         </div>
         <script>
-            window.checkGuess = function(s) {
-                let g = parseInt(document.getElementById('guessInput').value);
-                let status = document.getElementById('guessStatus');
-                if(g === s) {
-                    status.innerHTML = '🎉 صح! +5 نقاط';
-                    addPoints(5);
-                } else if(g < s) {
-                    status.innerHTML = 'الرقم أكبر';
-                } else {
-                    status.innerHTML = 'الرقم أصغر';
-                }
+            window.makeCandy = function(candy) {
+                document.getElementById('candy').innerHTML = candy;
+                document.getElementById('candyStatus').innerHTML = 'حلوى لذيذة!';
             };
             
-            window.resetGuess = function() {
-                location.reload();
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// لعبة حجر ورقة مقص
-///////////////////////////////////////////
-function rpsGame() {
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">✂️ حجر ورقة مقص</h3>
-            <div style="margin: 30px;">
-                <button onclick="window.playRPS('حجر')">🪨 حجر</button>
-                <button onclick="window.playRPS('ورقة')">📄 ورقة</button>
-                <button onclick="window.playRPS('مقص')">✂️ مقص</button>
-            </div>
-            <div class="status" id="rpsStatus"></div>
-        </div>
-        <script>
-            window.playRPS = function(player) {
-                let choices = ['حجر','ورقة','مقص'];
-                let computer = choices[Math.floor(Math.random() * 3)];
-                let result = '';
-                
-                if(player === computer) result = 'تعادل';
-                else if(
-                    (player === 'حجر' && computer === 'مقص') ||
-                    (player === 'ورقة' && computer === 'حجر') ||
-                    (player === 'مقص' && computer === 'ورقة')
-                ) {
-                    result = '🎉 فزتي! +3 نقاط';
-                    addPoints(3);
-                } else {
-                    result = 'خسرتي';
-                }
-                
-                document.getElementById('rpsStatus').innerHTML = 
-                    'اخترتي: ' + player + '<br>الكمبيوتر: ' + computer + '<br>' + result;
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// لعبة الجمع السريع
-///////////////////////////////////////////
-function additionGame() {
-    let a = Math.floor(Math.random() * 20) + 1;
-    let b = Math.floor(Math.random() * 20) + 1;
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">➕ جمع سريع</h3>
-            <h2>${a} + ${b} = ؟</h2>
-            <input type="number" id="addInput" placeholder="الإجابة" style="padding: 10px; width: 200px;">
-            <button onclick="window.checkAdd(${a}, ${b})">تحقق</button>
-            <div class="status" id="addStatus"></div>
-            <button onclick="resetAdd()">🔄 مسألة جديدة</button>
-        </div>
-        <script>
-            window.checkAdd = function(a, b) {
-                let answer = parseInt(document.getElementById('addInput').value);
-                if(answer === a + b) {
-                    document.getElementById('addStatus').innerHTML = '🎉 صح! +1 نقطة';
-                    addPoints(1);
-                } else {
-                    document.getElementById('addStatus').innerHTML = '❌ خطأ';
-                }
-            };
-            
-            window.resetAdd = function() {
-                location.reload();
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// لعبة تسريحة شعر
-///////////////////////////////////////////
-function hairGame() {
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">💇 تسريحة شعر</h3>
-            <div style="font-size: 120px; margin: 20px;" id="hairModel">👧</div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.changeHair('👧')">👧 قصير</div>
-                <div class="style-item" onclick="window.changeHair('👩')">👩 طويل</div>
-                <div class="style-item" onclick="window.changeHair('👸')">👸 تاج</div>
-                <div class="style-item" onclick="window.changeHair('🦰')">🦰 أحمر</div>
-            </div>
-            <div class="color-picker">
-                <div class="color-circle" style="background: #000;" onclick="window.changeHairColor('#000')"></div>
-                <div class="color-circle" style="background: #8B4513;" onclick="window.changeHairColor('#8B4513')"></div>
-                <div class="color-circle" style="background: #FFD700;" onclick="window.changeHairColor('#FFD700')"></div>
-            </div>
-            <div class="status" id="hairStatus"></div>
-            <button onclick="window.saveHair()">💾 حفظ +5 نقاط</button>
-        </div>
-        <script>
-            window.changeHair = function(style) {
-                document.getElementById('hairModel').innerHTML = style;
-            };
-            
-            window.changeHairColor = function(color) {
-                document.getElementById('hairModel').style.color = color;
-            };
-            
-            window.saveHair = function() {
-                document.getElementById('hairStatus').innerHTML = '🎀 تسريحة رائعة! +5 نقاط';
-                addPoints(5);
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// لعبة تلوين أظافر
-///////////////////////////////////////////
-function nailsGame() {
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">💅 تلوين أظافر</h3>
-            <div style="font-size: 120px; margin: 20px;" id="nails">🖐️</div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.paintNail('red')">🔴 أحمر</div>
-                <div class="style-item" onclick="window.paintNail('pink')">💗 وردي</div>
-                <div class="style-item" onclick="window.paintNail('purple')">💜 بنفسجي</div>
-                <div class="style-item" onclick="window.paintNail('gold')">💛 ذهبي</div>
-            </div>
-            <div class="status" id="nailsStatus"></div>
-            <button onclick="window.saveNails()">💾 حفظ +3 نقاط</button>
-        </div>
-        <script>
-            window.paintNail = function(color) {
-                document.getElementById('nails').style.color = color;
-                document.getElementById('nailsStatus').innerHTML = 'لون جميل';
-            };
-            
-            window.saveNails = function() {
-                document.getElementById('nailsStatus').innerHTML = '💅 أظافر رائعة! +3 نقاط';
-                addPoints(3);
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// لعبة فستان أميرة
-///////////////////////////////////////////
-function dressGame() {
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">👗 فستان أميرة</h3>
-            <div style="font-size: 120px; margin: 20px;" id="dressModel">👸</div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.changeDress('👗')">👗 قصير</div>
-                <div class="style-item" onclick="window.changeDress('👘')">👘 طويل</div>
-                <div class="style-item" onclick="window.changeDress('👰')">👰 زفاف</div>
-            </div>
-            <div class="color-picker">
-                <div class="color-circle" style="background: #FF69B4;" onclick="window.changeDressColor('#FF69B4')"></div>
-                <div class="color-circle" style="background: #87CEEB;" onclick="window.changeDressColor('#87CEEB')"></div>
-                <div class="color-circle" style="background: #98FB98;" onclick="window.changeDressColor('#98FB98')"></div>
-            </div>
-            <div class="status" id="dressStatus"></div>
-            <button onclick="window.saveDress()">💾 حفظ +7 نقاط</button>
-        </div>
-        <script>
-            window.changeDress = function(dress) {
-                document.getElementById('dressModel').innerHTML = '👸' + dress;
-            };
-            
-            window.changeDressColor = function(color) {
-                document.getElementById('dressModel').style.color = color;
-            };
-            
-            window.saveDress = function() {
-                document.getElementById('dressStatus').innerHTML = '👸 أميرة جميلة! +7 نقاط';
-                addPoints(7);
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// لعبة مكياج عيون
-///////////////////////////////////////////
-function makeupGame() {
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">👁️ مكياج عيون</h3>
-            <div style="font-size: 120px; margin: 20px;" id="eyes">👀</div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.addEyeshadow('pink')">💗 وردي</div>
-                <div class="style-item" onclick="window.addEyeshadow('purple')">💜 بنفسجي</div>
-                <div class="style-item" onclick="window.addEyeshadow('blue')">💙 أزرق</div>
-                <div class="style-item" onclick="window.addEyeshadow('gold')">💛 ذهبي</div>
-            </div>
-            <div class="status" id="makeupStatus"></div>
-            <button onclick="window.saveMakeup()">💾 حفظ +6 نقاط</button>
-        </div>
-        <script>
-            window.addEyeshadow = function(color) {
-                document.getElementById('eyes').innerHTML = '👁️✨';
-                document.getElementById('makeupStatus').innerHTML = 'مكياج ' + color;
-            };
-            
-            window.saveMakeup = function() {
-                document.getElementById('makeupStatus').innerHTML = '👁️ مكياج رائع! +6 نقاط';
-                addPoints(6);
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// لعبة تزيين كعكة
-///////////////////////////////////////////
-function cakeGame() {
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">🍰 تزيين كعكة</h3>
-            <div style="font-size: 120px; margin: 20px;" id="cake">🎂</div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.addTopping('🍓')">🍓 فراولة</div>
-                <div class="style-item" onclick="window.addTopping('🍫')">🍫 شوكولاتة</div>
-                <div class="style-item" onclick="window.addTopping('🍒')">🍒 كرز</div>
-                <div class="style-item" onclick="window.addTopping('🕯️')">🕯️ شمعة</div>
-            </div>
-            <div class="status" id="cakeStatus"></div>
-            <button onclick="window.saveCake()">💾 حفظ +8 نقاط</button>
-        </div>
-        <script>
-            window.addTopping = function(topping) {
-                document.getElementById('cake').innerHTML = '🎂' + topping;
-            };
-            
-            window.saveCake = function() {
-                document.getElementById('cakeStatus').innerHTML = '🍰 كعكة جميلة! +8 نقاط';
-                addPoints(8);
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// لعبة مجوهرات
-///////////////////////////////////////////
-function jewelryGame() {
-    return `
-        <div style="text-align: center;">
-            <h3 style="color: #ff69b4;">💎 مجوهرات</h3>
-            <div style="font-size: 120px; margin: 20px;" id="jewelryModel">👸💎</div>
-            <div class="style-options">
-                <div class="style-item" onclick="window.addJewelry('💍')">💍 خاتم</div>
-                <div class="style-item" onclick="window.addJewelry('📿')">📿 عقد</div>
-                <div class="style-item" onclick="window.addJewelry('👑')">👑 تاج</div>
-                <div class="style-item" onclick="window.addJewelry('✨')">✨ لمعان</div>
-            </div>
-            <div class="status" id="jewelryStatus"></div>
-            <button onclick="window.saveJewelry()">💾 حفظ +6 نقاط</button>
-        </div>
-        <script>
-            window.addJewelry = function(jewel) {
-                document.getElementById('jewelryModel').innerHTML = '👸' + jewel;
-            };
-            
-            window.saveJewelry = function() {
-                document.getElementById('jewelryStatus').innerHTML = '👸 أميرة متألقة! +6 نقاط';
-                addPoints(6);
+            window.saveCandy = function() {
+                document.getElementById('candyStatus').innerHTML = '🧁 أحسنت! +10 نقاط';
+                addPoints(10);
             };
         <\/script>
     `;
