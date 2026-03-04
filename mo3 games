@@ -1,1 +1,172 @@
 
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منصة الألعاب المتقدمة</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css"/>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(135deg,#141e30,#243b55);
+    color:white;
+    text-align:center;
+    direction:rtl;
+}
+header{padding:20px;font-size:26px;background:#00000080;}
+section{display:none;padding:20px;}
+.active{display:block;}
+button{
+    padding:8px 15px;
+    margin:5px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+input{padding:6px;margin:5px;}
+#board{width:400px;margin:20px auto;}
+table{margin:auto;background:white;color:black;border-collapse:collapse;}
+td,th{padding:5px 10px;border:1px solid #999;}
+</style>
+</head>
+<body>
+
+<header>🎮 منصة الألعاب المتقدمة</header>
+
+<section id="auth">
+<h2>تسجيل الدخول</h2>
+<input id="username" placeholder="اسم المستخدم">
+<button onclick="login()">دخول</button>
+</section>
+
+<section id="menu">
+<h2 id="welcome"></h2>
+<button onclick="showSection('chess')">♟ الشطرنج ضد الكمبيوتر</button>
+<button onclick="showSection('ranking')">🏆 الترتيب</button>
+<button onclick="logout()">🚪 تسجيل خروج</button>
+</section>
+
+<section id="chess">
+<h2>♟ الشطرنج ضد الذكاء الاصطناعي</h2>
+<div id="board"></div>
+<p id="status"></p>
+<button onclick="resetGame()">إعادة</button>
+<button onclick="showSection('menu')">رجوع</button>
+</section>
+
+<section id="ranking">
+<h2>🏆 ترتيب اللاعبين</h2>
+<table id="rankTable">
+<tr><th>اللاعب</th><th>النقاط</th></tr>
+</table>
+<button onclick="showSection('menu')">رجوع</button>
+</section>
+
+<script>
+////////////////////////////
+// نظام الحسابات
+////////////////////////////
+let currentUser=null;
+
+function login(){
+    let name=document.getElementById("username").value.trim();
+    if(!name) return alert("اكتب اسم!");
+    currentUser=name;
+    if(!localStorage.getItem(name)){
+        localStorage.setItem(name,0);
+    }
+    document.getElementById("welcome").innerText="مرحباً "+name;
+    showSection("menu");
+}
+
+function logout(){
+    currentUser=null;
+    showSection("auth");
+}
+
+////////////////////////////
+// التنقل
+////////////////////////////
+function showSection(id){
+    document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    if(id==="ranking") loadRanking();
+}
+showSection("auth");
+
+////////////////////////////
+// الشطرنج + AI
+////////////////////////////
+let game=new Chess();
+let board=Chessboard('board',{
+    draggable:true,
+    position:'start',
+    onDrop:function(source,target){
+        let move=game.move({from:source,to:target,promotion:'q'});
+        if(move===null) return 'snapback';
+        updateStatus();
+        window.setTimeout(makeAIMove,250);
+    }
+});
+
+function makeAIMove(){
+    let moves=game.moves();
+    if(moves.length===0) return;
+    let randomMove=moves[Math.floor(Math.random()*moves.length)];
+    game.move(randomMove);
+    board.position(game.fen());
+    updateStatus();
+}
+
+function updateStatus(){
+    if(game.in_checkmate()){
+        document.getElementById("status").innerText="كسبت! 🎉";
+        addPoint();
+    }else if(game.in_draw()){
+        document.getElementById("status").innerText="تعادل";
+    }else{
+        document.getElementById("status").innerText="دورك";
+    }
+}
+
+function resetGame(){
+    game.reset();
+    board.start();
+    document.getElementById("status").innerText="";
+}
+
+////////////////////////////
+// نظام النقاط والترتيب
+////////////////////////////
+function addPoint(){
+    let points=parseInt(localStorage.getItem(currentUser));
+    localStorage.setItem(currentUser,points+1);
+}
+
+function loadRanking(){
+    let table=document.getElementById("rankTable");
+    table.innerHTML="<tr><th>اللاعب</th><th>النقاط</th></tr>";
+    let players=[];
+    for(let i=0;i<localStorage.length;i++){
+        let key=localStorage.key(i);
+        let value=localStorage.getItem(key);
+        if(!isNaN(value)){
+            players.push({name:key,points:value});
+        }
+    }
+    players.sort((a,b)=>b.points-a.points);
+    players.forEach(p=>{
+        table.innerHTML+=`<tr><td>${p.name}</td><td>${p.points}</td></tr>`;
+    });
+}
+</script>
+
+</body>
+</html>
