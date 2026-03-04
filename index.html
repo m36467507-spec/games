@@ -1,667 +1,910 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>منصة الألعاب المتطورة 🎮</title>
-
-<!-- أفضل المكتبات وأحدث الإصدارات -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.80.1/phaser.min.js"></script>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    min-height: 100vh;
-    direction: rtl;
-}
-
-/* شاشة التحميل */
-#loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #1a1a2e;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: 0.5s;
-}
-
-.loader {
-    text-align: center;
-}
-
-.loader h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-    animation: pulse 1.5s infinite;
-}
-
-.progress-bar {
-    width: 300px;
-    height: 20px;
-    background: #333;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.progress {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, #00ff87, #60efff);
-    transition: 0.3s;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-/* الهيدر */
-header {
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 2px solid rgba(255,255,255,0.1);
-}
-
-.header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    background: linear-gradient(90deg, #ffd700, #ffa500);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.user-info {
-    background: rgba(255,255,255,0.1);
-    padding: 10px 20px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.user-points {
-    background: gold;
-    color: #333;
-    padding: 5px 15px;
-    border-radius: 25px;
-    font-weight: bold;
-}
-
-/* الأقسام */
-.section {
-    display: none;
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
-}
-
-.section.active {
-    display: block;
-    animation: slideIn 0.5s ease;
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* الأزرار */
-.btn {
-    padding: 15px 35px;
-    border: none;
-    border-radius: 50px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    color: white;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    border: 2px solid transparent;
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-}
-
-.btn-primary {
-    background: linear-gradient(90deg, #00b09b, #96c93d);
-}
-
-.btn-danger {
-    background: linear-gradient(90deg, #f12711, #f5af19);
-}
-
-/* بطاقات الألعاب */
-.games-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
-}
-
-.game-card {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 30px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.3s;
-    border: 2px solid transparent;
-}
-
-.game-card:hover {
-    transform: translateY(-10px);
-    border-color: gold;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-
-.game-icon {
-    font-size: 60px;
-    margin-bottom: 20px;
-}
-
-.game-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.game-desc {
-    color: #ddd;
-    margin-bottom: 20px;
-}
-
-.game-stats {
-    background: rgba(0,0,0,0.3);
-    padding: 10px;
-    border-radius: 50px;
-    font-size: 14px;
-}
-
-/* لوحة الشطرنج */
-#chess-board {
-    width: 500px;
-    height: 500px;
-    margin: 30px auto;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
-
-/* إكس-أو */
-.tic-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 120px);
-    gap: 15px;
-    justify-content: center;
-    margin: 30px 0;
-}
-
-.tic-cell {
-    width: 120px;
-    height: 120px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 60px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    border: 3px solid transparent;
-}
-
-.tic-cell:hover {
-    border-color: gold;
-    transform: scale(1.05);
-}
-
-/* الذاكرة */
-.memory-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 100px);
-    gap: 15px;
-    justify-content: center;
-    margin: 30px 0;
-}
-
-.memory-card {
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    cursor: pointer;
-    transition: 0.3s;
-    transform-style: preserve-3d;
-}
-
-.memory-card.flipped {
-    background: white;
-    color: #333;
-    transform: rotateY(180deg);
-}
-
-.memory-card.matched {
-    opacity: 0.6;
-    cursor: default;
-    background: linear-gradient(135deg, #00b09b, #96c93d);
-}
-
-/* الثعبان */
-#snake-canvas {
-    width: 500px;
-    height: 500px;
-    margin: 20px auto;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    background: #1a1a2e;
-}
-
-/* ترتيب اللاعبين */
-.ranking-table {
-    width: 100%;
-    background: rgba(255,255,255,0.1);
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 30px 0;
-}
-
-.ranking-table table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.ranking-table th {
-    background: rgba(0,0,0,0.3);
-    padding: 15px;
-    font-size: 18px;
-}
-
-.ranking-table td {
-    padding: 15px;
-    text-align: center;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.ranking-table tr:hover {
-    background: rgba(255,255,255,0.1);
-}
-
-.medal-gold { color: gold; }
-.medal-silver { color: silver; }
-.medal-bronze { color: #cd7f32; }
-
-/* شاشة الدخول */
-.auth-container {
-    max-width: 500px;
-    margin: 50px auto;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    padding: 40px;
-    border-radius: 30px;
-    text-align: center;
-}
-
-.auth-container input {
-    width: 100%;
-    padding: 15px;
-    margin: 20px 0;
-    border: 3px solid transparent;
-    border-radius: 50px;
-    font-size: 18px;
-    text-align: center;
-    background: rgba(255,255,255,0.2);
-    color: white;
-}
-
-.auth-container input:focus {
-    outline: none;
-    border-color: gold;
-}
-
-.auth-container input::placeholder {
-    color: rgba(255,255,255,0.7);
-}
-
-/* الإشعارات */
-.notification {
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(90deg, #00b09b, #96c93d);
-    color: white;
-    padding: 15px 30px;
-    border-radius: 50px;
-    font-size: 18px;
-    font-weight: bold;
-    z-index: 1000;
-    animation: slideDown 0.5s ease;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-
-@keyframes slideDown {
-    from {
-        top: -100px;
-        opacity: 0;
-    }
-    to {
-        top: 100px;
-        opacity: 1;
-    }
-}
-
-/* تأثيرات الصوت */
-.sound-toggle {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    cursor: pointer;
-    z-index: 1000;
-    border: 2px solid gold;
-}
-
-/* تصميم متجاوب */
-@media (max-width: 768px) {
-    #chess-board {
-        width: 350px;
-        height: 350px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🎮 منصة الألعاب الفائقة - Dark Edition</title>
     
-    .tic-grid {
-        grid-template-columns: repeat(3, 80px);
-    }
+    <!-- مكتبات محسنة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
     
-    .tic-cell {
-        width: 80px;
-        height: 80px;
-        font-size: 40px;
-    }
-    
-    .memory-grid {
-        grid-template-columns: repeat(4, 70px);
-    }
-    
-    .memory-card {
-        width: 70px;
-        height: 70px;
-        font-size: 30px;
-    }
-    
-    #snake-canvas {
-        width: 350px;
-        height: 350px;
-    }
-}
-</style>
+    <style>
+        /* ===== المتغيرات العامة ===== */
+        :root {
+            --bg-primary: #0a0f1f;
+            --bg-secondary: #141b2b;
+            --bg-card: #1e2a3a;
+            --bg-hover: #2a3a4a;
+            --text-primary: #e0e0ff;
+            --text-secondary: #a0b0d0;
+            --accent-primary: #6c5ce7;
+            --accent-secondary: #a55eea;
+            --accent-glow: rgba(108, 92, 231, 0.3);
+            --border-glow: 0 0 10px var(--accent-glow);
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --gradient-1: linear-gradient(135deg, #6c5ce7, #a55eea);
+            --gradient-2: linear-gradient(135deg, #00b09b, #96c93d);
+            --gradient-3: linear-gradient(135deg, #f12711, #f5af19);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===== الأساسيات ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Tahoma', sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            direction: rtl;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* خلفية ديناميكية متحركة */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(108, 92, 231, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(165, 94, 234, 0.15) 0%, transparent 30%);
+            z-index: -1;
+            animation: backgroundPulse 10s ease infinite;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* جسيمات متحركة */
+        .particle {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.3;
+            animation: float 10s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            from { transform: translateY(100vh) scale(0); }
+            to { transform: translateY(-100vh) scale(1); }
+        }
+
+        /* ===== الهيدر ===== */
+        header {
+            background: rgba(20, 30, 50, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 2px solid var(--accent-primary);
+            box-shadow: 0 4px 20px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--border-glow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-info {
+            background: var(--bg-card);
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            background-image: linear-gradient(var(--bg-card), var(--bg-card)), var(--gradient-1);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: var(--transition);
+        }
+
+        .user-info:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--border-glow);
+        }
+
+        .points-badge {
+            background: var(--gradient-2);
+            padding: 5px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* ===== الأقسام ===== */
+        .section {
+            display: none;
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== الأزرار ===== */
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--accent-glow);
+            border-color: var(--accent-primary);
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--gradient-2);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--gradient-3);
+            color: white;
+        }
+
+        /* ===== بطاقات الألعاب ===== */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px var(--shadow-color);
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 20px 30px var(--accent-glow);
+        }
+
+        .game-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .game-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 5px 10px var(--accent-glow));
+        }
+
+        .game-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .game-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .game-badge {
+            background: var(--bg-primary);
+            padding: 5px 15px;
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== منصة الألعاب ===== */
+        .game-container {
+            background: var(--bg-card);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 20px 40px var(--shadow-color);
+            border: 2px solid var(--accent-primary);
+        }
+
+        /* لوحة الشطرنج */
+        #chess-board {
+            width: 500px;
+            height: 500px;
+            margin: 20px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px var(--shadow-color);
+        }
+
+        /* إكس-أو */
+        .tic-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 120px);
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .tic-cell {
+            width: 120px;
+            height: 120px;
+            background: var(--bg-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 3px solid transparent;
+            color: var(--text-primary);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .tic-cell:hover {
+            border-color: var(--accent-primary);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px var(--accent-glow);
+        }
+
+        /* الذاكرة */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .memory-card {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 20px var(--shadow-color);
+        }
+
+        .memory-card.flipped {
+            background: var(--bg-primary);
+            transform: rotateY(180deg);
+            color: var(--accent-primary);
+        }
+
+        .memory-card.matched {
+            opacity: 0.6;
+            cursor: default;
+            background: var(--gradient-2);
+        }
+
+        /* الثعبان */
+        #snake-canvas {
+            width: 500px;
+            height: 500px;
+            margin: 20px auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 30px var(--shadow-color);
+            background: var(--bg-primary);
+            display: block;
+        }
+
+        /* 2048 */
+        .game2048-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .game2048-cell {
+            aspect-ratio: 1;
+            background: var(--bg-card);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-primary);
+            transition: var(--transition);
+            box-shadow: 0 5px 10px var(--shadow-color);
+        }
+
+        /* المتاهة */
+        #maze-canvas {
+            width: 500px;
+            height: 500px;
+            margin: 20px auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 30px var(--shadow-color);
+            background: var(--bg-primary);
+            display: block;
+        }
+
+        /* سوليتير */
+        .solitaire-card {
+            width: 80px;
+            height: 120px;
+            background: white;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 10px var(--shadow-color);
+            color: #333;
+        }
+
+        .solitaire-card.red {
+            color: #e74c3c;
+        }
+
+        .solitaire-card.black {
+            color: #2c3e50;
+        }
+
+        /* دومينو */
+        .domino-tile {
+            width: 100px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 10px var(--shadow-color);
+            color: #333;
+        }
+
+        /* ترتيب اللاعبين */
+        .ranking-container {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            overflow: hidden;
+        }
+
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .ranking-table th {
+            background: var(--bg-primary);
+            padding: 15px;
+            font-size: 18px;
+            color: var(--accent-primary);
+        }
+
+        .ranking-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid var(--bg-primary);
+        }
+
+        .ranking-table tr:hover {
+            background: var(--bg-hover);
+        }
+
+        .medal {
+            font-size: 24px;
+            filter: drop-shadow(0 0 10px gold);
+        }
+
+        /* ===== شاشة الدخول ===== */
+        .auth-container {
+            max-width: 500px;
+            margin: 100px auto;
+            background: var(--bg-card);
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 30px 50px var(--shadow-color);
+            border: 2px solid var(--accent-primary);
+            animation: glowPulse 3s ease infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 30px 50px var(--shadow-color); }
+            50% { box-shadow: 0 30px 70px var(--accent-glow); }
+        }
+
+        .auth-container input {
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            border: 3px solid var(--bg-primary);
+            border-radius: 50px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 18px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .auth-container input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* ===== الإشعارات ===== */
+        .notification {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 1000;
+            border: 2px solid var(--accent-primary);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            animation: slideDown 0.5s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideDown {
+            from { top: -100px; opacity: 0; }
+            to { top: 100px; opacity: 1; }
+        }
+
+        /* ===== التحكم بالصوت والإضاءة ===== */
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .control-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-card);
+            border: 2px solid var(--accent-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px var(--accent-glow);
+        }
+
+        /* ===== تصميم متجاوب ===== */
+        @media (max-width: 768px) {
+            #chess-board {
+                width: 350px;
+                height: 350px;
+            }
+            
+            .tic-grid {
+                grid-template-columns: repeat(3, 80px);
+            }
+            
+            .tic-cell {
+                width: 80px;
+                height: 80px;
+                font-size: 40px;
+            }
+            
+            .memory-grid {
+                grid-template-columns: repeat(4, 70px);
+            }
+            
+            .memory-card {
+                width: 70px;
+                height: 70px;
+                font-size: 30px;
+            }
+            
+            #snake-canvas,
+            #maze-canvas {
+                width: 350px;
+                height: 350px;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<!-- شاشة التحميل -->
-<div id="loading-screen">
-    <div class="loader">
-        <h1>🎮</h1>
-        <h2>جاري تحميل المنصة...</h2>
-        <div class="progress-bar">
-            <div class="progress" id="loading-progress"></div>
-        </div>
-    </div>
-</div>
+<!-- جسيمات متحركة -->
+<div id="particles"></div>
 
 <!-- الهيدر -->
 <header>
     <div class="header-content">
-        <div class="logo">🎮 منصة الألعاب المتطورة</div>
+        <div class="logo">
+            <span>🎮</span>
+            <span>Nexus Games</span>
+        </div>
         <div class="user-info" id="user-info" style="display: none;">
             <span id="username-display"></span>
-            <span class="user-points" id="points-display">0</span>
+            <span class="points-badge" id="points-display">0</span>
         </div>
     </div>
 </header>
 
-<!-- قسم تسجيل الدخول -->
+<!-- أزرار التحكم -->
+<div class="controls">
+    <div class="control-btn" id="sound-toggle" onclick="toggleSound()">🔊</div>
+    <div class="control-btn" id="theme-toggle" onclick="toggleTheme()">🌙</div>
+</div>
+
+<!-- شاشة الدخول -->
 <section id="auth-section" class="section active">
     <div class="auth-container">
-        <h1 style="font-size: 48px; margin-bottom: 20px;">🎮</h1>
-        <h2 style="margin-bottom: 20px;">مرحباً بك في منصة الألعاب</h2>
-        <p style="margin-bottom: 30px; color: #ddd;">أدخل اسمك وابدأ المغامرة</p>
-        <input type="text" id="auth-username" placeholder="اسم المستخدم" autocomplete="off">
-        <button class="btn btn-primary" onclick="login()" style="width: 100%;">دخول</button>
+        <div style="font-size: 80px; margin-bottom: 20px;">🎮</div>
+        <h1 style="font-size: 32px; margin-bottom: 10px;">مرحباً بك في</h1>
+        <h2 style="background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 30px;">Nexus Games</h2>
+        <input type="text" id="auth-username" placeholder="أدخل اسم المستخدم" autocomplete="off">
+        <button class="btn btn-primary" onclick="login()" style="width: 100%;">ابدأ المغامرة ▶</button>
     </div>
 </section>
 
 <!-- القائمة الرئيسية -->
 <section id="menu-section" class="section">
-    <h2 style="text-align: center; margin-bottom: 40px;">🎮 اختر لعبتك المفضلة</h2>
+    <h2 style="text-align: center; margin-bottom: 40px; font-size: 36px; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎮 اختر لعبتك</h2>
     
-    <div class="games-grid">
-        <div class="game-card" onclick="showGame('chess')">
-            <div class="game-icon">♟️</div>
-            <div class="game-title">الشطرنج</div>
-            <div class="game-desc">العب ضد الذكاء الاصطناعي في لعبة الملوك</div>
-            <div class="game-stats">🏆 10 نقاط للفوز</div>
-        </div>
-        
-        <div class="game-card" onclick="showGame('tictactoe')">
-            <div class="game-icon">⭕</div>
-            <div class="game-title">إكس-أو</div>
-            <div class="game-desc">لعبة X و O الكلاسيكية</div>
-            <div class="game-stats">🏆 5 نقاط للفوز</div>
-        </div>
-        
-        <div class="game-card" onclick="showGame('memory')">
-            <div class="game-icon">🎴</div>
-            <div class="game-title">الذاكرة</div>
-            <div class="game-desc">اختبر قوة ذاكرتك</div>
-            <div class="game-stats">🏆 15 نقطة للفوز</div>
-        </div>
-        
-        <div class="game-card" onclick="showGame('snake')">
-            <div class="game-icon">🐍</div>
-            <div class="game-title">الثعبان</div>
-            <div class="game-desc">لعبة الثعبان الكلاسيكية</div>
-            <div class="game-stats">🏆 5 نقاط كل 50 نقطة</div>
-        </div>
-        
-        <div class="game-card" onclick="showGame('2048')">
-            <div class="game-icon">🎯</div>
-            <div class="game-title">2048</div>
-            <div class="game-desc">لعبة الأرقام الشهيرة</div>
-            <div class="game-stats">🏆 20 نقطة للفوز</div>
-        </div>
-        
-        <div class="game-card" onclick="showGame('flappy')">
-            <div class="game-icon">🐦</div>
-            <div class="game-title">Flappy Bird</div>
-            <div class="game-desc">لعبة الطائر الشهيرة</div>
-            <div class="game-stats">🏆 2 نقاط لكل 10 نقاط</div>
-        </div>
-    </div>
+    <div class="games-grid" id="games-grid"></div>
     
     <div style="display: flex; justify-content: center; gap: 20px; margin-top: 40px;">
-        <button class="btn" onclick="showRanking()">🏆 لوحة الشرف</button>
+        <button class="btn btn-primary" onclick="showRanking()">🏆 لوحة الشرف</button>
         <button class="btn btn-danger" onclick="logout()">🚪 تسجيل خروج</button>
     </div>
 </section>
 
 <!-- لعبة الشطرنج -->
 <section id="chess-section" class="section">
-    <h2 style="text-align: center; margin-bottom: 20px;">♟️ الشطرنج ضد الذكاء الاصطناعي</h2>
-    <div id="chess-board"></div>
-    <div style="text-align: center; margin: 20px;">
-        <p id="chess-status" style="font-size: 20px; margin-bottom: 20px;"></p>
-        <button class="btn" onclick="resetChess()">🔄 لعبة جديدة</button>
-        <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+    <div class="game-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">♟️ الشطرنج</h2>
+        <div id="chess-board"></div>
+        <div style="text-align: center; margin: 20px;">
+            <p id="chess-status" style="font-size: 20px; margin-bottom: 20px; color: var(--accent-primary);"></p>
+            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="resetChess()">🔄 لعبة جديدة</button>
+                <button class="btn btn-success" onclick="changeChessDifficulty()">⚡ تغيير الصعوبة</button>
+                <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- لعبة إكس-أو -->
 <section id="tictactoe-section" class="section">
-    <h2 style="text-align: center; margin-bottom: 20px;">⭕ إكس-أو</h2>
-    <div class="tic-grid" id="tic-grid"></div>
-    <div style="text-align: center;">
-        <p id="tic-status" style="font-size: 20px; margin: 20px;"></p>
-        <button class="btn" onclick="resetTicTacToe()">🔄 لعبة جديدة</button>
-        <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+    <div class="game-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">⭕ إكس-أو</h2>
+        <div class="tic-grid" id="tic-grid"></div>
+        <div style="text-align: center; margin: 20px;">
+            <p id="tic-status" style="font-size: 20px; margin-bottom: 20px; color: var(--accent-primary);"></p>
+            <button class="btn btn-primary" onclick="resetTicTacToe()">🔄 لعبة جديدة</button>
+            <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+        </div>
     </div>
 </section>
 
 <!-- لعبة الذاكرة -->
 <section id="memory-section" class="section">
-    <h2 style="text-align: center; margin-bottom: 20px;">🎴 لعبة الذاكرة</h2>
-    <div style="text-align: center; margin-bottom: 20px;">
-        <span style="font-size: 20px;">المحاولات: <span id="memory-moves">0</span></span>
-    </div>
-    <div class="memory-grid" id="memory-grid"></div>
-    <div style="text-align: center; margin-top: 30px;">
-        <button class="btn" onclick="resetMemory()">🔄 لعبة جديدة</button>
-        <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+    <div class="game-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">🎴 الذاكرة</h2>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <span style="font-size: 20px;">المحاولات: <span id="memory-moves">0</span></span>
+        </div>
+        <div class="memory-grid" id="memory-grid"></div>
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="btn btn-primary" onclick="resetMemory()">🔄 لعبة جديدة</button>
+            <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+        </div>
     </div>
 </section>
 
 <!-- لعبة الثعبان -->
 <section id="snake-section" class="section">
-    <h2 style="text-align: center; margin-bottom: 20px;">🐍 الثعبان</h2>
-    <canvas id="snake-canvas"></canvas>
-    <div style="text-align: center; margin: 20px;">
-        <p style="font-size: 20px;">النتيجة: <span id="snake-score">0</span></p>
-        <p style="color: #ddd;">استخدم الأسهم ↑ ↓ → ←</p>
-        <button class="btn" onclick="resetSnake()">🔄 لعبة جديدة</button>
-        <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+    <div class="game-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">🐍 الثعبان</h2>
+        <canvas id="snake-canvas"></canvas>
+        <div style="text-align: center; margin: 20px;">
+            <p style="font-size: 20px;">النتيجة: <span id="snake-score">0</span></p>
+            <p style="color: var(--text-secondary);">استخدم الأسهم ↑ ↓ → ←</p>
+            <button class="btn btn-primary" onclick="resetSnake()">🔄 لعبة جديدة</button>
+            <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+        </div>
     </div>
 </section>
 
 <!-- لعبة 2048 -->
 <section id="game2048-section" class="section">
-    <h2 style="text-align: center; margin-bottom: 20px;">🎯 2048</h2>
-    <div id="game2048-board" style="background: #bbada0; border-radius: 20px; padding: 20px; max-width: 500px; margin: auto;"></div>
-    <div style="text-align: center; margin: 20px;">
-        <p style="font-size: 20px;">النتيجة: <span id="game2048-score">0</span></p>
-        <button class="btn" onclick="reset2048()">🔄 لعبة جديدة</button>
-        <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+    <div class="game-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">🎯 2048</h2>
+        <div class="game2048-grid" id="game2048-grid"></div>
+        <div style="text-align: center; margin: 20px;">
+            <p style="font-size: 20px;">النتيجة: <span id="game2048-score">0</span></p>
+            <p style="color: var(--text-secondary);">استخدم الأسهم ↑ ↓ → ←</p>
+            <button class="btn btn-primary" onclick="reset2048()">🔄 لعبة جديدة</button>
+            <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+        </div>
     </div>
 </section>
 
-<!-- لعبة Flappy Bird -->
-<section id="flappy-section" class="section">
-    <h2 style="text-align: center; margin-bottom: 20px;">🐦 Flappy Bird</h2>
-    <canvas id="flappy-canvas" width="400" height="600" style="background: #4ec0ca; border-radius: 20px;"></canvas>
-    <div style="text-align: center; margin: 20px;">
-        <p style="font-size: 20px;">النتيجة: <span id="flappy-score">0</span></p>
-        <button class="btn" onclick="resetFlappy()">🔄 لعبة جديدة</button>
-        <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+<!-- لعبة المتاهة -->
+<section id="maze-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">🧩 المتاهة</h2>
+        <canvas id="maze-canvas"></canvas>
+        <div style="text-align: center; margin: 20px;">
+            <p style="font-size: 20px;">النتيجة: <span id="maze-score">0</span></p>
+            <p style="color: var(--text-secondary);">استخدم الأسهم ↑ ↓ → ←</p>
+            <button class="btn btn-primary" onclick="resetMaze()">🔄 لعبة جديدة</button>
+            <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- لعبة سوليتير -->
+<section id="solitaire-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">🃏 سوليتير</h2>
+        <div id="solitaire-board" style="text-align: center;"></div>
+        <div style="text-align: center; margin: 20px;">
+            <p id="solitaire-status" style="font-size: 20px; margin-bottom: 20px;"></p>
+            <button class="btn btn-primary" onclick="resetSolitaire()">🔄 لعبة جديدة</button>
+            <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- لعبة دومينو -->
+<section id="domino-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">🎲 دومينو</h2>
+        <div id="domino-board" style="text-align: center;"></div>
+        <div style="text-align: center; margin: 20px;">
+            <p id="domino-status" style="font-size: 20px; margin-bottom: 20px;"></p>
+            <button class="btn btn-primary" onclick="resetDomino()">🔄 لعبة جديدة</button>
+            <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- لعبة الحاسبة -->
+<section id="calculator-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">🧮 تحديث الحاسبة</h2>
+        <div style="max-width: 300px; margin: 0 auto;">
+            <div style="background: var(--bg-primary); padding: 20px; border-radius: 20px;">
+                <div style="background: var(--bg-card); padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: left; font-size: 24px; direction: ltr;" id="calc-display">0</div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                    <button class="btn" style="padding: 15px;" onclick="calcInput('7')">7</button>
+                    <button class="btn" style="padding: 15px;" onclick="calcInput('8')">8</button>
+                    <button class="btn" style="padding: 15px;" onclick="calcInput('9')">9</button>
+                    <button class="btn btn-danger" style="padding: 15px;" onclick="calcOperator('/')">÷</button>
+                    <button class="btn" style="padding: 15px;" onclick="calcInput('4')">4</button>
+                    <button class="btn" style="padding: 15px;" onclick="calcInput('5')">5</button>
+                    <button class="btn" style="padding: 15px;" onclick="calcInput('6')">6</button>
+                    <button class="btn btn-danger" style="padding: 15px;" onclick="calcOperator('*')">×</button>
+                    <button class="btn" style="padding: 15px;" onclick="calcInput('1')">1</button>
+                    <button class="btn" style="padding: 15px;" onclick="calcInput('2')">2</button>
+                    <button class="btn" style="padding: 15px;" onclick="calcInput('3')">3</button>
+                    <button class="btn btn-danger" style="padding: 15px;" onclick="calcOperator('-')">-</button>
+                    <button class="btn" style="padding: 15px;" onclick="calcInput('0')">0</button>
+                    <button class="btn" style="padding: 15px;" onclick="calcInput('.')">.</button>
+                    <button class="btn btn-success" style="padding: 15px;" onclick="calcEquals()">=</button>
+                    <button class="btn btn-danger" style="padding: 15px;" onclick="calcOperator('+')">+</button>
+                    <button class="btn" style="grid-column: span 2;" onclick="calcClear()">C</button>
+                    <button class="btn" style="grid-column: span 2;" onclick="calcBackspace()">⌫</button>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin: 20px;">
+            <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+        </div>
     </div>
 </section>
 
 <!-- لوحة الشرف -->
 <section id="ranking-section" class="section">
-    <h2 style="text-align: center; margin-bottom: 30px;">🏆 لوحة الشرف</h2>
-    <div class="ranking-table">
-        <table id="ranking-table">
-            <tr>
-                <th>الترتيب</th>
-                <th>اللاعب</th>
-                <th>النقاط</th>
-                <th>الميدالية</th>
-            </tr>
-        </table>
-    </div>
-    <div style="text-align: center;">
-        <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+    <div class="game-container">
+        <h2 style="text-align: center; margin-bottom: 30px;">🏆 لوحة الشرف</h2>
+        <div class="ranking-container">
+            <table class="ranking-table" id="ranking-table">
+                <tr>
+                    <th>الترتيب</th>
+                    <th>اللاعب</th>
+                    <th>النقاط</th>
+                    <th>الميدالية</th>
+                </tr>
+            </table>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="btn btn-danger" onclick="backToMenu()">🔙 رجوع</button>
+        </div>
     </div>
 </section>
 
-<!-- زر التحكم بالصوت -->
-<div class="sound-toggle" id="sound-toggle" onclick="toggleSound()">🔊</div>
-
 <script>
 ///////////////////////////////////////////
-// النظام الأساسي - مطور بالكامل
+// النظام الأساسي المتطور
 ///////////////////////////////////////////
 
-// متغيرات عامة
+// ===== متغيرات عامة =====
 let currentUser = null;
 let soundEnabled = true;
-let loadingProgress = 0;
+let darkTheme = true;
 
-// شاشة التحميل
-const loadingInterval = setInterval(() => {
-    loadingProgress += 10;
-    document.getElementById('loading-progress').style.width = loadingProgress + '%';
-    
-    if (loadingProgress >= 100) {
-        clearInterval(loadingInterval);
-        setTimeout(() => {
-            document.getElementById('loading-screen').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('loading-screen').style.display = 'none';
-            }, 500);
-        }, 500);
+// قائمة الألعاب
+const games = [
+    { id: 'chess', name: 'الشطرنج', icon: '♟️', desc: 'العب ضد الذكاء الاصطناعي', points: 10, color: 'var(--gradient-1)' },
+    { id: 'tictactoe', name: 'إكس-أو', icon: '⭕', desc: 'لعبة X و O الكلاسيكية', points: 5, color: 'var(--gradient-2)' },
+    { id: 'memory', name: 'الذاكرة', icon: '🎴', desc: 'اختبر قوة ذاكرتك', points: 15, color: 'var(--gradient-3)' },
+    { id: 'snake', name: 'الثعبان', icon: '🐍', desc: 'لعبة الثعبان الكلاسيكية', points: '5/50', color: 'var(--gradient-1)' },
+    { id: '2048', name: '2048', icon: '🎯', desc: 'لعبة الأرقام الشهيرة', points: 20, color: 'var(--gradient-2)' },
+    { id: 'maze', name: 'المتاهة', icon: '🧩', desc: 'اهرب من المتاهة', points: 15, color: 'var(--gradient-3)' },
+    { id: 'solitaire', name: 'سوليتير', icon: '🃏', desc: 'لعبة الورق الكلاسيكية', points: 15, color: 'var(--gradient-1)' },
+    { id: 'domino', name: 'دومينو', icon: '🎲', desc: 'لعبة الدومينو', points: 10, color: 'var(--gradient-2)' },
+    { id: 'calculator', name: 'تحديث الحاسبة', icon: '🧮', desc: 'تحدي العمليات الحسابية', points: 5, color: 'var(--gradient-3)' }
+];
+
+// ===== إنشاء الجسيمات =====
+function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        particle.style.animationDuration = 5 + Math.random() * 10 + 's';
+        particlesContainer.appendChild(particle);
     }
-}, 200);
+}
 
-// نظام الصوت
+// ===== عرض الألعاب =====
+function renderGames() {
+    const grid = document.getElementById('games-grid');
+    let html = '';
+    
+    games.forEach(game => {
+        html += `
+            <div class="game-card" onclick="showGame('${game.id}')">
+                <div class="game-icon">${game.icon}</div>
+                <div class="game-title">${game.name}</div>
+                <div class="game-desc">${game.desc}</div>
+                <div class="game-badge">🏆 ${game.points} نقطة</div>
+            </div>
+        `;
+    });
+    
+    grid.innerHTML = html;
+}
+
+// ===== نظام الصوت =====
 function playSound(type) {
     if (!soundEnabled) return;
-    
-    const sounds = {
-        click: 60,
-        win: 70,
-        lose: 65,
-        move: 65
-    };
     
     try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -671,36 +914,66 @@ function playSound(type) {
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
         
-        oscillator.frequency.value = sounds[type] || 60;
+        const sounds = {
+            click: { freq: 800, time: 0.1 },
+            move: { freq: 600, time: 0.1 },
+            win: { freq: 1200, time: 0.2 },
+            lose: { freq: 400, time: 0.2 }
+        };
+        
+        const sound = sounds[type] || sounds.click;
+        oscillator.frequency.value = sound.freq;
         gainNode.gain.value = 0.1;
         
         oscillator.start();
-        oscillator.stop(audioCtx.currentTime + 0.1);
+        oscillator.stop(audioCtx.currentTime + sound.time);
     } catch(e) {}
 }
 
 function toggleSound() {
     soundEnabled = !soundEnabled;
     document.getElementById('sound-toggle').textContent = soundEnabled ? '🔊' : '🔈';
+    playSound('click');
 }
 
-// نظام الإشعارات
+// ===== التبديل بين الثيمات =====
+function toggleTheme() {
+    darkTheme = !darkTheme;
+    const root = document.documentElement;
+    
+    if (darkTheme) {
+        root.style.setProperty('--bg-primary', '#0a0f1f');
+        root.style.setProperty('--bg-secondary', '#141b2b');
+        root.style.setProperty('--bg-card', '#1e2a3a');
+        root.style.setProperty('--text-primary', '#e0e0ff');
+        root.style.setProperty('--text-secondary', '#a0b0d0');
+        document.getElementById('theme-toggle').textContent = '🌙';
+    } else {
+        root.style.setProperty('--bg-primary', '#f0f4ff');
+        root.style.setProperty('--bg-secondary', '#e0e8ff');
+        root.style.setProperty('--bg-card', '#ffffff');
+        root.style.setProperty('--text-primary', '#1a1a2e');
+        root.style.setProperty('--text-secondary', '#4a4a6a');
+        document.getElementById('theme-toggle').textContent = '☀️';
+    }
+    
+    playSound('click');
+}
+
+// ===== نظام الإشعارات =====
 function showNotification(message, type = 'success') {
     const notification = document.createElement('div');
     notification.className = 'notification';
     notification.textContent = message;
-    notification.style.background = type === 'success' 
-        ? 'linear-gradient(90deg, #00b09b, #96c93d)'
-        : 'linear-gradient(90deg, #f12711, #f5af19)';
-    
     document.body.appendChild(notification);
     
     setTimeout(() => {
-        notification.remove();
+        notification.style.animation = 'slideDown 0.5s reverse';
+        setTimeout(() => notification.remove(), 500);
     }, 3000);
 }
 
-// نظام تسجيل الدخول المتطور
+// ===== نظام تسجيل الدخول =====
 function login() {
     const username = document.getElementById('auth-username').value.trim();
     
@@ -712,33 +985,10 @@ function login() {
     
     currentUser = username;
     
-    // إنشاء ملف اللاعب إذا كان جديد
-    if (!localStorage.getItem(`user_${username}`)) {
-        const userData = {
-            name: username,
-            points: 0,
-            games: {
-                chess: 0,
-                tictactoe: 0,
-                memory: 0,
-                snake: 0,
-                game2048: 0,
-                flappy: 0
-            },
-            achievements: [],
-            joinDate: new Date().toISOString(),
-            lastLogin: new Date().toISOString()
-        };
-        localStorage.setItem(`user_${username}`, JSON.stringify(userData));
+    if (!localStorage.getItem(`points_${username}`)) {
         localStorage.setItem(`points_${username}`, 0);
-    } else {
-        // تحديث آخر دخول
-        const userData = JSON.parse(localStorage.getItem(`user_${username}`));
-        userData.lastLogin = new Date().toISOString();
-        localStorage.setItem(`user_${username}`, JSON.stringify(userData));
     }
     
-    // تحديث الواجهة
     document.getElementById('username-display').textContent = username;
     document.getElementById('points-display').textContent = getUserPoints(username);
     document.getElementById('user-info').style.display = 'flex';
@@ -756,22 +1006,14 @@ function getUserPoints(username) {
 function addPoints(points) {
     if (!currentUser) return;
     
-    const currentPoints = getUserPoints(currentUser);
-    const newPoints = currentPoints + points;
+    const current = getUserPoints(currentUser);
+    const newPoints = current + points;
     localStorage.setItem(`points_${currentUser}`, newPoints);
     
-    // تحديث بيانات المستخدم
-    const userData = JSON.parse(localStorage.getItem(`user_${currentUser}`));
-    if (userData) {
-        userData.points = newPoints;
-        localStorage.setItem(`user_${currentUser}`, JSON.stringify(userData));
-    }
-    
     document.getElementById('points-display').textContent = newPoints;
-    showNotification(`🎉 +${points} نقطة! المجموع: ${newPoints}`);
+    showNotification(`🎉 +${points} نقطة!`);
     playSound('win');
     
-    // تحديث لوحة الشرف إذا كانت مفتوحة
     if (document.getElementById('ranking-section').classList.contains('active')) {
         loadRanking();
     }
@@ -784,39 +1026,25 @@ function logout() {
     playSound('click');
 }
 
-// التنقل بين الأقسام
+// ===== التنقل =====
 function showSection(sectionId) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById(sectionId).classList.add('active');
-    
-    // تحديث العنوان
-    if (sectionId === 'menu-section') {
-        document.querySelector('.logo').innerHTML = '🎮 منصة الألعاب المتطورة';
-    }
 }
 
-function showGame(game) {
-    showSection(`${game}-section`);
+function showGame(gameId) {
+    showSection(`${gameId}-section`);
     
-    switch(game) {
-        case 'chess':
-            setTimeout(() => resetChess(), 200);
-            break;
-        case 'tictactoe':
-            resetTicTacToe();
-            break;
-        case 'memory':
-            resetMemory();
-            break;
-        case 'snake':
-            resetSnake();
-            break;
-        case '2048':
-            reset2048();
-            break;
-        case 'flappy':
-            resetFlappy();
-            break;
+    switch(gameId) {
+        case 'chess': resetChess(); break;
+        case 'tictactoe': resetTicTacToe(); break;
+        case 'memory': resetMemory(); break;
+        case 'snake': resetSnake(); break;
+        case '2048': reset2048(); break;
+        case 'maze': resetMaze(); break;
+        case 'solitaire': resetSolitaire(); break;
+        case 'domino': resetDomino(); break;
+        case 'calculator': resetCalculator(); break;
     }
     
     playSound('click');
@@ -832,9 +1060,7 @@ function backToMenu() {
     playSound('click');
 }
 
-///////////////////////////////////////////
-// لعبة الشطرنج - ذكاء اصطناعي متطور
-///////////////////////////////////////////
+// ===== لعبة الشطرنج =====
 let chessGame = null;
 let chessBoard = null;
 let chessDifficulty = 'easy';
@@ -848,74 +1074,51 @@ function initChess() {
     try {
         chessGame = new Chess();
         
-        const config = {
+        chessBoard = Chessboard('chess-board', {
             draggable: true,
             position: 'start',
             onDrop: handleChessMove,
-            pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
-            showNotation: true
-        };
+            pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
+        });
         
-        chessBoard = Chessboard('chess-board', config);
         updateChessStatus();
-        
-    } catch(e) {
-        console.error('خطأ في الشطرنج:', e);
-    }
+    } catch(e) {}
 }
 
 function handleChessMove(source, target) {
-    if (!currentUser) {
-        showNotification('يجب تسجيل الدخول أولاً', 'error');
-        return 'snapback';
-    }
-    
+    if (!currentUser) return 'snapback';
     if (!chessGame) return 'snapback';
     
-    try {
-        const move = chessGame.move({
-            from: source,
-            to: target,
-            promotion: 'q'
-        });
-        
-        if (move === null) return 'snapback';
-        
-        chessBoard.position(chessGame.fen());
-        playSound('move');
-        updateChessStatus();
-        
-        if (!chessGame.game_over()) {
-            setTimeout(makeAIMove, 500);
-        }
-        
-    } catch(e) {
-        console.error('خطأ:', e);
+    const move = chessGame.move({from: source, to: target, promotion: 'q'});
+    if (move === null) return 'snapback';
+    
+    chessBoard.position(chessGame.fen());
+    playSound('move');
+    updateChessStatus();
+    
+    if (!chessGame.game_over()) {
+        setTimeout(makeChessMove, 500);
     }
 }
 
-function makeAIMove() {
+function makeChessMove() {
     if (!chessGame || chessGame.game_over()) return;
     
     const moves = chessGame.moves();
     if (moves.length > 0) {
-        // ذكاء اصطناعي بسيط
-        let bestMove = moves[0];
+        let move;
         
         if (chessDifficulty === 'hard') {
-            // البحث عن أفضل حركة (أكل القطع)
-            for (const move of moves) {
-                if (move.includes('x')) {
-                    bestMove = move;
-                    break;
-                }
-            }
+            // استراتيجية بسيطة: أكل القطع
+            const capturingMoves = moves.filter(m => m.includes('x'));
+            move = capturingMoves.length > 0 ? 
+                capturingMoves[Math.floor(Math.random() * capturingMoves.length)] :
+                moves[Math.floor(Math.random() * moves.length)];
         } else {
-            // حركة عشوائية
-            bestMove = moves[Math.floor(Math.random() * moves.length)];
+            move = moves[Math.floor(Math.random() * moves.length)];
         }
         
-        chessGame.move(bestMove);
+        chessGame.move(move);
         chessBoard.position(chessGame.fen());
         playSound('move');
         updateChessStatus();
@@ -923,38 +1126,40 @@ function makeAIMove() {
 }
 
 function updateChessStatus() {
-    const statusDiv = document.getElementById('chess-status');
-    
+    const status = document.getElementById('chess-status');
     if (!chessGame) return;
     
     if (chessGame.in_checkmate()) {
         if (chessGame.turn() === 'b') {
-            statusDiv.innerHTML = '🎉 فوز! +10 نقاط';
+            status.innerHTML = '🎉 فوز! +10 نقاط';
             if (currentUser) addPoints(10);
         } else {
-            statusDiv.innerHTML = '🤖 الكمبيوتر فاز!';
+            status.innerHTML = '🤖 الكمبيوتر فاز';
         }
-        playSound('win');
     } else if (chessGame.in_draw()) {
-        statusDiv.innerHTML = '🤝 تعادل';
+        status.innerHTML = '🤝 تعادل';
     } else if (chessGame.in_check()) {
-        statusDiv.innerHTML = '⚠️ كش!';
+        status.innerHTML = '⚠️ كش';
     } else {
-        statusDiv.innerHTML = '🎮 دورك';
+        status.innerHTML = '🎮 دورك';
     }
 }
 
 function resetChess() {
-    if (chessBoard) {
-        chessBoard.destroy();
-    }
+    if (chessBoard) chessBoard.destroy();
     document.getElementById('chess-board').innerHTML = '';
     initChess();
 }
 
-///////////////////////////////////////////
-// لعبة إكس-أو مع ذكاء اصطناعي
-///////////////////////////////////////////
+function changeChessDifficulty() {
+    const difficulties = ['easy', 'medium', 'hard'];
+    const currentIndex = difficulties.indexOf(chessDifficulty);
+    chessDifficulty = difficulties[(currentIndex + 1) % difficulties.length];
+    showNotification(`صعوبة الشطرنج: ${chessDifficulty}`);
+    resetChess();
+}
+
+// ===== لعبة إكس-أو =====
 let ticBoard = ['', '', '', '', '', '', '', '', ''];
 let ticTurn = 'X';
 let ticGameOver = false;
@@ -983,45 +1188,19 @@ function ticMove(index) {
 function ticAIMove() {
     if (ticGameOver) return;
     
-    // ذكاء اصطناعي متقدم
-    const empty = ticBoard.reduce((acc, cell, idx) => {
-        if (cell === '') acc.push(idx);
-        return acc;
-    }, []);
-    
-    if (empty.length === 0) return;
-    
-    // استراتيجية الفوز
-    let moveIndex = empty[Math.floor(Math.random() * empty.length)];
-    
-    // التحقق من إمكانية الفوز
-    const winPatterns = [
-        [0,1,2], [3,4,5], [6,7,8],
-        [0,3,6], [1,4,7], [2,5,8],
-        [0,4,8], [2,4,6]
-    ];
-    
-    // محاولة الفوز
-    for (const pattern of winPatterns) {
-        const [a,b,c] = pattern;
-        if (ticBoard[a] === 'O' && ticBoard[b] === 'O' && ticBoard[c] === '') moveIndex = c;
-        if (ticBoard[a] === 'O' && ticBoard[c] === 'O' && ticBoard[b] === '') moveIndex = b;
-        if (ticBoard[b] === 'O' && ticBoard[c] === 'O' && ticBoard[a] === '') moveIndex = a;
+    const empty = [];
+    for (let i = 0; i < 9; i++) {
+        if (ticBoard[i] === '') empty.push(i);
     }
     
-    // منع اللاعب من الفوز
-    for (const pattern of winPatterns) {
-        const [a,b,c] = pattern;
-        if (ticBoard[a] === 'X' && ticBoard[b] === 'X' && ticBoard[c] === '') moveIndex = c;
-        if (ticBoard[a] === 'X' && ticBoard[c] === 'X' && ticBoard[b] === '') moveIndex = b;
-        if (ticBoard[b] === 'X' && ticBoard[c] === 'X' && ticBoard[a] === '') moveIndex = a;
+    if (empty.length > 0) {
+        const random = empty[Math.floor(Math.random() * empty.length)];
+        ticBoard[random] = 'O';
+        renderTicTacToe();
+        playSound('move');
+        ticTurn = 'X';
+        checkTicWinner();
     }
-    
-    ticBoard[moveIndex] = 'O';
-    renderTicTacToe();
-    playSound('move');
-    ticTurn = 'X';
-    checkTicWinner();
 }
 
 function checkTicWinner() {
@@ -1032,16 +1211,16 @@ function checkTicWinner() {
     ];
     
     for (const pattern of winPatterns) {
-        const [a,b,c] = pattern;
-        if (ticBoard[a] && ticBoard[a] === ticBoard[b] && ticBoard[a] === ticBoard[c]) {
+        if (ticBoard[pattern[0]] && 
+            ticBoard[pattern[0]] === ticBoard[pattern[1]] && 
+            ticBoard[pattern[0]] === ticBoard[pattern[2]]) {
+            
             ticGameOver = true;
-            if (ticBoard[a] === 'X') {
+            if (ticBoard[pattern[0]] === 'X') {
                 document.getElementById('tic-status').innerHTML = '🎉 فوز! +5 نقاط';
-                if (currentUser) addPoints(5);
-                playSound('win');
+                addPoints(5);
             } else {
                 document.getElementById('tic-status').innerHTML = '🤖 الكمبيوتر فاز';
-                playSound('lose');
             }
             return true;
         }
@@ -1064,9 +1243,7 @@ function resetTicTacToe() {
     document.getElementById('tic-status').innerHTML = '';
 }
 
-///////////////////////////////////////////
-// لعبة الذاكرة المتطورة
-///////////////////////////////////////////
+// ===== لعبة الذاكرة =====
 let memoryCards = [];
 let memoryFlipped = [];
 let memoryMatched = [];
@@ -1074,9 +1251,8 @@ let memoryMoves = 0;
 let memoryLock = false;
 
 function initMemory() {
-    const emojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐸', '🐙', '🦷'];
-    const selectedEmojis = emojis.slice(0, 8);
-    memoryCards = [...selectedEmojis, ...selectedEmojis].sort(() => Math.random() - 0.5);
+    const emojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
+    memoryCards = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
     memoryFlipped = new Array(16).fill(false);
     memoryMatched = new Array(16).fill(false);
     memoryMoves = 0;
@@ -1093,12 +1269,10 @@ function renderMemory() {
         if (memoryMatched[i]) cardClass += ' matched';
         
         html += `<div class="${cardClass}" onclick="memoryFlip(${i})">`;
-        if (memoryFlipped[i] || memoryMatched[i]) {
-            html += memoryCards[i];
-        } else {
-            html += '❓';
-        }
+        html += memoryFlipped[i] || memoryMatched[i] ? memoryCards[i] : '❓';
         html += '</div>';
+        
+        if ((i + 1) % 4 === 0) html += '<br>';
     }
     document.getElementById('memory-grid').innerHTML = html;
 }
@@ -1110,10 +1284,10 @@ function memoryFlip(index) {
     renderMemory();
     playSound('move');
     
-    const flipped = memoryFlipped.reduce((acc, val, idx) => {
-        if (val && !memoryMatched[idx]) acc.push(idx);
-        return acc;
-    }, []);
+    const flipped = [];
+    for (let i = 0; i < 16; i++) {
+        if (memoryFlipped[i] && !memoryMatched[i]) flipped.push(i);
+    }
     
     if (flipped.length === 2) {
         memoryLock = true;
@@ -1131,8 +1305,7 @@ function memoryFlip(index) {
             if (memoryMatched.every(v => v)) {
                 setTimeout(() => {
                     showNotification('🎉 فوز! +15 نقطة');
-                    if (currentUser) addPoints(15);
-                    playSound('win');
+                    addPoints(15);
                     initMemory();
                 }, 500);
             }
@@ -1151,172 +1324,116 @@ function resetMemory() {
     initMemory();
 }
 
-///////////////////////////////////////////
-// لعبة الثعبان المتطورة
-///////////////////////////////////////////
-let snakeGame = {
-    ctx: null,
-    snake: [],
-    food: {},
-    direction: 'RIGHT',
-    score: 0,
-    gameOver: false,
-    interval: null
-};
+// ===== لعبة الثعبان =====
+let snakeCtx;
+let snakeBody = [];
+let snakeFood = {};
+let snakeDir = 'RIGHT';
+let snakeScore = 0;
+let snakeGameOver = false;
+let snakeInterval;
 
 function initSnake() {
     const canvas = document.getElementById('snake-canvas');
     canvas.width = 500;
     canvas.height = 500;
-    snakeGame.ctx = canvas.getContext('2d');
+    snakeCtx = canvas.getContext('2d');
     resetSnake();
 }
 
 function resetSnake() {
-    if (snakeGame.interval) clearInterval(snakeGame.interval);
+    if (snakeInterval) clearInterval(snakeInterval);
     
-    snakeGame.snake = [
+    snakeBody = [
         {x: 250, y: 250},
         {x: 240, y: 250},
-        {x: 230, y: 250},
-        {x: 220, y: 250}
+        {x: 230, y: 250}
     ];
-    snakeGame.direction = 'RIGHT';
-    snakeGame.score = 0;
-    snakeGame.gameOver = false;
+    snakeDir = 'RIGHT';
+    snakeScore = 0;
+    snakeGameOver = false;
     document.getElementById('snake-score').textContent = '0';
     generateFood();
     drawSnake();
     
-    snakeGame.interval = setInterval(() => {
-        if (!snakeGame.gameOver && currentUser) {
+    snakeInterval = setInterval(() => {
+        if (!snakeGameOver && currentUser) {
             moveSnake();
             drawSnake();
         }
-    }, 100);
+    }, 150);
 }
 
 function generateFood() {
-    snakeGame.food = {
+    snakeFood = {
         x: Math.floor(Math.random() * 25) * 20,
         y: Math.floor(Math.random() * 25) * 20
     };
 }
 
 function moveSnake() {
-    const head = {...snakeGame.snake[0]};
+    const head = {...snakeBody[0]};
     
-    switch(snakeGame.direction) {
+    switch(snakeDir) {
         case 'RIGHT': head.x += 20; break;
         case 'LEFT': head.x -= 20; break;
         case 'UP': head.y -= 20; break;
         case 'DOWN': head.y += 20; break;
     }
     
-    // فحص الأكل
-    if (head.x === snakeGame.food.x && head.y === snakeGame.food.y) {
-        snakeGame.score += 10;
-        document.getElementById('snake-score').textContent = snakeGame.score;
+    if (head.x === snakeFood.x && head.y === snakeFood.y) {
+        snakeScore += 10;
+        document.getElementById('snake-score').textContent = snakeScore;
         generateFood();
         
-        // نقاط إضافية
-        if (snakeGame.score % 50 === 0) {
-            addPoints(5);
-        }
+        if (snakeScore % 50 === 0) addPoints(5);
     } else {
-        snakeGame.snake.pop();
+        snakeBody.pop();
     }
     
-    // فحص الحدود
     if (head.x < 0 || head.x >= 500 || head.y < 0 || head.y >= 500) {
         gameOverSnake();
         return;
     }
     
-    // فحص الاصطدام بالنفس
-    for (const segment of snakeGame.snake) {
+    for (const segment of snakeBody) {
         if (head.x === segment.x && head.y === segment.y) {
             gameOverSnake();
             return;
         }
     }
     
-    snakeGame.snake.unshift(head);
+    snakeBody.unshift(head);
 }
 
 function gameOverSnake() {
-    snakeGame.gameOver = true;
-    clearInterval(snakeGame.interval);
+    snakeGameOver = true;
+    clearInterval(snakeInterval);
     playSound('lose');
-    showNotification(`اللعبة انتهت! نقاطك: ${snakeGame.score}`);
+    showNotification(`اللعبة انتهت! نقاطك: ${snakeScore}`);
 }
 
 function drawSnake() {
-    const ctx = snakeGame.ctx;
-    ctx.clearRect(0, 0, 500, 500);
+    snakeCtx.fillStyle = 'var(--bg-primary)';
+    snakeCtx.fillRect(0, 0, 500, 500);
     
-    // رسم الشبكة
-    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
-    ctx.lineWidth = 1;
-    for (let i = 0; i <= 25; i++) {
-        ctx.beginPath();
-        ctx.moveTo(i * 20, 0);
-        ctx.lineTo(i * 20, 500);
-        ctx.stroke();
-        
-        ctx.beginPath();
-        ctx.moveTo(0, i * 20);
-        ctx.lineTo(500, i * 20);
-        ctx.stroke();
-    }
-    
-    // رسم الثعبان
-    snakeGame.snake.forEach((segment, index) => {
-        const gradient = ctx.createRadialGradient(
-            segment.x + 10, segment.y + 10, 5,
-            segment.x + 10, segment.y + 10, 15
-        );
-        gradient.addColorStop(0, index === 0 ? '#4caf50' : '#45a049');
-        gradient.addColorStop(1, '#2e7d32');
-        
-        ctx.fillStyle = gradient;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = '#4caf50';
-        ctx.fillRect(segment.x, segment.y, 18, 18);
+    snakeCtx.fillStyle = '#4caf50';
+    snakeBody.forEach(segment => {
+        snakeCtx.shadowBlur = 10;
+        snakeCtx.shadowColor = '#4caf50';
+        snakeCtx.fillRect(segment.x, segment.y, 18, 18);
     });
     
-    // رسم الأكل
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = '#ff4444';
-    ctx.fillStyle = '#ff4444';
-    ctx.beginPath();
-    ctx.arc(snakeGame.food.x + 9, snakeGame.food.y + 9, 9, 0, Math.PI * 2);
-    ctx.fill();
+    snakeCtx.fillStyle = '#ff4444';
+    snakeCtx.shadowColor = '#ff4444';
+    snakeCtx.beginPath();
+    snakeCtx.arc(snakeFood.x + 9, snakeFood.y + 9, 9, 0, Math.PI * 2);
+    snakeCtx.fill();
+    
+    snakeCtx.shadowBlur = 0;
 }
 
-// التحكم بالثعبان
-document.addEventListener('keydown', (e) => {
-    if (!currentUser || !document.getElementById('snake-section').classList.contains('active')) return;
-    
-    switch(e.key) {
-        case 'ArrowUp':
-            if (snakeGame.direction !== 'DOWN') snakeGame.direction = 'UP';
-            break;
-        case 'ArrowDown':
-            if (snakeGame.direction !== 'UP') snakeGame.direction = 'DOWN';
-            break;
-        case 'ArrowLeft':
-            if (snakeGame.direction !== 'RIGHT') snakeGame.direction = 'LEFT';
-            break;
-        case 'ArrowRight':
-            if (snakeGame.direction !== 'LEFT') snakeGame.direction = 'RIGHT';
-            break;
-    }
-});
-
-///////////////////////////////////////////
-// لعبة 2048
-///////////////////////////////////////////
+// ===== لعبة 2048 =====
 let game2048Board = [];
 let game2048Score = 0;
 
@@ -1349,9 +1466,9 @@ function addNewTile() {
 
 function render2048() {
     const colors = {
-        0: '#cdc1b4',
-        2: '#eee4da',
-        4: '#ede0c8',
+        0: 'var(--bg-primary)',
+        2: 'var(--bg-card)',
+        4: 'var(--bg-hover)',
         8: '#f2b179',
         16: '#f59563',
         32: '#f67c5f',
@@ -1363,19 +1480,15 @@ function render2048() {
         2048: '#edc22e'
     };
     
-    let html = '<table style="width:100%; border-collapse:collapse;">';
+    let html = '';
     for (let i = 0; i < 4; i++) {
-        html += '<tr>';
         for (let j = 0; j < 4; j++) {
             const value = game2048Board[i][j];
-            const color = colors[value] || '#cdc1b4';
-            html += `<td style="background:${color}; width:100px; height:100px; text-align:center; font-size:${value > 100 ? 24 : 30}px; font-weight:bold; border-radius:10px;">${value || ''}</td>`;
+            html += `<div class="game2048-cell" style="background: ${colors[value] || colors[0]};">${value || ''}</div>`;
         }
-        html += '</tr>';
     }
-    html += '</table>';
     
-    document.getElementById('game2048-board').innerHTML = html;
+    document.getElementById('game2048-grid').innerHTML = html;
     document.getElementById('game2048-score').textContent = game2048Score;
 }
 
@@ -1399,9 +1512,7 @@ function move2048(direction) {
             while (row.length < 4) row.push(0);
             if (direction === 'right') row.reverse();
             
-            if (JSON.stringify(game2048Board[i]) !== JSON.stringify(row)) {
-                moved = true;
-            }
+            if (JSON.stringify(game2048Board[i]) !== JSON.stringify(row)) moved = true;
             game2048Board[i] = row;
         }
     } else {
@@ -1437,13 +1548,11 @@ function move2048(direction) {
         render2048();
         playSound('move');
         
-        // فحص الفوز
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
                 if (game2048Board[i][j] === 2048) {
                     showNotification('🎉 فوز! +20 نقطة');
                     addPoints(20);
-                    playSound('win');
                     return;
                 }
             }
@@ -1455,166 +1564,338 @@ function reset2048() {
     init2048();
 }
 
-// التحكم بلعبة 2048
-document.addEventListener('keydown', (e) => {
-    if (!currentUser || !document.getElementById('game2048-section').classList.contains('active')) return;
-    
-    switch(e.key) {
-        case 'ArrowUp': move2048('up'); break;
-        case 'ArrowDown': move2048('down'); break;
-        case 'ArrowLeft': move2048('left'); break;
-        case 'ArrowRight': move2048('right'); break;
-    }
-});
+// ===== لعبة المتاهة =====
+let mazeCtx;
+let mazePlayer = {x: 1, y: 1};
+let mazeGoal = {x: 8, y: 8};
+let mazeGrid = [];
+let mazeScore = 0;
+let mazeGameOver = false;
 
-///////////////////////////////////////////
-// لعبة Flappy Bird
-///////////////////////////////////////////
-let flappyGame = {
-    ctx: null,
-    bird: {x: 100, y: 300, vy: 0},
-    pipes: [],
-    score: 0,
-    gameOver: false,
-    interval: null
-};
-
-function initFlappy() {
-    const canvas = document.getElementById('flappy-canvas');
-    canvas.width = 400;
-    canvas.height = 600;
-    flappyGame.ctx = canvas.getContext('2d');
-    resetFlappy();
+function initMaze() {
+    const canvas = document.getElementById('maze-canvas');
+    canvas.width = 500;
+    canvas.height = 500;
+    mazeCtx = canvas.getContext('2d');
+    resetMaze();
 }
 
-function resetFlappy() {
-    if (flappyGame.interval) clearInterval(flappyGame.interval);
-    
-    flappyGame.bird = {x: 100, y: 300, vy: 0};
-    flappyGame.pipes = [];
-    flappyGame.score = 0;
-    flappyGame.gameOver = false;
-    document.getElementById('flappy-score').textContent = '0';
-    
-    for (let i = 0; i < 3; i++) {
-        flappyGame.pipes.push({
-            x: 400 + i * 200,
-            top: Math.random() * 300 + 100,
-            gap: 150
-        });
+function resetMaze() {
+    mazeGrid = [];
+    for (let i = 0; i < 10; i++) {
+        mazeGrid[i] = [];
+        for (let j = 0; j < 10; j++) {
+            mazeGrid[i][j] = Math.random() < 0.2 ? 1 : 0;
+        }
     }
     
-    drawFlappy();
-    flappyGame.interval = setInterval(updateFlappy, 30);
+    mazeGrid[1][1] = 0;
+    mazeGrid[8][8] = 0;
+    mazePlayer = {x: 1, y: 1};
+    mazeGoal = {x: 8, y: 8};
+    mazeScore = 0;
+    mazeGameOver = false;
+    document.getElementById('maze-score').textContent = '0';
+    drawMaze();
 }
 
-function updateFlappy() {
-    if (flappyGame.gameOver || !currentUser) return;
+function drawMaze() {
+    const cellSize = 50;
     
-    // جاذبية
-    flappyGame.bird.vy += 0.5;
-    flappyGame.bird.y += flappyGame.bird.vy;
+    mazeCtx.fillStyle = 'var(--bg-primary)';
+    mazeCtx.fillRect(0, 0, 500, 500);
     
-    // تحريك الأنابيب
-    for (const pipe of flappyGame.pipes) {
-        pipe.x -= 3;
-    }
-    
-    // إضافة أنابيب جديدة
-    if (flappyGame.pipes[0].x < -60) {
-        flappyGame.pipes.shift();
-        flappyGame.pipes.push({
-            x: 400,
-            top: Math.random() * 300 + 100,
-            gap: 150
-        });
-    }
-    
-    // فحص الاصطدام
-    if (flappyGame.bird.y < 0 || flappyGame.bird.y > 600) {
-        gameOverFlappy();
-        return;
-    }
-    
-    for (const pipe of flappyGame.pipes) {
-        if (flappyGame.bird.x + 30 > pipe.x && flappyGame.bird.x < pipe.x + 60) {
-            if (flappyGame.bird.y < pipe.top || flappyGame.bird.y + 30 > pipe.top + pipe.gap) {
-                gameOverFlappy();
-                return;
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+            if (mazeGrid[i][j] === 1) {
+                mazeCtx.fillStyle = 'var(--bg-card)';
+                mazeCtx.fillRect(j * cellSize, i * cellSize, cellSize - 2, cellSize - 2);
             }
+        }
+    }
+    
+    mazeCtx.fillStyle = '#4caf50';
+    mazeCtx.beginPath();
+    mazeCtx.arc(mazePlayer.y * cellSize + cellSize/2, mazePlayer.x * cellSize + cellSize/2, 15, 0, Math.PI * 2);
+    mazeCtx.fill();
+    
+    mazeCtx.fillStyle = '#ff4444';
+    mazeCtx.beginPath();
+    mazeCtx.arc(mazeGoal.y * cellSize + cellSize/2, mazeGoal.x * cellSize + cellSize/2, 15, 0, Math.PI * 2);
+    mazeCtx.fill();
+}
+
+function moveMaze(dx, dy) {
+    if (mazeGameOver) return;
+    
+    const newX = mazePlayer.x + dx;
+    const newY = mazePlayer.y + dy;
+    
+    if (newX >= 0 && newX < 10 && newY >= 0 && newY < 10 && mazeGrid[newX][newY] === 0) {
+        mazePlayer.x = newX;
+        mazePlayer.y = newY;
+        playSound('move');
+        
+        if (mazePlayer.x === mazeGoal.x && mazePlayer.y === mazeGoal.y) {
+            mazeScore += 10;
+            document.getElementById('maze-score').textContent = mazeScore;
+            
+            if (mazeScore % 50 === 0) addPoints(10);
+            
+            mazeGoal = {
+                x: Math.floor(Math.random() * 8) + 1,
+                y: Math.floor(Math.random() * 8) + 1
+            };
+            
+            while (mazeGrid[mazeGoal.x][mazeGoal.y] === 1 || 
+                   (mazeGoal.x === mazePlayer.x && mazeGoal.y === mazePlayer.y)) {
+                mazeGoal = {
+                    x: Math.floor(Math.random() * 8) + 1,
+                    y: Math.floor(Math.random() * 8) + 1
+                };
+            }
+            
+            playSound('win');
         }
         
-        // تسجيل النقاط
-        if (flappyGame.bird.x === pipe.x + 30) {
-            flappyGame.score += 10;
-            document.getElementById('flappy-score').textContent = flappyGame.score;
-            
-            if (flappyGame.score % 50 === 0) {
-                addPoints(10);
-                playSound('win');
-            }
+        drawMaze();
+    }
+}
+
+function resetMaze() {
+    initMaze();
+}
+
+// ===== لعبة سوليتير =====
+let solitaireCards = [];
+let solitaireStatus = '';
+
+function initSolitaire() {
+    const suits = ['♥', '♦', '♣', '♠'];
+    const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    
+    solitaireCards = [];
+    for (const suit of suits) {
+        for (const value of values) {
+            solitaireCards.push({suit, value, color: suit === '♥' || suit === '♦' ? 'red' : 'black'});
         }
     }
     
-    drawFlappy();
+    solitaireCards = solitaireCards.sort(() => Math.random() - 0.5);
+    renderSolitaire();
 }
 
-function gameOverFlappy() {
-    flappyGame.gameOver = true;
-    clearInterval(flappyGame.interval);
-    playSound('lose');
-    showNotification(`اللعبة انتهت! نقاطك: ${flappyGame.score}`);
-}
-
-function drawFlappy() {
-    const ctx = flappyGame.ctx;
+function renderSolitaire() {
+    let html = '<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">';
     
-    // السماء
-    ctx.fillStyle = '#4ec0ca';
-    ctx.fillRect(0, 0, 400, 600);
-    
-    // الأرض
-    ctx.fillStyle = '#8b5a2b';
-    ctx.fillRect(0, 550, 400, 50);
-    
-    // الطائر
-    ctx.fillStyle = '#ff0';
-    ctx.shadowBlur = 10;
-    ctx.shadowColor = '#fff';
-    ctx.beginPath();
-    ctx.arc(flappyGame.bird.x, flappyGame.bird.y, 15, 0, Math.PI * 2);
-    ctx.fill();
-    
-    // الأنابيب
-    ctx.shadowBlur = 5;
-    ctx.shadowColor = '#000';
-    for (const pipe of flappyGame.pipes) {
-        ctx.fillStyle = '#0f0';
-        ctx.fillRect(pipe.x, 0, 60, pipe.top);
-        ctx.fillRect(pipe.x, pipe.top + pipe.gap, 60, 600 - pipe.top - pipe.gap);
+    for (let i = 0; i < Math.min(10, solitaireCards.length); i++) {
+        const card = solitaireCards[i];
+        html += `<div class="solitaire-card ${card.color}" onclick="drawSolitaireCard(${i})">${card.value}${card.suit}</div>`;
     }
     
-    ctx.shadowBlur = 0;
+    html += '</div>';
+    document.getElementById('solitaire-board').innerHTML = html;
+    document.getElementById('solitaire-status').innerHTML = solitaireStatus;
 }
 
-// القفز
+function drawSolitaireCard(index) {
+    if (solitaireCards.length === 0) return;
+    
+    const card = solitaireCards[index];
+    solitaireStatus = `اخترت: ${card.value}${card.suit}`;
+    
+    if (card.value === 'A') {
+        solitaireCards.splice(index, 1);
+        addPoints(1);
+        playSound('win');
+    }
+    
+    renderSolitaire();
+}
+
+function resetSolitaire() {
+    initSolitaire();
+}
+
+// ===== لعبة دومينو =====
+let dominoTiles = [];
+let dominoBoard = [];
+let dominoStatus = '';
+
+function initDomino() {
+    dominoTiles = [];
+    for (let i = 0; i <= 6; i++) {
+        for (let j = i; j <= 6; j++) {
+            dominoTiles.push({left: i, right: j});
+        }
+    }
+    
+    dominoTiles = dominoTiles.sort(() => Math.random() - 0.5);
+    dominoBoard = [dominoTiles.pop()];
+    renderDomino();
+}
+
+function renderDomino() {
+    let html = '<div style="margin-bottom: 20px;">';
+    
+    for (const tile of dominoBoard) {
+        html += `<div class="domino-tile">${tile.left}|${tile.right}</div>`;
+    }
+    
+    html += '</div><div style="display: flex; flex-wrap: wrap; justify-content: center;">';
+    
+    for (let i = 0; i < Math.min(7, dominoTiles.length); i++) {
+        const tile = dominoTiles[i];
+        html += `<div class="domino-tile" onclick="playDomino(${i})">${tile.left}|${tile.right}</div>`;
+    }
+    
+    html += '</div>';
+    document.getElementById('domino-board').innerHTML = html;
+    document.getElementById('domino-status').innerHTML = dominoStatus;
+}
+
+function playDomino(index) {
+    const tile = dominoTiles[index];
+    const firstTile = dominoBoard[0];
+    const lastTile = dominoBoard[dominoBoard.length - 1];
+    
+    if (tile.left === lastTile.right || tile.right === lastTile.right) {
+        dominoBoard.push(tile);
+        dominoTiles.splice(index, 1);
+        dominoStatus = '✅ حركة صحيحة';
+        playSound('win');
+        
+        if (dominoTiles.length === 0) {
+            showNotification('🎉 فوز! +10 نقاط');
+            addPoints(10);
+        }
+    } else {
+        dominoStatus = '❌ حركة خاطئة';
+        playSound('lose');
+    }
+    
+    renderDomino();
+}
+
+function resetDomino() {
+    initDomino();
+}
+
+// ===== لعبة الحاسبة =====
+let calcDisplay = '0';
+let calcFirst = null;
+let calcOperator = null;
+let calcNewNumber = true;
+
+function resetCalculator() {
+    calcDisplay = '0';
+    calcFirst = null;
+    calcOperator = null;
+    calcNewNumber = true;
+    updateCalcDisplay();
+}
+
+function calcInput(num) {
+    if (calcNewNumber) {
+        calcDisplay = num;
+        calcNewNumber = false;
+    } else {
+        calcDisplay = calcDisplay === '0' ? num : calcDisplay + num;
+    }
+    updateCalcDisplay();
+}
+
+function calcOperator(op) {
+    if (calcFirst === null) {
+        calcFirst = parseFloat(calcDisplay);
+        calcOperator = op;
+        calcNewNumber = true;
+    } else {
+        calcEquals();
+        calcOperator = op;
+        calcFirst = parseFloat(calcDisplay);
+        calcNewNumber = true;
+    }
+}
+
+function calcEquals() {
+    if (calcFirst !== null && calcOperator !== null) {
+        const second = parseFloat(calcDisplay);
+        let result = 0;
+        
+        switch(calcOperator) {
+            case '+': result = calcFirst + second; break;
+            case '-': result = calcFirst - second; break;
+            case '*': result = calcFirst * second; break;
+            case '/': result = calcFirst / second; break;
+        }
+        
+        calcDisplay = result.toString();
+        calcFirst = null;
+        calcOperator = null;
+        calcNewNumber = true;
+        
+        if (Math.abs(result) > 100) {
+            addPoints(5);
+            playSound('win');
+        }
+    }
+    
+    updateCalcDisplay();
+}
+
+function calcClear() {
+    resetCalculator();
+}
+
+function calcBackspace() {
+    if (calcDisplay.length > 1) {
+        calcDisplay = calcDisplay.slice(0, -1);
+    } else {
+        calcDisplay = '0';
+    }
+    updateCalcDisplay();
+}
+
+function updateCalcDisplay() {
+    document.getElementById('calc-display').textContent = calcDisplay;
+}
+
+// ===== التحكم بالأسهم =====
 document.addEventListener('keydown', (e) => {
-    if (e.code === 'Space' && currentUser && document.getElementById('flappy-section').classList.contains('active')) {
-        flappyGame.bird.vy = -8;
-        playSound('move');
+    if (!currentUser) return;
+    
+    const activeSection = document.querySelector('.section.active').id;
+    
+    if (activeSection === 'snake-section') {
+        switch(e.key) {
+            case 'ArrowUp': if (snakeDir !== 'DOWN') snakeDir = 'UP'; break;
+            case 'ArrowDown': if (snakeDir !== 'UP') snakeDir = 'DOWN'; break;
+            case 'ArrowLeft': if (snakeDir !== 'RIGHT') snakeDir = 'LEFT'; break;
+            case 'ArrowRight': if (snakeDir !== 'LEFT') snakeDir = 'RIGHT'; break;
+        }
+    }
+    
+    if (activeSection === 'game2048-section') {
+        switch(e.key) {
+            case 'ArrowUp': move2048('up'); break;
+            case 'ArrowDown': move2048('down'); break;
+            case 'ArrowLeft': move2048('left'); break;
+            case 'ArrowRight': move2048('right'); break;
+        }
+    }
+    
+    if (activeSection === 'maze-section') {
+        switch(e.key) {
+            case 'ArrowUp': moveMaze(-1, 0); break;
+            case 'ArrowDown': moveMaze(1, 0); break;
+            case 'ArrowLeft': moveMaze(0, -1); break;
+            case 'ArrowRight': moveMaze(0, 1); break;
+        }
     }
 });
 
-document.addEventListener('click', () => {
-    if (currentUser && document.getElementById('flappy-section').classList.contains('active')) {
-        flappyGame.bird.vy = -8;
-        playSound('move');
-    }
-});
-
-///////////////////////////////////////////
-// لوحة الشرف المتطورة
-///////////////////////////////////////////
+// ===== لوحة الشرف =====
 function loadRanking() {
     const players = [];
     
@@ -1629,61 +1910,35 @@ function loadRanking() {
     
     players.sort((a, b) => b.points - a.points);
     
-    let html = `
-        <tr>
-            <th>الترتيب</th>
-            <th>اللاعب</th>
-            <th>النقاط</th>
-            <th>الميدالية</th>
-        </tr>
-    `;
+    let html = '<tr><th>الترتيب</th><th>اللاعب</th><th>النقاط</th><th>الميدالية</th></tr>';
     
     players.forEach((player, index) => {
-        let medal = '';
-        if (index === 0) medal = '🥇';
-        else if (index === 1) medal = '🥈';
-        else if (index === 2) medal = '🥉';
-        else medal = '🎮';
-        
-        html += `
-            <tr>
-                <td>#${index + 1}</td>
-                <td>${player.name}</td>
-                <td>${player.points}</td>
-                <td class="medal-${index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : ''}">${medal}</td>
-            </tr>
-        `;
+        let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🎮';
+        html += `<tr><td>#${index + 1}</td><td>${player.name}</td><td>${player.points}</td><td class="medal">${medal}</td></tr>`;
     });
     
     document.getElementById('ranking-table').innerHTML = html;
 }
 
-///////////////////////////////////////////
-// بدء التطبيق
-///////////////////////////////////////////
+// ===== بدء التطبيق =====
 window.onload = function() {
-    console.log('بدء المنصة المتطورة');
+    createParticles();
+    renderGames();
     
-    // تهيئة كل الألعاب
     setTimeout(() => {
         initChess();
         renderTicTacToe();
         initMemory();
         initSnake();
         init2048();
-        initFlappy();
-    }, 1000);
+        initMaze();
+        initSolitaire();
+        initDomino();
+        resetCalculator();
+    }, 500);
     
-    // التحكم بالصوت
-    document.addEventListener('click', () => playSound('click'));
+    showSection('auth-section');
 };
-
-// حفظ النقاط تلقائياً
-window.addEventListener('beforeunload', () => {
-    if (currentUser) {
-        console.log('حفظ البيانات...');
-    }
-});
 </script>
 
 </body>
