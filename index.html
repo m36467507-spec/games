@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮 صالة الألعاب - مودة ومريم</title>
+    <title>🎮 عالم مودة ومريم - 27 لعبة</title>
     
     <!-- المكتبات -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
@@ -46,7 +46,6 @@
             text-align: center;
         }
 
-        /* جملة ثانية مكررة بشكل خفيف */
         body::after {
             content: "❤️ مودة & مريم ❤️";
             position: fixed;
@@ -64,7 +63,6 @@
             50% { opacity: 0.15; }
         }
 
-        /* جمل إضافية في الخلفية */
         .background-text {
             position: fixed;
             top: 0;
@@ -89,6 +87,8 @@
         .background-text span:nth-child(3) { top: 70%; left: 15%; transform: rotate(-45deg); }
         .background-text span:nth-child(4) { top: 85%; left: 70%; transform: rotate(15deg); }
         .background-text span:nth-child(5) { top: 45%; left: 40%; transform: rotate(-10deg); }
+        .background-text span:nth-child(6) { top: 20%; left: 20%; transform: rotate(10deg); }
+        .background-text span:nth-child(7) { top: 60%; left: 60%; transform: rotate(-20deg); }
 
         /* الهيدر */
         header {
@@ -97,7 +97,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid #4a90e2;
+            border-bottom: 3px solid #ffd700;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -107,12 +107,12 @@
         .logo {
             font-size: 28px;
             font-weight: bold;
-            color: #4a90e2;
-            text-shadow: 0 0 10px #4a90e2;
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700;
         }
 
         .logo span {
-            color: #ffd700;
+            color: #ff6b6b;
             font-size: 32px;
         }
 
@@ -123,11 +123,12 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            border: 2px solid #4a90e2;
+            border: 2px solid #ffd700;
         }
 
         .points {
-            background: #4a90e2;
+            background: #ffd700;
+            color: #0a0f1f;
             padding: 3px 15px;
             border-radius: 50px;
             font-weight: bold;
@@ -154,6 +155,11 @@
             text-align: center;
             border: 3px solid #ffd700;
             box-shadow: 0 0 50px #ffd700;
+        }
+
+        .password-box h2 {
+            color: #ffd700;
+            margin: 20px 0;
         }
 
         .password-box input {
@@ -268,10 +274,11 @@
             font-size: 16px;
             font-weight: bold;
             margin-bottom: 3px;
+            color: #ffd700;
         }
 
         .game-points {
-            color: #ffd700;
+            color: #ff6b6b;
             font-size: 12px;
         }
 
@@ -370,6 +377,11 @@
             color: #1a2a3a;
         }
 
+        .memory-card.matched {
+            opacity: 0.6;
+            cursor: default;
+        }
+
         /* الثعبان */
         #snake-canvas {
             width: 400px;
@@ -413,6 +425,104 @@
             border: 3px solid #ffd700;
         }
 
+        /* الألعاب الجديدة */
+        .game-box {
+            background: #2a3a4a;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .game-input {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            border: 2px solid #ffd700;
+            background: #1a2a3a;
+            color: white;
+            width: 200px;
+        }
+
+        .word-display {
+            font-size: 36px;
+            letter-spacing: 10px;
+            margin: 20px;
+            color: #ffd700;
+        }
+
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .key {
+            background: #2a3a4a;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid #ffd700;
+        }
+
+        .key:hover {
+            background: #ffd700;
+            color: #0a0f1f;
+        }
+
+        .reaction-box {
+            width: 300px;
+            height: 300px;
+            background: #ff4444;
+            border-radius: 20px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .color-box {
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
+            margin: 10px;
+            display: inline-block;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .color-box:hover {
+            transform: scale(1.1);
+        }
+
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        .number-cell {
+            background: #2a3a4a;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            border: 2px solid #ffd700;
+        }
+
+        .number-cell:hover {
+            background: #ffd700;
+            color: #0a0f1f;
+        }
+
         /* ترتيب اللاعبين */
         .ranking-table {
             width: 100%;
@@ -443,16 +553,19 @@
     <span>مودة & مريم</span>
     <span>❤️ للأبد ❤️</span>
     <span>أحلي لعبة ❤️</span>
+    <span>❤️ مودة ❤️</span>
+    <span>❤️ مريم ❤️</span>
 </div>
 
 <!-- شاشة كلمة السر -->
 <div id="password-screen">
     <div class="password-box">
         <div style="font-size: 60px;">❤️</div>
-        <h2 style="margin: 20px;">أهلاً مودة ومريم</h2>
+        <h2>أهلاً مودة ومريم</h2>
+        <p style="color: #ffd700; margin: 10px;">أحلي ألعاب مخصوص ليكوا</p>
         <input type="password" id="password-input" placeholder="كلمة السر" value="1234">
         <br>
-        <button onclick="checkPassword()" class="btn-gold" style="width: 100%;">دخول</button>
+        <button onclick="checkPassword()" class="btn-gold" style="width: 100%;">ادخلوا يلا ❤️</button>
         <p style="margin-top: 20px; color: #888;">كلمة السر: 1234</p>
     </div>
 </div>
@@ -460,28 +573,28 @@
 <header>
     <div class="logo">❤️ <span>مودة ومريم</span> ❤️</div>
     <div class="user-info">
-        <span>النقاط</span>
+        <span>نقاطكما</span>
         <span class="points" id="points-display">0</span>
     </div>
 </header>
 
 <!-- القائمة الرئيسية -->
 <section id="menu-section" class="section">
-    <h2 style="text-align: center; margin-bottom: 20px;">🎮 أحلي ألعاب لمودة ومريم</h2>
+    <h2 style="text-align: center; margin-bottom: 20px; color: #ffd700;">🎮 أحلي 27 لعبة لمودة ومريم</h2>
     
     <div class="games-grid" id="games-grid"></div>
     
     <div style="text-align: center; margin-top: 30px;">
-        <button onclick="showSection('ranking-section')" class="btn-gold">🏆 الترتيب</button>
+        <button onclick="showSection('ranking-section')" class="btn-gold">🏆 إنجازاتكما</button>
         <button onclick="resetAllPoints()">🔄 تصفير النقاط</button>
         <button onclick="showPasswordScreen()">🔐 قفل الشاشة</button>
     </div>
 </section>
 
-<!-- لعبة الشطرنج -->
+<!-- 1. لعبة الشطرنج -->
 <section id="chess-section" class="section">
     <div class="game-container">
-        <h2 style="text-align: center;">♟️ الشطرنج لمودة ومريم</h2>
+        <h2 style="text-align: center;">♟️ شطرنج مودة ومريم</h2>
         
         <div class="chess-controls">
             <div class="difficulty-btn active" onclick="setChessLevel('easy')" id="diff-easy">سهل</div>
@@ -500,7 +613,7 @@
     </div>
 </section>
 
-<!-- باقي الألعاب (مختصرة للاختصار) -->
+<!-- 2. لعبة إكس-أو -->
 <section id="tictactoe-section" class="section">
     <div class="game-container">
         <h2 style="text-align: center;">⭕ إكس-أو</h2>
@@ -513,9 +626,10 @@
     </div>
 </section>
 
+<!-- 3. لعبة الذاكرة -->
 <section id="memory-section" class="section">
     <div class="game-container">
-        <h2 style="text-align: center;">🎴 الذاكرة</h2>
+        <h2 style="text-align: center;">🎴 لعبة الذاكرة</h2>
         <p style="text-align: center;">المحاولات: <span id="memory-moves">0</span></p>
         <div class="memory-grid" id="memory-grid"></div>
         <div style="text-align: center;">
@@ -525,10 +639,367 @@
     </div>
 </section>
 
-<!-- الترتيب -->
+<!-- 4. لعبة الثعبان -->
+<section id="snake-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🐍 الثعبان</h2>
+        <canvas id="snake-canvas"></canvas>
+        <p style="text-align: center;">النتيجة: <span id="snake-score">0</span></p>
+        <div style="text-align: center;">
+            <button onclick="resetSnake()">🔄 لعبة جديدة</button>
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 5. لعبة 2048 -->
+<section id="game2048-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🎯 2048</h2>
+        <div class="game2048-board" id="game2048-board"></div>
+        <p style="text-align: center;">النتيجة: <span id="game2048-score">0</span></p>
+        <div style="text-align: center;">
+            <button onclick="reset2048()">🔄 لعبة جديدة</button>
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 6. لعبة المتاهة -->
+<section id="maze-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🧩 المتاهة</h2>
+        <canvas id="maze-canvas"></canvas>
+        <p style="text-align: center;">النتيجة: <span id="maze-score">0</span></p>
+        <div style="text-align: center;">
+            <button onclick="resetMaze()">🔄 لعبة جديدة</button>
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 7. لعبة سودوكو -->
+<section id="sudoku-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🔢 سودوكو</h2>
+        <div class="game-box">
+            <div id="sudoku-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-width: 300px; margin: 20px auto;"></div>
+            <p id="sudoku-status"></p>
+            <button onclick="resetSudoku()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 8. لعبة الرجل المعلق -->
+<section id="hangman-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">👨 الرجل المعلق</h2>
+        <div class="game-box">
+            <div id="hangman-word" class="word-display"></div>
+            <div id="hangman-letters" class="keyboard"></div>
+            <p id="hangman-status"></p>
+            <button onclick="resetHangman()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 9. لعبة تخمين الكلمات -->
+<section id="wordguess-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">📝 تخمين الكلمات</h2>
+        <div class="game-box">
+            <p id="wordguess-clue"></p>
+            <input type="text" id="wordguess-input" class="game-input" placeholder="تخمينك">
+            <button onclick="checkWordGuess()">تحقق</button>
+            <p id="wordguess-status"></p>
+            <button onclick="resetWordGuess()">🔄 كلمة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 10. لعبة سرعة رد الفعل -->
+<section id="reaction-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">⚡ سرعة رد الفعل</h2>
+        <div class="game-box">
+            <div id="reaction-box" class="reaction-box" onclick="hitReaction()">انتظر...</div>
+            <p>النتيجة: <span id="reaction-score">0</span></p>
+            <button onclick="resetReaction()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 11. لعبة الضغط السريع -->
+<section id="clicker-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">👆 الضغط السريع</h2>
+        <div class="game-box">
+            <p>الوقت: <span id="clicker-time">10</span> ثانية</p>
+            <p>الضغطات: <span id="clicker-count">0</span></p>
+            <button onclick="clickerClick()" id="clicker-btn">اضغط هنا</button>
+            <button onclick="resetClicker()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 12. لعبة سرعة الكتابة -->
+<section id="typing-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">⌨️ سرعة الكتابة</h2>
+        <div class="game-box">
+            <p id="typing-word" style="font-size: 24px; color: #ffd700;"></p>
+            <input type="text" id="typing-input" class="game-input" placeholder="اكتب الكلمة">
+            <button onclick="checkTyping()">تحقق</button>
+            <p>النتيجة: <span id="typing-score">0</span></p>
+            <button onclick="resetTyping()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 13. لعبة تدريب التصويب -->
+<section id="aimtrainer-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🎯 تدريب التصويب</h2>
+        <div class="game-box">
+            <div style="position: relative; width: 400px; height: 400px; background: #1a2a3a; margin: 20px auto; border-radius: 10px;">
+                <div id="target" style="position: absolute; width: 50px; height: 50px; background: #ff4444; border-radius: 50%; cursor: pointer; display: none;" onclick="hitTarget()"></div>
+            </div>
+            <p>الإصابات: <span id="aim-score">0</span></p>
+            <button onclick="resetAimTrainer()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 14. لعبة رد فعل بالألوان -->
+<section id="reactioncolor-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🌈 رد فعل بالألوان</h2>
+        <div class="game-box">
+            <div id="color-box" class="reaction-box" style="background: #ff4444;" onclick="checkColorReaction()"></div>
+            <p>النتيجة: <span id="color-reaction-score">0</span></p>
+            <button onclick="resetColorReaction()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 15. لعبة تحدي الرياضيات -->
+<section id="mathchallenge-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🧮 تحدي الرياضيات</h2>
+        <div class="game-box">
+            <p id="math-question" style="font-size: 32px;"></p>
+            <input type="number" id="math-answer" class="game-input" placeholder="الإجابة">
+            <button onclick="checkMathAnswer()">تحقق</button>
+            <p>النتيجة: <span id="math-score">0</span></p>
+            <button onclick="resetMathChallenge()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 16. لعبة ذاكرة الأرقام -->
+<section id="numbermemory-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🔢 ذاكرة الأرقام</h2>
+        <div class="game-box">
+            <p id="number-sequence" style="font-size: 48px;"></p>
+            <input type="text" id="number-memory-input" class="game-input" placeholder="أعد كتابة الرقم">
+            <button onclick="checkNumberMemory()">تحقق</button>
+            <p>المستوى: <span id="number-memory-level">1</span></p>
+            <button onclick="resetNumberMemory()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 17. لعبة عد سريع -->
+<section id="countfast-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">⏱️ عد سريع</h2>
+        <div class="game-box">
+            <div class="number-grid" id="count-grid"></div>
+            <p>النتيجة: <span id="count-score">0</span></p>
+            <button onclick="resetCountFast()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 18. لعبة لغز رياضي -->
+<section id="mathpuzzle-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">➕ لغز رياضي</h2>
+        <div class="game-box">
+            <p id="puzzle-question" style="font-size: 24px;"></p>
+            <div class="number-grid" id="puzzle-options"></div>
+            <p>النتيجة: <span id="puzzle-score">0</span></p>
+            <button onclick="resetMathPuzzle()">🔄 لغز جديد</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 19. لعبة ترتيب الأرقام -->
+<section id="numberorder-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">📊 ترتيب الأرقام</h2>
+        <div class="game-box">
+            <div class="number-grid" id="order-grid"></div>
+            <p>النتيجة: <span id="order-score">0</span></p>
+            <button onclick="resetNumberOrder()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 20. لعبة Flappy Bird -->
+<section id="flappybird-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🐦 Flappy Bird</h2>
+        <canvas id="flappy-canvas" width="400" height="600" style="background: #4ec0ca; border-radius: 10px; display: block; margin: 20px auto;"></canvas>
+        <p style="text-align: center;">النتيجة: <span id="flappy-score">0</span></p>
+        <div style="text-align: center;">
+            <button onclick="resetFlappyBird()">🔄 لعبة جديدة</button>
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 21. لعبة الديناصور -->
+<section id="dino-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🦖 الديناصور</h2>
+        <canvas id="dino-canvas" width="800" height="300" style="background: #f7f7f7; border-radius: 10px; display: block; margin: 20px auto;"></canvas>
+        <p style="text-align: center;">النتيجة: <span id="dino-score">0</span></p>
+        <div style="text-align: center;">
+            <button onclick="resetDino()">🔄 لعبة جديدة</button>
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 22. لعبة بونغ -->
+<section id="pong-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🏓 بونغ</h2>
+        <canvas id="pong-canvas" width="600" height="400" style="background: #000; border-radius: 10px; display: block; margin: 20px auto;"></canvas>
+        <p style="text-align: center;">النتيجة: <span id="pong-score">0</span></p>
+        <div style="text-align: center;">
+            <button onclick="resetPong()">🔄 لعبة جديدة</button>
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 23. لعبة كسر الطوب -->
+<section id="breakout-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🧱 كسر الطوب</h2>
+        <canvas id="breakout-canvas" width="500" height="400" style="background: #000; border-radius: 10px; display: block; margin: 20px auto;"></canvas>
+        <p style="text-align: center;">النتيجة: <span id="breakout-score">0</span></p>
+        <div style="text-align: center;">
+            <button onclick="resetBreakout()">🔄 لعبة جديدة</button>
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 24. لعبة غزاة الفضاء -->
+<section id="spaceinvaders-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">👾 غزاة الفضاء</h2>
+        <canvas id="space-canvas" width="500" height="400" style="background: #000; border-radius: 10px; display: block; margin: 20px auto;"></canvas>
+        <p style="text-align: center;">النتيجة: <span id="space-score">0</span></p>
+        <div style="text-align: center;">
+            <button onclick="resetSpaceInvaders()">🔄 لعبة جديدة</button>
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 25. لعبة تسلسل الذاكرة -->
+<section id="memorysequence-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🧠 تسلسل الذاكرة</h2>
+        <div class="game-box">
+            <div class="number-grid" id="sequence-grid"></div>
+            <p id="sequence-status"></p>
+            <button onclick="resetMemorySequence()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 26. لعبة مطابقة الألوان -->
+<section id="colormatch-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🎨 مطابقة الألوان</h2>
+        <div class="game-box">
+            <div id="target-color" class="color-box" style="background: #ff0000; width: 150px; height: 150px;"></div>
+            <div id="color-options"></div>
+            <p>النتيجة: <span id="color-match-score">0</span></p>
+            <button onclick="resetColorMatch()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- 27. لعبة سوليتير -->
+<section id="solitaire-section" class="section">
+    <div class="game-container">
+        <h2 style="text-align: center;">🃏 سوليتير</h2>
+        <div class="game-box">
+            <div id="solitaire-board" style="min-height: 200px;"></div>
+            <button onclick="resetSolitaire()">🔄 لعبة جديدة</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="backToMenu()">🔙 رجوع</button>
+        </div>
+    </div>
+</section>
+
+<!-- الترتيب والإنجازات -->
 <section id="ranking-section" class="section">
     <div class="game-container">
-        <h2 style="text-align: center;">🏆 قاعة المشاهير - مودة ومريم</h2>
+        <h2 style="text-align: center;">🏆 إنجازات مودة ومريم</h2>
         <div class="ranking-table">
             <table style="width: 100%;">
                 <thead>
@@ -585,6 +1056,10 @@ function addPoints(p) {
     rankings.sort((a,b) => b.points - a.points);
     rankings = rankings.slice(0, 20);
     localStorage.setItem('mega_rankings', JSON.stringify(rankings));
+    
+    if (document.getElementById('ranking-section').classList.contains('active')) {
+        loadRanking();
+    }
 }
 
 function resetAllPoints() {
@@ -596,7 +1071,7 @@ function resetAllPoints() {
 }
 
 ///////////////////////////////////////////
-// الألعاب
+// قائمة الألعاب (27 لعبة)
 ///////////////////////////////////////////
 const games = [
     { id: 'chess', name: 'شطرنج', icon: '♟️', points: 10 },
@@ -604,7 +1079,28 @@ const games = [
     { id: 'memory', name: 'ذاكرة', icon: '🎴', points: 15 },
     { id: 'snake', name: 'ثعبان', icon: '🐍', points: '5/50' },
     { id: 'game2048', name: '2048', icon: '🎯', points: 20 },
-    { id: 'maze', name: 'متاهة', icon: '🧩', points: 10 }
+    { id: 'maze', name: 'متاهة', icon: '🧩', points: 10 },
+    { id: 'sudoku', name: 'سودوكو', icon: '🔢', points: 15 },
+    { id: 'hangman', name: 'الرجل المعلق', icon: '👨', points: 10 },
+    { id: 'wordguess', name: 'تخمين كلمات', icon: '📝', points: 12 },
+    { id: 'reaction', name: 'سرعة رد الفعل', icon: '⚡', points: '1/نقطة' },
+    { id: 'clicker', name: 'الضغط السريع', icon: '👆', points: '1/10' },
+    { id: 'typing', name: 'سرعة الكتابة', icon: '⌨️', points: 20 },
+    { id: 'aimtrainer', name: 'تدريب التصويب', icon: '🎯', points: '1/نقطة' },
+    { id: 'reactioncolor', name: 'رد فعل بالألوان', icon: '🌈', points: 5 },
+    { id: 'mathchallenge', name: 'تحدي الرياضيات', icon: '🧮', points: 5 },
+    { id: 'numbermemory', name: 'ذاكرة الأرقام', icon: '🔢', points: 15 },
+    { id: 'countfast', name: 'عد سريع', icon: '⏱️', points: '1/نقطة' },
+    { id: 'mathpuzzle', name: 'لغز رياضي', icon: '➕', points: 10 },
+    { id: 'numberorder', name: 'ترتيب الأرقام', icon: '📊', points: 8 },
+    { id: 'flappybird', name: 'Flappy Bird', icon: '🐦', points: '2/10' },
+    { id: 'dino', name: 'ديناصور', icon: '🦖', points: '1/نقطة' },
+    { id: 'pong', name: 'بونغ', icon: '🏓', points: 5 },
+    { id: 'breakout', name: 'كسر الطوب', icon: '🧱', points: 10 },
+    { id: 'spaceinvaders', name: 'غزاة الفضاء', icon: '👾', points: 15 },
+    { id: 'memorysequence', name: 'تسلسل الذاكرة', icon: '🧠', points: 20 },
+    { id: 'colormatch', name: 'مطابقة الألوان', icon: '🎨', points: 8 },
+    { id: 'solitaire', name: 'سوليتير', icon: '🃏', points: 5 }
 ];
 
 function loadGames() {
@@ -635,17 +1131,43 @@ function backToMenu() {
 function showGame(gameId) {
     showSection(gameId + '-section');
     
-    if (gameId === 'chess') resetChess();
-    else if (gameId === 'tictactoe') resetTicTacToe();
-    else if (gameId === 'memory') resetMemory();
-    else if (gameId === 'snake') resetSnake();
-    else if (gameId === 'game2048') reset2048();
-    else if (gameId === 'maze') resetMaze();
+    // تشغيل اللعبة المناسبة
+    switch(gameId) {
+        case 'chess': resetChess(); break;
+        case 'tictactoe': resetTicTacToe(); break;
+        case 'memory': resetMemory(); break;
+        case 'snake': resetSnake(); break;
+        case 'game2048': reset2048(); break;
+        case 'maze': resetMaze(); break;
+        case 'sudoku': resetSudoku(); break;
+        case 'hangman': resetHangman(); break;
+        case 'wordguess': resetWordGuess(); break;
+        case 'reaction': resetReaction(); break;
+        case 'clicker': resetClicker(); break;
+        case 'typing': resetTyping(); break;
+        case 'aimtrainer': resetAimTrainer(); break;
+        case 'reactioncolor': resetColorReaction(); break;
+        case 'mathchallenge': resetMathChallenge(); break;
+        case 'numbermemory': resetNumberMemory(); break;
+        case 'countfast': resetCountFast(); break;
+        case 'mathpuzzle': resetMathPuzzle(); break;
+        case 'numberorder': resetNumberOrder(); break;
+        case 'flappybird': resetFlappyBird(); break;
+        case 'dino': resetDino(); break;
+        case 'pong': resetPong(); break;
+        case 'breakout': resetBreakout(); break;
+        case 'spaceinvaders': resetSpaceInvaders(); break;
+        case 'memorysequence': resetMemorySequence(); break;
+        case 'colormatch': resetColorMatch(); break;
+        case 'solitaire': resetSolitaire(); break;
+    }
 }
 
 ///////////////////////////////////////////
-// الشطرنج
+// الألعاب الكلاسيكية (موجودة)
 ///////////////////////////////////////////
+
+// 1. الشطرنج
 let chessGame = null;
 let chessBoard = null;
 let chessLevel = 'easy';
@@ -724,13 +1246,13 @@ function updateChessStatus() {
     
     if (chessGame.in_checkmate()) {
         if (chessGame.turn() === 'b') {
-            status.innerHTML = '🎉 فوز عظيم! +10 نقاط';
+            status.innerHTML = '🎉 فوز! +10 نقاط';
             addPoints(10);
         } else {
-            status.innerHTML = 'خسرت - حاول مرة أخرى';
+            status.innerHTML = 'خسرت';
         }
     } else if (chessGame.in_check()) {
-        status.innerHTML = '⚠️ أنت في وضع كش';
+        status.innerHTML = '⚠️ كش';
     } else {
         status.innerHTML = '🎮 دورك';
     }
@@ -742,9 +1264,7 @@ function resetChess() {
     initChess();
 }
 
-///////////////////////////////////////////
-// إكس-أو
-///////////////////////////////////////////
+// 2. إكس-أو
 let ticBoard = ['', '', '', '', '', '', '', '', ''];
 let ticTurn = 'X';
 let ticGameOver = false;
@@ -808,9 +1328,7 @@ function resetTicTacToe() {
     document.getElementById('tic-status').innerHTML = '';
 }
 
-///////////////////////////////////////////
-// الذاكرة
-///////////////////////////////////////////
+// 3. الذاكرة
 let memCards = [];
 let memFlipped = [];
 let memMatched = [];
@@ -885,9 +1403,7 @@ function resetMemory() {
     initMemory();
 }
 
-///////////////////////////////////////////
-// الثعبان
-///////////////////////////////////////////
+// 4. الثعبان
 let snakeCtx;
 let snakeBody = [];
 let snakeFood = {};
@@ -996,9 +1512,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight' && snakeDir !== 'LEFT') snakeDir = 'RIGHT';
 });
 
-///////////////////////////////////////////
-// 2048
-///////////////////////////////////////////
+// 5. 2048
 let board2048 = [];
 let score2048 = 0;
 
@@ -1128,9 +1642,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') move2048('right');
 });
 
-///////////////////////////////////////////
-// المتاهة
-///////////////////////////////////////////
+// 6. المتاهة
 let mazeCtx;
 let mazeX = 1, mazeY = 1;
 let mazeGoalX = 8, mazeGoalY = 8;
@@ -1219,6 +1731,1004 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') moveMaze(0, 1);
 });
 
+// 7. سودوكو (نسخة مبسطة)
+let sudokuBoard = [];
+let sudokuSolution = [];
+
+function resetSudoku() {
+    // سودوكو بسيط 4x4
+    sudokuBoard = [
+        [1,2,3,4],
+        [3,4,1,2],
+        [2,1,4,3],
+        [4,3,2,1]
+    ];
+    renderSudoku();
+}
+
+function renderSudoku() {
+    let html = '';
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            html += `<div class="number-cell" style="width:60px; height:60px;">${sudokuBoard[i][j]}</div>`;
+        }
+        html += '<br>';
+    }
+    document.getElementById('sudoku-grid').innerHTML = html;
+    document.getElementById('sudoku-status').innerHTML = '🎮 لعبة سودوكو (4x4)';
+}
+
+// 8. الرجل المعلق
+let hangmanWords = ['مودة', 'مريم', 'ألعاب', 'مرح', 'حب'];
+let hangmanCurrent = '';
+let hangmanDisplay = [];
+let hangmanAttempts = 6;
+
+function resetHangman() {
+    hangmanCurrent = hangmanWords[Math.floor(Math.random() * hangmanWords.length)];
+    hangmanDisplay = Array(hangmanCurrent.length).fill('_');
+    hangmanAttempts = 6;
+    renderHangman();
+}
+
+function renderHangman() {
+    document.getElementById('hangman-word').textContent = hangmanDisplay.join(' ');
+    
+    let letters = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي'.split('');
+    let html = '';
+    letters.forEach(letter => {
+        html += `<div class="key" onclick="guessHangman('${letter}')">${letter}</div>`;
+    });
+    document.getElementById('hangman-letters').innerHTML = html;
+    document.getElementById('hangman-status').innerHTML = `محاولات متبقية: ${hangmanAttempts}`;
+}
+
+function guessHangman(letter) {
+    let found = false;
+    for (let i = 0; i < hangmanCurrent.length; i++) {
+        if (hangmanCurrent[i] === letter) {
+            hangmanDisplay[i] = letter;
+            found = true;
+        }
+    }
+    
+    if (!found) hangmanAttempts--;
+    
+    document.getElementById('hangman-word').textContent = hangmanDisplay.join(' ');
+    document.getElementById('hangman-status').innerHTML = `محاولات متبقية: ${hangmanAttempts}`;
+    
+    if (!hangmanDisplay.includes('_')) {
+        alert('🎉 فزت! +10 نقاط');
+        addPoints(10);
+        resetHangman();
+    } else if (hangmanAttempts === 0) {
+        alert('خسرت! الكلمة كانت: ' + hangmanCurrent);
+        resetHangman();
+    }
+}
+
+// 9. تخمين الكلمات
+let wordGuessWords = [
+    { word: 'مودة', clue: 'اسم جميل' },
+    { word: 'مريم', clue: 'اسم آخر جميل' },
+    { word: 'شطرنج', clue: 'لعبة الملوك' },
+    { word: 'ثعبان', clue: 'لعبة كلاسيكية' }
+];
+let wordGuessCurrent = '';
+
+function resetWordGuess() {
+    let item = wordGuessWords[Math.floor(Math.random() * wordGuessWords.length)];
+    wordGuessCurrent = item.word;
+    document.getElementById('wordguess-clue').innerHTML = '🔍 ' + item.clue;
+    document.getElementById('wordguess-status').innerHTML = '';
+    document.getElementById('wordguess-input').value = '';
+}
+
+function checkWordGuess() {
+    let guess = document.getElementById('wordguess-input').value;
+    if (guess === wordGuessCurrent) {
+        alert('🎉 إجابة صحيحة! +5 نقاط');
+        addPoints(5);
+        resetWordGuess();
+    } else {
+        document.getElementById('wordguess-status').innerHTML = '❌ إجابة خطأ';
+    }
+}
+
+// 10. سرعة رد الفعل
+let reactionActive = false;
+let reactionScore = 0;
+let reactionTimer;
+
+function resetReaction() {
+    reactionScore = 0;
+    document.getElementById('reaction-score').textContent = '0';
+    nextReaction();
+}
+
+function nextReaction() {
+    let box = document.getElementById('reaction-box');
+    box.style.background = '#ff4444';
+    box.innerHTML = 'انتظر...';
+    reactionActive = false;
+    
+    setTimeout(() => {
+        box.style.background = '#4caf50';
+        box.innerHTML = 'اضغط الآن!';
+        reactionActive = true;
+        reactionTimer = Date.now();
+    }, Math.random() * 2000 + 1000);
+}
+
+function hitReaction() {
+    if (!reactionActive) return;
+    
+    let time = Date.now() - reactionTimer;
+    reactionScore++;
+    document.getElementById('reaction-score').textContent = reactionScore;
+    addPoints(1);
+    nextReaction();
+}
+
+// 11. الضغط السريع
+let clickerCount = 0;
+let clickerTime = 10;
+let clickerInterval;
+
+function resetClicker() {
+    clickerCount = 0;
+    clickerTime = 10;
+    document.getElementById('clicker-count').textContent = '0';
+    document.getElementById('clicker-time').textContent = '10';
+    document.getElementById('clicker-btn').disabled = false;
+    startClicker();
+}
+
+function startClicker() {
+    clickerInterval = setInterval(() => {
+        clickerTime--;
+        document.getElementById('clicker-time').textContent = clickerTime;
+        
+        if (clickerTime <= 0) {
+            clearInterval(clickerInterval);
+            document.getElementById('clicker-btn').disabled = true;
+            let points = Math.floor(clickerCount / 10);
+            if (points > 0) {
+                addPoints(points);
+                alert(`🎉 ${points} نقاط!`);
+            }
+        }
+    }, 1000);
+}
+
+function clickerClick() {
+    clickerCount++;
+    document.getElementById('clicker-count').textContent = clickerCount;
+}
+
+// 12. سرعة الكتابة
+let typingWords = ['مودة', 'مريم', 'ألعاب', 'سريع', 'مرح'];
+let typingCurrent = '';
+let typingScore = 0;
+
+function resetTyping() {
+    typingCurrent = typingWords[Math.floor(Math.random() * typingWords.length)];
+    document.getElementById('typing-word').textContent = typingCurrent;
+    document.getElementById('typing-input').value = '';
+    document.getElementById('typing-score').textContent = typingScore;
+}
+
+function checkTyping() {
+    let input = document.getElementById('typing-input').value;
+    if (input === typingCurrent) {
+        typingScore += 10;
+        document.getElementById('typing-score').textContent = typingScore;
+        resetTyping();
+        if (typingScore % 50 === 0) addPoints(5);
+    }
+}
+
+// 13. تدريب التصويب
+let aimScore = 0;
+let aimInterval;
+
+function resetAimTrainer() {
+    aimScore = 0;
+    document.getElementById('aim-score').textContent = '0';
+    moveTarget();
+}
+
+function moveTarget() {
+    let target = document.getElementById('target');
+    let x = Math.random() * 350;
+    let y = Math.random() * 350;
+    target.style.left = x + 'px';
+    target.style.top = y + 'px';
+    target.style.display = 'block';
+}
+
+function hitTarget() {
+    aimScore++;
+    document.getElementById('aim-score').textContent = aimScore;
+    if (aimScore % 5 === 0) addPoints(1);
+    moveTarget();
+}
+
+// 14. رد فعل بالألوان
+let colorReactionScore = 0;
+let colorActive = false;
+let colorTimer;
+
+function resetColorReaction() {
+    colorReactionScore = 0;
+    document.getElementById('color-reaction-score').textContent = '0';
+    nextColor();
+}
+
+function nextColor() {
+    let colors = ['#ff4444', '#4caf50', '#ffd700', '#4a90e2'];
+    let box = document.getElementById('color-box');
+    let randomColor = colors[Math.floor(Math.random() * colors.length)];
+    box.style.background = randomColor;
+    box.innerHTML = 'اضغط';
+    colorActive = true;
+    colorTimer = Date.now();
+}
+
+function checkColorReaction() {
+    if (!colorActive) return;
+    
+    let time = Date.now() - colorTimer;
+    colorReactionScore++;
+    document.getElementById('color-reaction-score').textContent = colorReactionScore;
+    addPoints(1);
+    nextColor();
+}
+
+// 15. تحدي الرياضيات
+let mathScore = 0;
+let mathAnswer = 0;
+
+function resetMathChallenge() {
+    mathScore = 0;
+    document.getElementById('math-score').textContent = '0';
+    newMathQuestion();
+}
+
+function newMathQuestion() {
+    let a = Math.floor(Math.random() * 10) + 1;
+    let b = Math.floor(Math.random() * 10) + 1;
+    let op = Math.random() < 0.5 ? '+' : '-';
+    
+    if (op === '+') {
+        mathAnswer = a + b;
+        document.getElementById('math-question').textContent = `${a} + ${b} = ?`;
+    } else {
+        if (a < b) [a, b] = [b, a];
+        mathAnswer = a - b;
+        document.getElementById('math-question').textContent = `${a} - ${b} = ?`;
+    }
+    document.getElementById('math-answer').value = '';
+}
+
+function checkMathAnswer() {
+    let answer = parseInt(document.getElementById('math-answer').value);
+    if (answer === mathAnswer) {
+        mathScore += 5;
+        document.getElementById('math-score').textContent = mathScore;
+        if (mathScore % 25 === 0) addPoints(5);
+        newMathQuestion();
+    }
+}
+
+// 16. ذاكرة الأرقام
+let numberMemoryLevel = 1;
+let numberMemoryCurrent = '';
+
+function resetNumberMemory() {
+    numberMemoryLevel = 1;
+    document.getElementById('number-memory-level').textContent = '1';
+    newNumberSequence();
+}
+
+function newNumberSequence() {
+    let num = '';
+    for (let i = 0; i < numberMemoryLevel; i++) {
+        num += Math.floor(Math.random() * 10);
+    }
+    numberMemoryCurrent = num;
+    document.getElementById('number-sequence').textContent = num;
+    document.getElementById('number-memory-input').value = '';
+    
+    setTimeout(() => {
+        document.getElementById('number-sequence').textContent = '🔢 اكتب الرقم';
+    }, 2000);
+}
+
+function checkNumberMemory() {
+    let input = document.getElementById('number-memory-input').value;
+    if (input === numberMemoryCurrent) {
+        numberMemoryLevel++;
+        document.getElementById('number-memory-level').textContent = numberMemoryLevel;
+        if (numberMemoryLevel % 3 === 0) addPoints(5);
+        newNumberSequence();
+    }
+}
+
+// 17. عد سريع
+let countFastScore = 0;
+let countFastNumbers = [];
+
+function resetCountFast() {
+    countFastScore = 0;
+    document.getElementById('count-score').textContent = '0';
+    newCountFast();
+}
+
+function newCountFast() {
+    countFastNumbers = [];
+    let html = '';
+    for (let i = 0; i < 9; i++) {
+        let num = Math.floor(Math.random() * 10) + 1;
+        countFastNumbers.push(num);
+        html += `<div class="number-cell" onclick="countFastClick(${i})">${num}</div>`;
+    }
+    document.getElementById('count-grid').innerHTML = html;
+}
+
+function countFastClick(i) {
+    countFastScore += countFastNumbers[i];
+    document.getElementById('count-score').textContent = countFastScore;
+    if (countFastScore >= 100) {
+        alert('🎉 +5 نقاط');
+        addPoints(5);
+        resetCountFast();
+    }
+}
+
+// 18. لغز رياضي
+let puzzleScore = 0;
+
+function resetMathPuzzle() {
+    puzzleScore = 0;
+    document.getElementById('puzzle-score').textContent = '0';
+    newPuzzle();
+}
+
+function newPuzzle() {
+    let a = Math.floor(Math.random() * 20) + 1;
+    let b = Math.floor(Math.random() * 20) + 1;
+    let answer = a + b;
+    
+    document.getElementById('puzzle-question').textContent = `${a} + ${b} = ?`;
+    
+    let options = [answer, answer + 2, answer - 1, answer + 1];
+    options = options.sort(() => Math.random() - 0.5);
+    
+    let html = '';
+    options.forEach(opt => {
+        html += `<div class="number-cell" onclick="checkPuzzle(${opt}, ${answer})">${opt}</div>`;
+    });
+    document.getElementById('puzzle-options').innerHTML = html;
+}
+
+function checkPuzzle(selected, correct) {
+    if (selected === correct) {
+        puzzleScore += 5;
+        document.getElementById('puzzle-score').textContent = puzzleScore;
+        if (puzzleScore % 20 === 0) addPoints(5);
+        newPuzzle();
+    }
+}
+
+// 19. ترتيب الأرقام
+let orderNumbers = [];
+let orderScore = 0;
+
+function resetNumberOrder() {
+    orderScore = 0;
+    document.getElementById('order-score').textContent = '0';
+    newOrder();
+}
+
+function newOrder() {
+    orderNumbers = [];
+    for (let i = 0; i < 6; i++) {
+        orderNumbers.push(Math.floor(Math.random() * 20) + 1);
+    }
+    renderOrder();
+}
+
+function renderOrder() {
+    let html = '';
+    for (let i = 0; i < orderNumbers.length; i++) {
+        html += `<div class="number-cell" onclick="orderClick(${i})">${orderNumbers[i]}</div>`;
+    }
+    document.getElementById('order-grid').innerHTML = html;
+}
+
+function orderClick(i) {
+    if (i === 0 || orderNumbers[i] < orderNumbers[i-1]) {
+        orderScore += orderNumbers[i];
+        orderNumbers.splice(i, 1);
+        document.getElementById('order-score').textContent = orderScore;
+        if (orderNumbers.length === 0) {
+            if (orderScore > 50) addPoints(5);
+            newOrder();
+        } else {
+            renderOrder();
+        }
+    }
+}
+
+// 20. Flappy Bird (نسخة مبسطة)
+let flappyCanvas, flappyCtx;
+let flappyBird = { x: 100, y: 250, vy: 0 };
+let flappyPipes = [];
+let flappyScore = 0;
+let flappyGameOver = false;
+let flappyInterval;
+
+function initFlappyBird() {
+    flappyCanvas = document.getElementById('flappy-canvas');
+    flappyCtx = flappyCanvas.getContext('2d');
+    resetFlappyBird();
+}
+
+function resetFlappyBird() {
+    flappyBird = { x: 100, y: 250, vy: 0 };
+    flappyPipes = [];
+    flappyScore = 0;
+    flappyGameOver = false;
+    document.getElementById('flappy-score').textContent = '0';
+    
+    for (let i = 0; i < 3; i++) {
+        flappyPipes.push({
+            x: 400 + i * 200,
+            top: Math.random() * 300 + 100,
+            gap: 150
+        });
+    }
+    
+    if (flappyInterval) clearInterval(flappyInterval);
+    flappyInterval = setInterval(updateFlappy, 30);
+}
+
+function updateFlappy() {
+    if (flappyGameOver) return;
+    
+    // جاذبية
+    flappyBird.vy += 0.5;
+    flappyBird.y += flappyBird.vy;
+    
+    // تحريك الأنابيب
+    for (let pipe of flappyPipes) {
+        pipe.x -= 3;
+    }
+    
+    // إضافة أنابيب جديدة
+    if (flappyPipes[0].x < -60) {
+        flappyPipes.shift();
+        flappyPipes.push({
+            x: 400,
+            top: Math.random() * 300 + 100,
+            gap: 150
+        });
+    }
+    
+    // فحص الاصطدام
+    if (flappyBird.y < 0 || flappyBird.y > 600) {
+        gameOverFlappy();
+    }
+    
+    for (let pipe of flappyPipes) {
+        if (flappyBird.x + 30 > pipe.x && flappyBird.x < pipe.x + 60) {
+            if (flappyBird.y < pipe.top || flappyBird.y + 30 > pipe.top + pipe.gap) {
+                gameOverFlappy();
+            }
+        }
+        
+        if (flappyBird.x === pipe.x + 30) {
+            flappyScore += 10;
+            document.getElementById('flappy-score').textContent = flappyScore;
+            if (flappyScore % 50 === 0) addPoints(5);
+        }
+    }
+    
+    drawFlappy();
+}
+
+function drawFlappy() {
+    flappyCtx.fillStyle = '#4ec0ca';
+    flappyCtx.fillRect(0, 0, 400, 600);
+    
+    flappyCtx.fillStyle = '#ff0';
+    flappyCtx.beginPath();
+    flappyCtx.arc(flappyBird.x, flappyBird.y, 15, 0, Math.PI * 2);
+    flappyCtx.fill();
+    
+    flappyCtx.fillStyle = '#0f0';
+    for (let pipe of flappyPipes) {
+        flappyCtx.fillRect(pipe.x, 0, 60, pipe.top);
+        flappyCtx.fillRect(pipe.x, pipe.top + pipe.gap, 60, 600 - pipe.top - pipe.gap);
+    }
+}
+
+function gameOverFlappy() {
+    flappyGameOver = true;
+    clearInterval(flappyInterval);
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' && document.getElementById('flappybird-section').classList.contains('active')) {
+        flappyBird.vy = -8;
+    }
+});
+
+// 21. الديناصور (نسخة مبسطة)
+let dinoCanvas, dinoCtx;
+let dino = { x: 100, y: 250, vy: 0 };
+let dinoObstacles = [];
+let dinoScore = 0;
+let dinoGameOver = false;
+let dinoInterval;
+
+function initDino() {
+    dinoCanvas = document.getElementById('dino-canvas');
+    dinoCtx = dinoCanvas.getContext('2d');
+    resetDino();
+}
+
+function resetDino() {
+    dino = { x: 100, y: 250, vy: 0 };
+    dinoObstacles = [];
+    dinoScore = 0;
+    dinoGameOver = false;
+    document.getElementById('dino-score').textContent = '0';
+    
+    if (dinoInterval) clearInterval(dinoInterval);
+    dinoInterval = setInterval(updateDino, 30);
+}
+
+function updateDino() {
+    if (dinoGameOver) return;
+    
+    // جاذبية
+    dino.vy += 0.5;
+    dino.y += dino.vy;
+    
+    if (dino.y > 250) {
+        dino.y = 250;
+        dino.vy = 0;
+    }
+    
+    // إضافة عوائق
+    if (Math.random() < 0.02) {
+        dinoObstacles.push({ x: 800, y: 250, width: 20, height: 40 });
+    }
+    
+    // تحريك العوائق
+    for (let obs of dinoObstacles) {
+        obs.x -= 5;
+    }
+    
+    // فحص الاصطدام
+    for (let obs of dinoObstacles) {
+        if (dino.x + 30 > obs.x && dino.x < obs.x + obs.width) {
+            if (dino.y + 30 > obs.y) {
+                gameOverDino();
+            }
+        }
+    }
+    
+    dinoScore++;
+    document.getElementById('dino-score').textContent = Math.floor(dinoScore / 10);
+    if (dinoScore % 500 === 0) addPoints(5);
+    
+    drawDino();
+}
+
+function drawDino() {
+    dinoCtx.fillStyle = '#f7f7f7';
+    dinoCtx.fillRect(0, 0, 800, 300);
+    
+    dinoCtx.fillStyle = '#333';
+    dinoCtx.fillRect(dino.x, dino.y, 30, 30);
+    
+    dinoCtx.fillStyle = '#ff4444';
+    for (let obs of dinoObstacles) {
+        dinoCtx.fillRect(obs.x, obs.y, obs.width, obs.height);
+    }
+}
+
+function gameOverDino() {
+    dinoGameOver = true;
+    clearInterval(dinoInterval);
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' && document.getElementById('dino-section').classList.contains('active')) {
+        if (dino.y === 250) {
+            dino.vy = -10;
+        }
+    }
+});
+
+// 22. بونغ (نسخة مبسطة)
+let pongCanvas, pongCtx;
+let pong = { x: 300, y: 200, dx: 3, dy: 3 };
+let pongPaddle = 150;
+let pongScore = 0;
+let pongInterval;
+
+function initPong() {
+    pongCanvas = document.getElementById('pong-canvas');
+    pongCtx = pongCanvas.getContext('2d');
+    resetPong();
+}
+
+function resetPong() {
+    pong = { x: 300, y: 200, dx: 3, dy: 3 };
+    pongPaddle = 150;
+    pongScore = 0;
+    document.getElementById('pong-score').textContent = '0';
+    
+    if (pongInterval) clearInterval(pongInterval);
+    pongInterval = setInterval(updatePong, 30);
+}
+
+function updatePong() {
+    pong.x += pong.dx;
+    pong.y += pong.dy;
+    
+    if (pong.y < 0 || pong.y > 400) pong.dy *= -1;
+    
+    if (pong.x > 580) {
+        if (pong.y > pongPaddle && pong.y < pongPaddle + 100) {
+            pong.dx *= -1;
+            pongScore += 10;
+            document.getElementById('pong-score').textContent = pongScore;
+            if (pongScore % 50 === 0) addPoints(5);
+        } else {
+            resetPong();
+        }
+    }
+    
+    if (pong.x < 0) pong.dx *= -1;
+    
+    drawPong();
+}
+
+function drawPong() {
+    pongCtx.fillStyle = '#000';
+    pongCtx.fillRect(0, 0, 600, 400);
+    
+    pongCtx.fillStyle = '#fff';
+    pongCtx.beginPath();
+    pongCtx.arc(pong.x, pong.y, 10, 0, Math.PI * 2);
+    pongCtx.fill();
+    
+    pongCtx.fillRect(580, pongPaddle, 10, 100);
+}
+
+document.addEventListener('mousemove', (e) => {
+    if (document.getElementById('pong-section').classList.contains('active')) {
+        let rect = pongCanvas.getBoundingClientRect();
+        pongPaddle = e.clientY - rect.top - 50;
+        if (pongPaddle < 0) pongPaddle = 0;
+        if (pongPaddle > 300) pongPaddle = 300;
+    }
+});
+
+// 23. كسر الطوب (نسخة مبسطة)
+let breakoutCanvas, breakoutCtx;
+let breakoutBall = { x: 250, y: 300, dx: 3, dy: -3 };
+let breakoutPaddle = 200;
+let breakoutBricks = [];
+let breakoutScore = 0;
+let breakoutInterval;
+
+function initBreakout() {
+    breakoutCanvas = document.getElementById('breakout-canvas');
+    breakoutCtx = breakoutCanvas.getContext('2d');
+    resetBreakout();
+}
+
+function resetBreakout() {
+    breakoutBall = { x: 250, y: 300, dx: 3, dy: -3 };
+    breakoutPaddle = 200;
+    breakoutScore = 0;
+    breakoutBricks = [];
+    
+    for (let i = 0; i < 5; i++) {
+        for (let j = 0; j < 8; j++) {
+            breakoutBricks.push({
+                x: j * 60 + 30,
+                y: i * 30 + 50,
+                width: 50,
+                height: 20,
+                active: true
+            });
+        }
+    }
+    
+    document.getElementById('breakout-score').textContent = '0';
+    
+    if (breakoutInterval) clearInterval(breakoutInterval);
+    breakoutInterval = setInterval(updateBreakout, 30);
+}
+
+function updateBreakout() {
+    breakoutBall.x += breakoutBall.dx;
+    breakoutBall.y += breakoutBall.dy;
+    
+    if (breakoutBall.x < 0 || breakoutBall.x > 500) breakoutBall.dx *= -1;
+    if (breakoutBall.y < 0) breakoutBall.dy *= -1;
+    
+    if (breakoutBall.y > 380 && 
+        breakoutBall.x > breakoutPaddle && 
+        breakoutBall.x < breakoutPaddle + 100) {
+        breakoutBall.dy *= -1;
+    }
+    
+    for (let brick of breakoutBricks) {
+        if (brick.active && 
+            breakoutBall.x > brick.x && 
+            breakoutBall.x < brick.x + brick.width &&
+            breakoutBall.y > brick.y && 
+            breakoutBall.y < brick.y + brick.height) {
+            brick.active = false;
+            breakoutBall.dy *= -1;
+            breakoutScore += 10;
+            document.getElementById('breakout-score').textContent = breakoutScore;
+            if (breakoutScore % 50 === 0) addPoints(5);
+        }
+    }
+    
+    if (breakoutBall.y > 400) {
+        resetBreakout();
+    }
+    
+    drawBreakout();
+}
+
+function drawBreakout() {
+    breakoutCtx.fillStyle = '#000';
+    breakoutCtx.fillRect(0, 0, 500, 400);
+    
+    breakoutCtx.fillStyle = '#fff';
+    breakoutCtx.beginPath();
+    breakoutCtx.arc(breakoutBall.x, breakoutBall.y, 5, 0, Math.PI * 2);
+    breakoutCtx.fill();
+    
+    breakoutCtx.fillRect(breakoutPaddle, 380, 100, 10);
+    
+    for (let brick of breakoutBricks) {
+        if (brick.active) {
+            breakoutCtx.fillStyle = '#ff4444';
+            breakoutCtx.fillRect(brick.x, brick.y, brick.width, brick.height);
+        }
+    }
+}
+
+document.addEventListener('mousemove', (e) => {
+    if (document.getElementById('breakout-section').classList.contains('active')) {
+        let rect = breakoutCanvas.getBoundingClientRect();
+        breakoutPaddle = e.clientX - rect.left - 50;
+        if (breakoutPaddle < 0) breakoutPaddle = 0;
+        if (breakoutPaddle > 400) breakoutPaddle = 400;
+    }
+});
+
+// 24. غزاة الفضاء (نسخة مبسطة)
+let spaceCanvas, spaceCtx;
+let spaceShip = 250;
+let spaceBullets = [];
+let spaceInvaders = [];
+let spaceScore = 0;
+let spaceInterval;
+
+function initSpaceInvaders() {
+    spaceCanvas = document.getElementById('space-canvas');
+    spaceCtx = spaceCanvas.getContext('2d');
+    resetSpaceInvaders();
+}
+
+function resetSpaceInvaders() {
+    spaceShip = 250;
+    spaceBullets = [];
+    spaceInvaders = [];
+    spaceScore = 0;
+    
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 5; j++) {
+            spaceInvaders.push({
+                x: j * 60 + 50,
+                y: i * 50 + 50,
+                width: 40,
+                height: 30,
+                active: true
+            });
+        }
+    }
+    
+    document.getElementById('space-score').textContent = '0';
+    
+    if (spaceInterval) clearInterval(spaceInterval);
+    spaceInterval = setInterval(updateSpace, 30);
+}
+
+function updateSpace() {
+    for (let bullet of spaceBullets) {
+        bullet.y -= 5;
+    }
+    spaceBullets = spaceBullets.filter(b => b.y > 0);
+    
+    for (let invader of spaceInvaders) {
+        if (invader.active) {
+            for (let bullet of spaceBullets) {
+                if (bullet.x > invader.x && bullet.x < invader.x + invader.width &&
+                    bullet.y > invader.y && bullet.y < invader.y + invader.height) {
+                    invader.active = false;
+                    spaceScore += 10;
+                    document.getElementById('space-score').textContent = spaceScore;
+                    if (spaceScore % 50 === 0) addPoints(5);
+                }
+            }
+        }
+    }
+    
+    drawSpace();
+}
+
+function drawSpace() {
+    spaceCtx.fillStyle = '#000';
+    spaceCtx.fillRect(0, 0, 500, 400);
+    
+    spaceCtx.fillStyle = '#0f0';
+    spaceCtx.fillRect(spaceShip, 350, 50, 30);
+    
+    spaceCtx.fillStyle = '#fff';
+    for (let bullet of spaceBullets) {
+        spaceCtx.fillRect(bullet.x, bullet.y, 5, 10);
+    }
+    
+    spaceCtx.fillStyle = '#ff0';
+    for (let invader of spaceInvaders) {
+        if (invader.active) {
+            spaceCtx.fillRect(invader.x, invader.y, invader.width, invader.height);
+        }
+    }
+}
+
+document.addEventListener('keydown', (e) => {
+    if (!document.getElementById('spaceinvaders-section').classList.contains('active')) return;
+    
+    if (e.key === 'ArrowLeft') spaceShip -= 20;
+    if (e.key === 'ArrowRight') spaceShip += 20;
+    if (e.key === ' ') {
+        spaceBullets.push({ x: spaceShip + 25, y: 340 });
+    }
+    
+    if (spaceShip < 0) spaceShip = 0;
+    if (spaceShip > 450) spaceShip = 450;
+});
+
+// 25. تسلسل الذاكرة
+let sequenceGame = [];
+let sequenceIndex = 0;
+let sequenceLevel = 1;
+
+function resetMemorySequence() {
+    sequenceGame = [];
+    sequenceIndex = 0;
+    sequenceLevel = 1;
+    newSequence();
+}
+
+function newSequence() {
+    sequenceGame = [];
+    for (let i = 0; i < sequenceLevel; i++) {
+        sequenceGame.push(Math.floor(Math.random() * 9) + 1);
+    }
+    showSequence();
+}
+
+function showSequence() {
+    let html = '';
+    for (let num of sequenceGame) {
+        html += `<div class="number-cell" style="background: #ffd700;">${num}</div>`;
+    }
+    document.getElementById('sequence-grid').innerHTML = html;
+    
+    setTimeout(() => {
+        let hidden = '';
+        for (let i = 0; i < sequenceGame.length; i++) {
+            hidden += `<div class="number-cell" onclick="sequenceClick(${i})">?</div>`;
+        }
+        document.getElementById('sequence-grid').innerHTML = hidden;
+    }, 2000);
+}
+
+function sequenceClick(i) {
+    if (i === sequenceIndex && sequenceGame[i]) {
+        sequenceIndex++;
+        if (sequenceIndex === sequenceGame.length) {
+            sequenceLevel++;
+            if (sequenceLevel % 3 === 0) addPoints(5);
+            newSequence();
+        }
+    }
+}
+
+// 26. مطابقة الألوان
+let colorMatchScore = 0;
+let targetColor = '';
+
+function resetColorMatch() {
+    colorMatchScore = 0;
+    document.getElementById('color-match-score').textContent = '0';
+    newColorMatch();
+}
+
+function newColorMatch() {
+    let colors = ['#ff4444', '#4caf50', '#ffd700', '#4a90e2', '#ff6b6b', '#9b59b6'];
+    targetColor = colors[Math.floor(Math.random() * colors.length)];
+    document.getElementById('target-color').style.background = targetColor;
+    
+    let options = [targetColor];
+    while (options.length < 4) {
+        let c = colors[Math.floor(Math.random() * colors.length)];
+        if (!options.includes(c)) options.push(c);
+    }
+    options = options.sort(() => Math.random() - 0.5);
+    
+    let html = '';
+    options.forEach(color => {
+        html += `<div class="color-box" style="background: ${color};" onclick="checkColorMatch('${color}')"></div>`;
+    });
+    document.getElementById('color-options').innerHTML = html;
+}
+
+function checkColorMatch(color) {
+    if (color === targetColor) {
+        colorMatchScore += 5;
+        document.getElementById('color-match-score').textContent = colorMatchScore;
+        if (colorMatchScore % 20 === 0) addPoints(5);
+        newColorMatch();
+    }
+}
+
+// 27. سوليتير (نسخة مبسطة)
+let solitaireCards = [];
+
+function resetSolitaire() {
+    let values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    solitaireCards = [];
+    for (let v of values) {
+        solitaireCards.push(v);
+    }
+    solitaireCards = solitaireCards.sort(() => Math.random() - 0.5);
+    renderSolitaire();
+}
+
+function renderSolitaire() {
+    let html = '<div style="display: flex; flex-wrap: wrap; gap: 10px;">';
+    for (let i = 0; i < Math.min(10, solitaireCards.length); i++) {
+        html += `<div class="number-cell" style="width:60px;" onclick="pickSolitaire(${i})">${solitaireCards[i]}</div>`;
+    }
+    html += '</div>';
+    document.getElementById('solitaire-board').innerHTML = html;
+}
+
+function pickSolitaire(i) {
+    if (solitaireCards[i] === 'A') {
+        solitaireCards.splice(i, 1);
+        addPoints(1);
+        renderSolitaire();
+    }
+}
+
 ///////////////////////////////////////////
 // الترتيب
 ///////////////////////////////////////////
@@ -1231,7 +2741,7 @@ function loadRanking() {
         html += `<tr><td>${i+1}</td><td>${r.points}</td><td>${r.achievement}</td><td>${medal} ${r.date}</td></tr>`;
     });
     
-    if (html === '') html = '<tr><td colspan="4">لا توجد نتائج بعد</td></tr>';
+    if (html === '') html = '<tr><td colspan="4">ابدأوا اللعب يا أبطال ❤️</td></tr>';
     document.getElementById('ranking-table').innerHTML = html;
 }
 
@@ -1246,6 +2756,27 @@ function initAllGames() {
         initSnake();
         init2048();
         initMaze();
+        resetSudoku();
+        resetHangman();
+        resetWordGuess();
+        resetReaction();
+        resetClicker();
+        resetTyping();
+        resetAimTrainer();
+        resetColorReaction();
+        resetMathChallenge();
+        resetNumberMemory();
+        resetCountFast();
+        resetMathPuzzle();
+        resetNumberOrder();
+        initFlappyBird();
+        initDino();
+        initPong();
+        initBreakout();
+        initSpaceInvaders();
+        resetMemorySequence();
+        resetColorMatch();
+        resetSolitaire();
     }, 500);
 }
 </script>
