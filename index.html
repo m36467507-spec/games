@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>weza - اكبر موقع العاب عربي | 200+ لعبة عاملة</title>
+    <title>10 ألعاب مميزة - العب واستمتع</title>
     <style>
         * {
             margin: 0;
@@ -12,24 +12,8 @@
             font-family: 'Cairo', 'Tajawal', sans-serif;
         }
 
-        :root {
-            --primary: #7c3aed;
-            --secondary: #a855f7;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --success: #22c55e;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --info: #3b82f6;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        }
-
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
             min-height: 100vh;
         }
 
@@ -37,16 +21,20 @@
         header {
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+            padding: 1rem 0;
             position: sticky;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 100;
         }
 
-        .header-container {
-            max-width: 1400px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 0 2rem;
+        }
+
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -55,118 +43,132 @@
         }
 
         .logo {
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: 900;
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, #141e30, #243b55);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-        }
-
-        .search-box {
-            flex: 1;
-            max-width: 500px;
-            position: relative;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 50px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
-        }
-
-        .categories {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            padding: 1rem 2rem;
-            background: white;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .category-btn {
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 50px;
-            background: #f1f5f9;
-            color: #334155;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .category-btn:hover {
-            background: var(--gradient-1);
-            color: white;
-            transform: translateY(-2px);
+        .logo i {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .category-btn.active {
-            background: var(--gradient-1);
+        .game-counter {
+            background: linear-gradient(135deg, #141e30, #243b55);
             color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* Games Grid */
         .games-grid {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 2rem;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .game-card {
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transition: all 0.3s;
             cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
         }
 
         .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: translateY(-10px) rotateX(2deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .game-image {
             height: 200px;
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, #141e30, #243b55);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: hidden;
+        }
+
+        .game-image::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: rotate(45deg) translateY(100%);
+            transition: transform 0.6s;
+        }
+
+        .game-card:hover .game-image::before {
+            transform: rotate(45deg) translateY(-100%);
         }
 
         .game-image i {
             font-size: 5rem;
             color: white;
-            opacity: 0.8;
+            z-index: 1;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+            transition: all 0.3s;
+        }
+
+        .game-card:hover .game-image i {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .game-badge {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: var(--gradient-2);
+            background: #ff4757;
             color: white;
-            padding: 0.3rem 1rem;
+            padding: 0.5rem 1rem;
             border-radius: 50px;
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: 0 3px 10px rgba(255,71,87,0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .game-age {
@@ -178,6 +180,8 @@
             padding: 0.3rem 0.8rem;
             border-radius: 50px;
             font-size: 0.8rem;
+            z-index: 2;
+            backdrop-filter: blur(5px);
         }
 
         .game-info {
@@ -185,8 +189,8 @@
         }
 
         .game-title {
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 1.4rem;
+            font-weight: 800;
             color: #1e293b;
             margin-bottom: 0.5rem;
             display: flex;
@@ -195,27 +199,46 @@
         }
 
         .game-rating {
-            color: #f59e0b;
+            color: #fbbf24;
             display: flex;
             align-items: center;
             gap: 0.3rem;
+            background: #fef3c7;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
         }
 
         .game-category {
             display: inline-block;
-            padding: 0.3rem 1rem;
-            background: #f1f5f9;
+            padding: 0.4rem 1rem;
+            background: #e2e8f0;
             border-radius: 50px;
             font-size: 0.8rem;
             color: #475569;
+            font-weight: 600;
             margin-bottom: 1rem;
         }
 
         .game-description {
             color: #64748b;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             line-height: 1.6;
             margin-bottom: 1.5rem;
+        }
+
+        .game-features {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        .game-features span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
         }
 
         .play-btn {
@@ -223,20 +246,24 @@
             padding: 1rem;
             border: none;
             border-radius: 10px;
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, #141e30, #243b55);
             color: white;
             font-weight: 700;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         .play-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(124,58,237,0.4);
+            box-shadow: 0 5px 20px rgba(20,30,48,0.4);
         }
 
-        /* Game Modal */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -245,7 +272,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.95);
-            z-index: 2000;
+            z-index: 1000;
             overflow-y: auto;
         }
 
@@ -262,19 +289,23 @@
             left: 1rem;
             width: 50px;
             height: 50px;
-            background: var(--danger);
+            background: #ef4444;
             color: white;
             border: none;
             border-radius: 50%;
-            font-size: 1.5rem;
+            font-size: 2rem;
             cursor: pointer;
-            z-index: 2001;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(239,68,68,0.4);
         }
 
         .close-modal:hover {
-            transform: rotate(90deg);
-            background: var(--gradient-2);
+            transform: rotate(90deg) scale(1.1);
+            background: #dc2626;
         }
 
         .game-wrapper {
@@ -284,17 +315,30 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
+        .game-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(135deg, #141e30, #243b55);
+            border-image-slice: 1;
+        }
+
+        .game-header h2 {
+            font-size: 2.5rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
         /* Game Canvas */
         .game-canvas {
             width: 100%;
-            height: 500px;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            height: 400px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
             border-radius: 20px;
             position: relative;
             overflow: hidden;
-            border: 4px solid transparent;
-            border-image: var(--gradient-1);
-            border-image-slice: 1;
+            border: 4px solid #141e30;
         }
 
         /* Game Elements */
@@ -302,7 +346,7 @@
             position: absolute;
             width: 50px;
             height: 50px;
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
             border-radius: 50%;
             bottom: 20px;
             left: 50%;
@@ -313,20 +357,20 @@
             justify-content: center;
             color: white;
             font-size: 1.5rem;
-            box-shadow: 0 0 20px rgba(124,58,237,0.5);
+            box-shadow: 0 0 20px rgba(251,191,36,0.5);
         }
 
         .enemy {
             position: absolute;
             width: 40px;
             height: 40px;
-            background: var(--gradient-2);
+            background: linear-gradient(135deg, #ef4444, #dc2626);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            animation: moveEnemy 3s linear;
+            animation: fall 3s linear;
         }
 
         .coin {
@@ -339,26 +383,28 @@
             align-items: center;
             justify-content: center;
             color: #000;
-            animation: rotate 1s linear infinite;
+            animation: fall 4s linear;
         }
 
-        .bullet {
+        .target {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: yellow;
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border: 3px solid #ef4444;
             border-radius: 50%;
-            box-shadow: 0 0 10px yellow;
+            cursor: pointer;
+            animation: move 3s infinite alternate;
         }
 
-        @keyframes moveEnemy {
-            from { top: 0; }
-            to { top: 90%; }
+        @keyframes fall {
+            from { top: -50px; }
+            to { top: 100%; }
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes move {
+            from { left: 0; }
+            to { left: 90%; }
         }
 
         /* Game Controls */
@@ -374,23 +420,26 @@
             padding: 1rem 2rem;
             border: none;
             border-radius: 50px;
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, #141e30, #243b55);
             color: white;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 1rem;
+            border: 2px solid transparent;
         }
 
         .control-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(124,58,237,0.4);
+            box-shadow: 0 5px 20px rgba(20,30,48,0.4);
+            border-color: #fbbf24;
         }
 
-        .control-btn.danger {
-            background: var(--danger);
+        .control-btn:active {
+            transform: scale(0.95);
         }
 
         .game-status {
@@ -399,9 +448,119 @@
             font-weight: 700;
             margin: 1rem 0;
             padding: 1rem;
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, #141e30, #243b55);
             color: white;
             border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Memory Game Grid */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 20px;
+            height: 100%;
+        }
+
+        .memory-card {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+        }
+
+        .memory-card.flipped {
+            background: white;
+            color: #141e30;
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched {
+            background: #10b981;
+            color: white;
+            cursor: default;
+            animation: match 0.5s;
+        }
+
+        @keyframes match {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Tic Tac Toe */
+        .ttt-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 20px;
+            height: 100%;
+        }
+
+        .ttt-cell {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .ttt-cell:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+        }
+
+        .ttt-cell.win {
+            background: #10b981;
+            animation: win 1s infinite;
+        }
+
+        @keyframes win {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Snake Game */
+        .snake-grid {
+            display: grid;
+            grid-template-columns: repeat(15, 1fr);
+            gap: 1px;
+            background: #1e293b;
+            padding: 1px;
+            height: 100%;
+        }
+
+        .snake-cell {
+            aspect-ratio: 1;
+            background: #0f172a;
+        }
+
+        .snake-cell.snake {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 5px;
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        .snake-cell.food {
+            background: gold;
+            border-radius: 50%;
+            box-shadow: 0 0 15px gold;
+            animation: pulse 1s infinite;
         }
 
         /* Loading */
@@ -412,14 +571,14 @@
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            z-index: 2002;
+            z-index: 1002;
         }
 
         .spinner {
             width: 80px;
             height: 80px;
             border: 8px solid #f3f3f3;
-            border-top: 8px solid #667eea;
+            border-top: 8px solid #141e30;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-bottom: 1rem;
@@ -430,26 +589,41 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Footer */
-        footer {
-            background: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-            color: #64748b;
+        .loading p {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
+            .hero h1 {
+                font-size: 2rem;
             }
             
-            .search-box {
-                max-width: 100%;
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-header h2 {
+                font-size: 1.8rem;
             }
             
             .game-canvas {
-                height: 400px;
+                height: 300px;
             }
         }
     </style>
@@ -458,29 +632,27 @@
 </head>
 <body>
     <header>
-        <div class="header-container">
-            <div class="logo">weza</div>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="ابحث عن لعبة...">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <span>10 ألعاب مميزة</span>
+                </div>
+                <div class="game-counter">
+                    <i class="fas fa-star"></i>
+                    10 ألعاب حصرية
+                </div>
             </div>
         </div>
     </header>
 
-    <div class="categories" id="categories">
-        <button class="category-btn active" data-category="all"><i class="fas fa-home"></i> الكل</button>
-        <button class="category-btn" data-category="مغامرة"><i class="fas fa-compass"></i> مغامرة</button>
-        <button class="category-btn" data-category="حرب"><i class="fas fa-gun"></i> حرب</button>
-        <button class="category-btn" data-category="اكشن"><i class="fas fa-fist-raised"></i> اكشن</button>
-        <button class="category-btn" data-category="ذكاء"><i class="fas fa-brain"></i> ذكاء</button>
-        <button class="category-btn" data-category="رياضة"><i class="fas fa-futbol"></i> رياضة</button>
-        <button class="category-btn" data-category="سباق"><i class="fas fa-car"></i> سباق</button>
-        <button class="category-btn" data-category="بنات"><i class="fas fa-tshirt"></i> بنات</button>
-        <button class="category-btn" data-category="اطفال"><i class="fas fa-child"></i> اطفال</button>
-    </div>
+    <section class="hero">
+        <h1>🎮 اكتشف 10 ألعاب مميزة</h1>
+        <p>ألعاب مبتكرة وممتعة تناسب جميع الأعمار - العب واستمتع بتجربة فريدة</p>
+    </section>
 
     <div class="games-grid" id="gamesGrid"></div>
 
-    <!-- Game Modal -->
     <div class="modal" id="gameModal">
         <button class="close-modal" onclick="closeGame()">×</button>
         <div class="modal-content">
@@ -488,153 +660,154 @@
         </div>
     </div>
 
-    <!-- Loading -->
     <div class="loading" id="loading">
         <div class="spinner"></div>
-        <p style="color: white; font-size: 1.2rem;">جاري تحميل اللعبة...</p>
+        <p>جاري تحميل اللعبة...</p>
     </div>
 
     <footer>
-        <p>© 2024 weza - جميع الحقوق محفوظة | 200+ لعبة عاملة</p>
+        <p>© 2024 - 10 ألعاب مميزة | العب واستمتع بأحدث الألعاب</p>
     </footer>
 
     <script>
         // ==================== GAME DATABASE ====================
         const games = [
-            // ========== 40 لعبة مغامرة ==========
-            { id: 1, title: "صائد الكنوز", category: "مغامرة", age: "8+", icon: "fa-map", rating: 4.8, plays: "1.2M", description: "ابحث عن الكنوز المفقودة في الغابة المسحورة", type: "adventure_collector" },
-            { id: 2, title: "جزيرة القراصنة", category: "مغامرة", age: "10+", icon: "fa-ship", rating: 4.7, plays: "980K", description: "مغامرة بحرية مع القراصنة بحثاً عن الكنز", type: "adventure_pirate" },
-            { id: 3, title: "غابة الاسرار", category: "مغامرة", age: "6+", icon: "fa-tree", rating: 4.5, plays: "750K", description: "استكشف غابة الاسرار والتعرف على مخلوقاتها", type: "adventure_forest" },
-            { id: 4, title: "صائد الوحوش", category: "مغامرة", age: "12+", icon: "fa-dragon", rating: 4.9, plays: "2.1M", description: "اصطاد الوحوش في عالم خيالي مليء بالمغامرات", type: "adventure_hunter" },
-            { id: 5, title: "اهرامات مصر", category: "مغامرة", age: "8+", icon: "fa-pyramid", rating: 4.6, plays: "890K", description: "اكتشف اسرار الفراعنة في الاهرامات", type: "adventure_egypt" },
-            { id: 6, title: "كهف العجائب", category: "مغامرة", age: "5+", icon: "fa-cave", rating: 4.4, plays: "670K", description: "مغامرة في كهف مليء بالعجائب والاسرار", type: "adventure_cave" },
-            { id: 7, title: "جزيرة الديناصورات", category: "مغامرة", age: "6+", icon: "fa-dino", rating: 4.7, plays: "1.5M", description: "عش مع الديناصورات في جزيرة نائية", type: "adventure_dino" },
-            { id: 8, title: "الفضاء الخارجي", category: "مغامرة", age: "7+", icon: "fa-rocket", rating: 4.8, plays: "1.8M", description: "استكشف الكواكب والنجوم في الفضاء", type: "adventure_space" },
-            { id: 9, title: "قاع المحيط", category: "مغامرة", age: "5+", icon: "fa-fish", rating: 4.3, plays: "540K", description: "غوص في اعماق المحيط لاكتشاف الاسرار", type: "adventure_ocean" },
-            { id: 10, title: "قلعة الرعب", category: "مغامرة", age: "10+", icon: "fa-ghost", rating: 4.2, plays: "820K", description: "مغامرة مخيفة في قلعة مسكونة", type: "adventure_horror" },
-            
-            // ========== 40 لعبة حرب ==========
-            { id: 11, title: "معركة الجبابرة", category: "حرب", age: "12+", icon: "fa-tank", rating: 4.9, plays: "2.5M", description: "حرب مستقبلية باسلحة متطورة", type: "war_future" },
-            { id: 12, title: "جيوش العالم", category: "حرب", age: "10+", icon: "fa-chess", rating: 4.7, plays: "1.8M", description: "لعبة حرب استراتيجية", type: "war_strategy" },
-            { id: 13, title: "الغواصات", category: "حرب", age: "8+", icon: "fa-submarine", rating: 4.5, plays: "920K", description: "حرب بحرية بالغواصات", type: "war_submarine" },
-            { id: 14, title: "الطيار المقاتل", category: "حرب", age: "10+", icon: "fa-fighter-jet", rating: 4.8, plays: "2.2M", description: "حرب جوية بطائرات مقاتلة", type: "war_jet" },
-            { id: 15, title: "القلعة", category: "حرب", age: "7+", icon: "fa-castle", rating: 4.6, plays: "1.1M", description: "الدفاع عن القلعة من الاعداء", type: "war_castle" },
-            { id: 16, title: "القناص", category: "حرب", age: "12+", icon: "fa-crosshairs", rating: 4.7, plays: "1.9M", description: "لعبة قناص مثيرة", type: "war_sniper" },
-            { id: 17, title: "الدبابات", category: "حرب", age: "8+", icon: "fa-tank", rating: 4.6, plays: "1.4M", description: "معارك دبابات شرسة", type: "war_tank" },
-            { id: 18, title: "الجنود", category: "حرب", age: "6+", icon: "fa-users", rating: 4.4, plays: "780K", description: "قيادة مجموعة من الجنود", type: "war_soldiers" },
-            { id: 19, title: "المدفعية", category: "حرب", age: "8+", icon: "fa-bomb", rating: 4.3, plays: "650K", description: "قصف مواقع العدو بالمدفعية", type: "war_artillery" },
-            { id: 20, title: "النينجا", category: "حرب", age: "10+", icon: "fa-user-ninja", rating: 4.8, plays: "1.7M", description: "حرب النينجا والاغتيالات", type: "war_ninja" },
-
-            // ========== 40 لعبة اكشن ==========
-            { id: 21, title: "المدمر", category: "اكشن", age: "10+", icon: "fa-fist-raised", rating: 4.8, plays: "1.6M", description: "اكشن وقتال متواصل", type: "action_fighting" },
-            { id: 22, title: "النينجا", category: "اكشن", age: "8+", icon: "fa-user-ninja", rating: 4.7, plays: "1.4M", description: "مغامرات النينجا الشيقة", type: "action_ninja" },
-            { id: 23, title: "الساموراي", category: "اكشن", age: "10+", icon: "fa-khanda", rating: 4.6, plays: "1.2M", description: "معارك الساموراي بالسيف", type: "action_samurai" },
-            { id: 24, title: "المصارع", category: "اكشن", age: "12+", icon: "fa-helmet-battle", rating: 4.5, plays: "980K", description: "مصارعة حرة في الحلبة", type: "action_wrestling" },
-            { id: 25, title: "الملاكمة", category: "اكشن", age: "8+", icon: "fa-boxing-glove", rating: 4.4, plays: "860K", description: "نزال ملاكمة مثير", type: "action_boxing" },
-            { id: 26, title: "الكاراتيه", category: "اكشن", age: "6+", icon: "fa-hand-fist", rating: 4.3, plays: "720K", description: "تدريبات الكاراتيه", type: "action_karate" },
-            { id: 27, title: "الجودو", category: "اكشن", age: "6+", icon: "fa-person-walking", rating: 4.2, plays: "580K", description: "مسابقة الجودو", type: "action_judo" },
-            { id: 28, title: "التايكوندو", category: "اكشن", age: "6+", icon: "fa-person-running", rating: 4.3, plays: "620K", description: "بطولة التايكوندو", type: action_taekwondo" },
-            { id: 29, title: "المصارع", category: "اكشن", age: "12+", icon: "fa-helmet-battle", rating: 4.5, plays: "980K", description: "مصارعة حرة في الحلبة", type: "action_wrestling" },
-            { id: 30, title: "الملاكمة", category: "اكشن", age: "8+", icon: "fa-boxing-glove", rating: 4.4, plays: "860K", description: "نزال ملاكمة مثير", type: "action_boxing" },
-
-            // ========== 40 لعبة ذكاء ==========
-            { id: 31, title: "سودوكو", category: "ذكاء", age: "6+", icon: "fa-table", rating: 4.5, plays: "950K", description: "لعبة الارقام الشهيرة", type: "puzzle_sudoku" },
-            { id: 32, title: "الشطرنج", category: "ذكاء", age: "8+", icon: "fa-chess", rating: 4.8, plays: "2.1M", description: "لعبة الملوك والاستراتيجية", type: "puzzle_chess" },
-            { id: 33, title: "كلمات متقاطعة", category: "ذكاء", age: "10+", icon: "fa-font", rating: 4.6, plays: "1.3M", description: "اختبر معلوماتك العامة", type: "puzzle_crossword" },
-            { id: 34, title: "الذاكرة", category: "ذكاء", age: "4+", icon: "fa-brain", rating: 4.7, plays: "1.7M", description: "لعبة تقوية الذاكرة", type: "puzzle_memory" },
-            { id: 35, title: "الرياضيات", category: "ذكاء", age: "6+", icon: "fa-calculator", rating: 4.5, plays: "890K", description: "تحديات الرياضيات", type: "puzzle_math" },
-            { id: 36, title: "الالغاز", category: "ذكاء", age: "8+", icon: "fa-question", rating: 4.6, plays: "1.1M", description: "حل الالغاز المنطقية", type: "puzzle_riddles" },
-            { id: 37, title: "توصيل الاشكال", category: "ذكاء", age: "3+", icon: "fa-shapes", rating: 4.3, plays: "620K", description: "لعبة توصيل الاشكال", type: "puzzle_shapes" },
-            { id: 38, title: "تذكر الالوان", category: "ذكاء", age: "4+", icon: "fa-palette", rating: 4.4, plays: "580K", description: "لعبة تذكر الالوان", type: "puzzle_colors" },
-            { id: 39, title: "الارقام", category: "ذكاء", age: "3+", icon: "fa-sort-numeric-up", rating: 4.2, plays: "450K", description: "تعلم الارقام", type: "puzzle_numbers" },
-            { id: 40, title: "الحروف", category: "ذكاء", age: "3+", icon: "fa-font", rating: 4.3, plays: "520K", description: "تعلم الحروف", type: "puzzle_letters" },
-
-            // ========== 40 لعبة رياضية ==========
-            { id: 41, title: "ستار كرة القدم", category: "رياضة", age: "5+", icon: "fa-futbol", rating: 4.8, plays: "2.3M", description: "لعبة كرة القدم الممتعة", type: "sports_soccer" },
-            { id: 42, title: "السلة", category: "رياضة", age: "6+", icon: "fa-basketball", rating: 4.7, plays: "1.5M", description: "مباراة كرة سلة حماسية", type: "sports_basketball" },
-            { id: 43, title: "التنس", category: "رياضة", age: "5+", icon: "fa-table-tennis", rating: 4.5, plays: "820K", description: "مباراة تنس ارضي", type: "sports_tennis" },
-            { id: 44, title: "الطائرة", category: "رياضة", age: "6+", icon: "fa-volleyball", rating: 4.4, plays: "680K", description: "كرة طائرة", type: "sports_volleyball" },
-            { id: 45, title: "الجولف", category: "رياضة", age: "7+", icon: "fa-golf-ball", rating: 4.3, plays: "540K", description: "لعبة الجولف", type: "sports_golf" },
-            { id: 46, title: "البولينج", category: "رياضة", age: "4+", icon: "fa-bowling-ball", rating: 4.2, plays: "460K", description: "البولينج", type: "sports_bowling" },
-            { id: 47, title: "البلياردو", category: "رياضة", age: "8+", icon: "fa-circle", rating: 4.6, plays: "920K", description: "لعبة البلياردو", type: "sports_billiards" },
-            { id: 48, title: "الهوكي", category: "رياضة", age: "6+", icon: "fa-hockey-puck", rating: 4.3, plays: "580K", description: "هوكي الجليد", type: "sports_hockey" },
-            { id: 49, title: "الكريكيت", category: "رياضة", age: "7+", icon: "fa-baseball", rating: 4.1, plays: "390K", description: "الكريكيت", type: "sports_cricket" },
-            { id: 50, title: "الرماية", category: "رياضة", age: "8+", icon: "fa-bullseye", rating: 4.5, plays: "750K", description: "رماية على الاهداف", type: "sports_shooting" },
-
-            // ========== 40 لعبة سباق ==========
-            { id: 51, title: "سباق السيارات", category: "سباق", age: "5+", icon: "fa-car", rating: 4.9, plays: "2.8M", description: "سباق سيارات مثير", type: "racing_car" },
-            { id: 52, title: "سباق الدراجات", category: "سباق", age: "4+", icon: "fa-motorcycle", rating: 4.6, plays: "1.2M", description: "سباق الدراجات النارية", type: "racing_bike" },
-            { id: 53, title: "سباق الشاحنات", category: "سباق", age: "5+", icon: "fa-truck", rating: 4.4, plays: "890K", description: "سباق الشاحنات الضخمة", type: "racing_truck" },
-            { id: 54, title: "فورميلا 1", category: "سباق", age: "6+", icon: "fa-flag-checkered", rating: 4.8, plays: "1.9M", description: "سباق سيارات فورميلا 1", type: "racing_f1" },
-            { id: 55, title: "سباق القوارب", category: "سباق", age: "5+", icon: "fa-ship", rating: 4.3, plays: "670K", description: "سباق القوارب السريعة", type: "racing_boat" },
-            { id: 56, title: "سباق الطائرات", category: "سباق", age: "6+", icon: "fa-plane", rating: 4.5, plays: "780K", description: "سباق الطائرات", type: "racing_plane" },
-            { id: 57, title: "سباق الخيول", category: "سباق", age: "4+", icon: "fa-horse", rating: 4.2, plays: "560K", description: "سباق الخيول العربية", type: "racing_horse" },
-            { id: 58, title: "سباق الجليد", category: "سباق", age: "5+", icon: "fa-snowflake", rating: 4.1, plays: "430K", description: "سباق على الجليد", type: "racing_ice" },
-            { id: 59, title: "سباق الصحراء", category: "سباق", age: "5+", icon: "fa-sun", rating: 4.3, plays: "640K", description: "سباق في الصحراء", type: "racing_desert" },
-            { id: 60, title: "سباق المدينة", category: "سباق", age: "4+", icon: "fa-city", rating: 4.4, plays: "720K", description: "سباق في شوارع المدينة", type: "racing_city" },
-
-            // ========== 40 لعبة بنات ==========
-            { id: 61, title: "تلبيس الاميرات", category: "بنات", age: "3+", icon: "fa-crown", rating: 4.7, plays: "1.4M", description: "البس الاميرة اجمل الملابس", type: "dressup_princess" },
-            { id: 62, title: "طبخ الكعك", category: "بنات", age: "4+", icon: "fa-cake-candles", rating: 4.6, plays: "1.2M", description: "اطبخي وزيّني الكعك", type: "cooking_cake" },
-            { id: 63, title: "صالون التجميل", category: "بنات", age: "5+", icon: "fa-scissors", rating: 4.5, plays: "980K", description: "صالون لتصفيف الشعر", type: "beauty_salon" },
-            { id: 64, title: "المكياج", category: "بنات", age: "6+", icon: "fa-magic", rating: 4.4, plays: "860K", description: "تعلمي فن المكياج", type: "beauty_makeup" },
-            { id: 65, title: "الديكور", category: "بنات", age: "4+", icon: "fa-couch", rating: 4.3, plays: "720K", description: "ديكور وتنسيق المنزل", type: "decor_home" },
-            { id: 66, title: "الحديقة", category: "بنات", age: "3+", icon: "fa-seedling", rating: 4.2, plays: "580K", description: "زراعة الازهار", type: "garden_flowers" },
-            { id: 67, title: "الحيوانات الاليفة", category: "بنات", age: "3+", icon: "fa-cat", rating: 4.5, plays: "820K", description: "رعاية الحيوانات الاليفة", type: "pets_care" },
-            { id: 68, title: "الموضة", category: "بنات", age: "5+", icon: "fa-vest", rating: 4.6, plays: "940K", description: "تصميم الازياء", type: "fashion_design" },
-            { id: 69, title: "المجوهرات", category: "بنات", age: "4+", icon: "fa-gem", rating: 4.3, plays: "670K", description: "تصميم المجوهرات", type: "jewelry_design" },
-            { id: 70, title: "العرائس", category: "بنات", age: "2+", icon: "fa-doll", rating: 4.4, plays: "750K", description: "تلبيس العرائس", type: "dolls_dress" },
-
-            // ========== 40 لعبة اطفال ==========
-            { id: 71, title: "تلوين الصور", category: "اطفال", age: "2+", icon: "fa-paint-brush", rating: 4.5, plays: "890K", description: "تلوين رسومات جميلة", type: "kids_coloring" },
-            { id: 72, title: "الارقام", category: "اطفال", age: "2+", icon: "fa-sort-numeric-up", rating: 4.3, plays: "670K", description: "تعلم الارقام", type: "kids_numbers" },
-            { id: 73, title: "الحروف", category: "اطفال", age: "2+", icon: "fa-font", rating: 4.4, plays: "720K", description: "تعلم الحروف", type: "kids_letters" },
-            { id: 74, title: "الحيوانات", category: "اطفال", age: "1+", icon: "fa-dog", rating: 4.6, plays: "980K", description: "تعرف على الحيوانات", type: "kids_animals" },
-            { id: 75, title: "الالوان", category: "اطفال", age: "1+", icon: "fa-palette", rating: 4.5, plays: "850K", description: "تعلم الالوان", type: "kids_colors" },
-            { id: 76, title: "الفواكه", category: "اطفال", age: "1+", icon: "fa-apple-alt", rating: 4.4, plays: "780K", description: "تعلم اسماء الفواكه", type: "kids_fruits" },
-            { id: 77, title: "الخضروات", category: "اطفال", age: "1+", icon: "fa-carrot", rating: 4.3, plays: "690K", description: "تعلم الخضروات", type: "kids_vegetables" },
-            { id: 78, title: "الاشكال", category: "اطفال", age: "2+", icon: "fa-shapes", rating: 4.2, plays: "540K", description: "تعلم الاشكال الهندسية", type: "kids_shapes" },
-            { id: 79, title: "الغاز للاطفال", category: "اطفال", age: "3+", icon: "fa-puzzle-piece", rating: 4.4, plays: "630K", description: "الغاز بسيطة للاطفال", type: "kids_puzzles" },
-            { id: 80, title: "الذاكرة للاطفال", category: "اطفال", age: "3+", icon: "fa-brain", rating: 4.5, plays: "710K", description: "لعبة الذاكرة للاطفال", type: "kids_memory" }
+            {
+                id: 1,
+                title: "جامع الكنوز",
+                category: "مغامرة",
+                age: "6+",
+                rating: 4.8,
+                players: "1",
+                time: "غير محدود",
+                icon: "fa-map",
+                description: "اجمع الكنوز وتجنب الأعداء في مغامرة مثيرة",
+                features: ["مغامرة", "تحدي", "سرعة"],
+                type: "collector"
+            },
+            {
+                id: 2,
+                title: "لعبة الذاكرة",
+                category: "ذكاء",
+                age: "4+",
+                rating: 4.7,
+                players: "1",
+                time: "محدود",
+                icon: "fa-brain",
+                description: "اختبر ذاكرتك مع بطاقات المطابقة",
+                features: ["ذاكرة", "تركيز", "تحدي"],
+                type: "memory"
+            },
+            {
+                id: 3,
+                title: "إكس أو",
+                category: "ذكاء",
+                age: "5+",
+                rating: 4.6,
+                players: "2",
+                time: "سريعة",
+                icon: "fa-hashtag",
+                description: "اللعبة الكلاسيكية إكس أو ضد الكمبيوتر",
+                features: ["استراتيجية", "تحدي", "منطق"],
+                type: "tictactoe"
+            },
+            {
+                id: 4,
+                title: "الثعبان الجائع",
+                category: "اكشن",
+                age: "5+",
+                rating: 4.9,
+                players: "1",
+                time: "غير محدود",
+                icon: "fa-snake",
+                description: "لعبة الثعبان الكلاسيكية بتصميم جديد",
+                features: ["سرعة", "تركيز", "تحدي"],
+                type: "snake"
+            },
+            {
+                id: 5,
+                title: "مطلق النار",
+                category: "اكشن",
+                age: "8+",
+                rating: 4.7,
+                players: "1",
+                time: "مستويات",
+                icon: "fa-crosshairs",
+                description: "صوب على الأهداف المتحركة واجمع النقاط",
+                features: ["دقة", "سرعة", "تركيز"],
+                type: "shooter"
+            },
+            {
+                id: 6,
+                title: "حجر ورقة مقص",
+                category: "اطفال",
+                age: "3+",
+                rating: 4.5,
+                players: "2",
+                time: "سريعة",
+                icon: "fa-hand-back-fist",
+                description: "اللعبة الشهيرة ضد الكمبيوتر",
+                features: ["حظ", "تحدي", "مرح"],
+                type: "rps"
+            },
+            {
+                id: 7,
+                title: "تحدي الرياضيات",
+                category: "تعليمي",
+                age: "6+",
+                rating: 4.6,
+                players: "1",
+                time: "محدود",
+                icon: "fa-calculator",
+                description: "اختبر مهاراتك في الرياضيات",
+                features: ["رياضيات", "سرعة", "تحدي"],
+                type: "math"
+            },
+            {
+                id: 8,
+                title: "تطابق الألوان",
+                category: "اطفال",
+                age: "3+",
+                rating: 4.4,
+                players: "1",
+                time: "سريعة",
+                icon: "fa-palette",
+                description: "اختر اللون الصحيح بسرعة",
+                features: ["ألوان", "سرعة", "تعلم"],
+                type: "colors"
+            },
+            {
+                id: 9,
+                title: "الغاز ذكاء",
+                category: "ذكاء",
+                age: "7+",
+                rating: 4.7,
+                players: "1",
+                time: "مستويات",
+                icon: "fa-puzzle-piece",
+                description: "حل الألغاز المنطقية",
+                features: ["منطق", "تفكير", "تحدي"],
+                type: "puzzle"
+            },
+            {
+                id: 10,
+                title: "الطيار الشجاع",
+                category: "اكشن",
+                age: "5+",
+                rating: 4.8,
+                players: "1",
+                time: "غير محدود",
+                icon: "fa-fighter-jet",
+                description: "تجنب العوائق وحلق بأمان",
+                features: ["سرعة", "تحدي", "مغامرة"],
+                type: "pilot"
+            }
         ];
 
-        // ==================== GENERATE 200+ GAMES ====================
-        for (let i = 81; i <= 250; i++) {
-            const categories = ["مغامرة", "حرب", "اكشن", "ذكاء", "رياضة", "سباق", "بنات", "اطفال"];
-            const category = categories[Math.floor(Math.random() * categories.length)];
-            const icons = {
-                "مغامرة": "fa-compass",
-                "حرب": "fa-gun", 
-                "اكشن": "fa-fist-raised",
-                "ذكاء": "fa-brain",
-                "رياضة": "fa-futbol",
-                "سباق": "fa-car",
-                "بنات": "fa-tshirt",
-                "اطفال": "fa-child"
-            };
-            
-            games.push({
-                id: i,
-                title: `لعبة ${category} ${i}`,
-                category: category,
-                age: ["3+", "4+", "5+", "6+", "7+", "8+", "9+", "10+", "12+"][Math.floor(Math.random() * 9)],
-                icon: icons[category],
-                rating: (3 + Math.random() * 2).toFixed(1),
-                plays: Math.floor(Math.random() * 2) + "." + Math.floor(Math.random() * 9) + "M",
-                description: `استمتع بلعبة ${category} الرائعة هذه`,
-                type: "default"
-            });
-        }
-
-        // ==================== GAME FUNCTIONS ====================
-        let currentCategory = 'all';
-        let currentGames = [...games];
-
+        // ==================== DISPLAY GAMES ====================
         function displayGames() {
             const grid = document.getElementById('gamesGrid');
-            const filtered = currentCategory === 'all' ? currentGames : currentGames.filter(g => g.category === currentCategory);
-            
-            grid.innerHTML = filtered.map(game => `
+            grid.innerHTML = games.map(game => `
                 <div class="game-card" onclick="openGame(${game.id})">
                     <div class="game-image">
                         <i class="fas ${game.icon}"></i>
@@ -648,6 +821,11 @@
                         </div>
                         <span class="game-category">${game.category}</span>
                         <p class="game-description">${game.description}</p>
+                        <div class="game-features">
+                            <span><i class="fas fa-user"></i> ${game.players}</span>
+                            <span><i class="fas fa-clock"></i> ${game.time}</span>
+                            ${game.features.map(f => `<span><i class="fas fa-check-circle"></i> ${f}</span>`).join('')}
+                        </div>
                         <button class="play-btn" onclick="event.stopPropagation(); openGame(${game.id})">
                             <i class="fas fa-play"></i> العب الان
                         </button>
@@ -667,110 +845,36 @@
                 let gameHTML = '';
                 
                 switch(game.type) {
-                    // Adventure Games
-                    case 'adventure_collector':
-                        gameHTML = createAdventureCollector(game);
+                    case 'collector':
+                        gameHTML = createCollectorGame(game);
                         break;
-                    case 'adventure_pirate':
-                        gameHTML = createPirateAdventure(game);
-                        break;
-                    case 'adventure_forest':
-                        gameHTML = createForestAdventure(game);
-                        break;
-                    case 'adventure_hunter':
-                        gameHTML = createMonsterHunter(game);
-                        break;
-                    case 'adventure_egypt':
-                        gameHTML = createEgyptAdventure(game);
-                        break;
-                    case 'adventure_space':
-                        gameHTML = createSpaceAdventure(game);
-                        break;
-                    case 'adventure_ocean':
-                        gameHTML = createOceanAdventure(game);
-                        break;
-                    
-                    // War Games
-                    case 'war_future':
-                        gameHTML = createFutureWar(game);
-                        break;
-                    case 'war_strategy':
-                        gameHTML = createStrategyWar(game);
-                        break;
-                    case 'war_tank':
-                        gameHTML = createTankWar(game);
-                        break;
-                    case 'war_sniper':
-                        gameHTML = createSniperGame(game);
-                        break;
-                    case 'war_jet':
-                        gameHTML = createJetFighter(game);
-                        break;
-                    
-                    // Action Games
-                    case 'action_fighting':
-                        gameHTML = createFightingGame(game);
-                        break;
-                    case 'action_ninja':
-                        gameHTML = createNinjaGame(game);
-                        break;
-                    case 'action_boxing':
-                        gameHTML = createBoxingGame(game);
-                        break;
-                    
-                    // Puzzle Games
-                    case 'puzzle_memory':
+                    case 'memory':
                         gameHTML = createMemoryGame(game);
                         break;
-                    case 'puzzle_math':
+                    case 'tictactoe':
+                        gameHTML = createTicTacToeGame(game);
+                        break;
+                    case 'snake':
+                        gameHTML = createSnakeGame(game);
+                        break;
+                    case 'shooter':
+                        gameHTML = createShooterGame(game);
+                        break;
+                    case 'rps':
+                        gameHTML = createRPSGame(game);
+                        break;
+                    case 'math':
                         gameHTML = createMathGame(game);
                         break;
-                    case 'puzzle_colors':
+                    case 'colors':
                         gameHTML = createColorsGame(game);
                         break;
-                    case 'puzzle_sudoku':
-                        gameHTML = createSudokuGame(game);
+                    case 'puzzle':
+                        gameHTML = createPuzzleGame(game);
                         break;
-                    
-                    // Sports Games
-                    case 'sports_soccer':
-                        gameHTML = createSoccerGame(game);
+                    case 'pilot':
+                        gameHTML = createPilotGame(game);
                         break;
-                    case 'sports_basketball':
-                        gameHTML = createBasketballGame(game);
-                        break;
-                    case 'sports_tennis':
-                        gameHTML = createTennisGame(game);
-                        break;
-                    
-                    // Racing Games
-                    case 'racing_car':
-                        gameHTML = createCarRacing(game);
-                        break;
-                    case 'racing_bike':
-                        gameHTML = createBikeRacing(game);
-                        break;
-                    
-                    // Girls Games
-                    case 'dressup_princess':
-                        gameHTML = createDressupGame(game);
-                        break;
-                    case 'cooking_cake':
-                        gameHTML = createCookingGame(game);
-                        break;
-                    case 'beauty_salon':
-                        gameHTML = createSalonGame(game);
-                        break;
-                    
-                    // Kids Games
-                    case 'kids_coloring':
-                        gameHTML = createColoringGame(game);
-                        break;
-                    case 'kids_animals':
-                        gameHTML = createAnimalsGame(game);
-                        break;
-                    
-                    // Default
                     default:
                         gameHTML = createDefaultGame(game);
                 }
@@ -780,518 +884,307 @@
                 
                 // Initialize game
                 initGame(game);
-            }, 1000);
+            }, 800);
             
             document.getElementById('gameModal').style.display = 'block';
         }
 
         // ==================== GAME CREATORS ====================
         
-        // Adventure Games
-        function createAdventureCollector(game) {
+        // 1. جامع الكنوز
+        function createCollectorGame(game) {
             return `
                 <div class="game-header">
                     <h2>${game.title}</h2>
+                    <p style="color: #666;">اجمع العملات وتجنب الأعداء</p>
                 </div>
                 <div class="game-canvas" id="gameCanvas">
                     <div class="player" id="player"><i class="fas fa-user"></i></div>
                 </div>
-                <div class="game-status" id="gameStatus">اجمع 10 كنوز</div>
+                <div class="game-status" id="gameStatus">النقاط: 0</div>
                 <div class="game-controls">
-                    <button class="control-btn" onclick="movePlayer('left')"><i class="fas fa-arrow-left"></i></button>
-                    <button class="control-btn" onclick="movePlayer('right')"><i class="fas fa-arrow-right"></i></button>
-                    <button class="control-btn danger" onclick="resetGame()">🔄</button>
+                    <button class="control-btn" onclick="movePlayer('left')"><i class="fas fa-arrow-left"></i> يسار</button>
+                    <button class="control-btn" onclick="movePlayer('right')"><i class="fas fa-arrow-right"></i> يمين</button>
+                    <button class="control-btn" onclick="resetCollectorGame()"><i class="fas fa-redo"></i> إعادة</button>
                 </div>
             `;
         }
 
-        function createPirateAdventure(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🏴‍☠️</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player" style="background: var(--gradient-2);"><i class="fas fa-ship"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">ابحر نحو الكنز</div>
-                <div class="game-controls">
-                    <button class="control-btn" onclick="movePlayer('left')"><i class="fas fa-arrow-left"></i></button>
-                    <button class="control-btn" onclick="movePlayer('right')"><i class="fas fa-arrow-right"></i></button>
-                </div>
-            `;
-        }
-
-        function createForestAdventure(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🌳</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player" style="background: #2ecc71;"><i class="fas fa-tree"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">استكشف الغابة</div>
-            `;
-        }
-
-        function createMonsterHunter(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🐉</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player"><i class="fas fa-khanda"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">اصطاد الوحوش</div>
-            `;
-        }
-
-        function createEgyptAdventure(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 𓂀</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player" style="background: gold;"><i class="fas fa-crown"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">اكتشف اسرار الفراعنة</div>
-            `;
-        }
-
-        function createSpaceAdventure(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🚀</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player"><i class="fas fa-rocket"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">استكشف الفضاء</div>
-            `;
-        }
-
-        function createOceanAdventure(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🌊</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player" style="background: #3498db;"><i class="fas fa-fish"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">اغوص في المحيط</div>
-            `;
-        }
-
-        // War Games
-        function createFutureWar(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🤖</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player"><i class="fas fa-robot"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">دمر الاعداء</div>
-            `;
-        }
-
-        function createStrategyWar(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} ♟️</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player"><i class="fas fa-chess-king"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">خطط لهجومك</div>
-            `;
-        }
-
-        function createTankWar(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🚜</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player"><i class="fas fa-tank"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">دمر دبابات العدو</div>
-            `;
-        }
-
-        function createSniperGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🎯</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player"><i class="fas fa-crosshairs"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">صوب واطلق</div>
-            `;
-        }
-
-        function createJetFighter(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} ✈️</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player"><i class="fas fa-fighter-jet"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">اسقط طائرات العدو</div>
-            `;
-        }
-
-        // Action Games
-        function createFightingGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 👊</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player"><i class="fas fa-fist-raised"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">اضرب بسرعة</div>
-            `;
-        }
-
-        function createNinjaGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🥷</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player"><i class="fas fa-user-ninja"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">تسلل واضرب</div>
-            `;
-        }
-
-        function createBoxingGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🥊</h2>
-                </div>
-                <div class="game-canvas" id="gameCanvas">
-                    <div class="player"><i class="fas fa-boxing-glove"></i></div>
-                </div>
-                <div class="game-status" id="gameStatus">لكم بقوة</div>
-            `;
-        }
-
-        // Puzzle Games
+        // 2. لعبة الذاكرة
         function createMemoryGame(game) {
             return `
                 <div class="game-header">
-                    <h2>${game.title} 🧠</h2>
+                    <h2>${game.title}</h2>
+                    <p style="color: #666;">طابق البطاقات المتشابهة</p>
                 </div>
-                <div class="game-canvas" id="gameCanvas" style="display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; padding: 20px;">
-                    ${Array(16).fill().map((_,i) => `
-                        <div style="background: var(--gradient-1); border-radius: 10px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; cursor: pointer;" onclick="flipCard(this)">
-                            ?
-                        </div>
-                    `).join('')}
+                <div class="game-canvas">
+                    <div class="memory-grid" id="memoryGrid"></div>
                 </div>
-                <div class="game-status" id="gameStatus">طابق الصور</div>
-            `;
-        }
-
-        function createMathGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} ➗</h2>
-                </div>
-                <div class="game-canvas" style="display: flex; align-items: center; justify-content: center;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">${Math.floor(Math.random()*10)} + ${Math.floor(Math.random()*10)} = ?</div>
-                        <input type="number" style="padding: 1rem; font-size: 1.5rem; width: 100px; text-align: center; border-radius: 10px; border: 2px solid var(--primary);">
-                    </div>
+                <div class="game-status" id="gameStatus">عدد المحاولات: 0 | المتبقي: 8</div>
+                <div class="game-controls">
+                    <button class="control-btn" onclick="resetMemoryGame()"><i class="fas fa-redo"></i> لعبة جديدة</button>
                 </div>
             `;
         }
 
-        function createColorsGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🎨</h2>
-                </div>
-                <div class="game-canvas" style="display: flex; align-items: center; justify-content: center; gap: 20px;">
-                    <div style="width: 100px; height: 100px; background: red; border-radius: 20px; cursor: pointer;" onclick="guessColor('red')"></div>
-                    <div style="width: 100px; height: 100px; background: blue; border-radius: 20px; cursor: pointer;" onclick="guessColor('blue')"></div>
-                    <div style="width: 100px; height: 100px; background: green; border-radius: 20px; cursor: pointer;" onclick="guessColor('green')"></div>
-                    <div style="width: 100px; height: 100px; background: yellow; border-radius: 20px; cursor: pointer;" onclick="guessColor('yellow')"></div>
-                </div>
-            `;
-        }
-
-        function createSudokuGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🔢</h2>
-                </div>
-                <div class="game-canvas" style="display: grid; grid-template-columns: repeat(9,1fr); gap: 2px; padding: 20px;">
-                    ${Array(81).fill().map(() => `
-                        <input type="text" maxlength="1" style="width: 100%; aspect-ratio: 1; text-align: center; font-size: 1.2rem; border: 1px solid #ccc;">
-                    `).join('')}
-                </div>
-            `;
-        }
-
-        // Sports Games
-        function createSoccerGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} ⚽</h2>
-                </div>
-                <div class="game-canvas" style="position: relative;">
-                    <div style="position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, #1e9600, #fff200);"></div>
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 5rem;">⚽</div>
-                </div>
-            `;
-        }
-
-        function createBasketballGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🏀</h2>
-                </div>
-                <div class="game-canvas" style="position: relative;">
-                    <div style="position: absolute; width: 100%; height: 100%; background: #f39c12;"></div>
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 5rem;">🏀</div>
-                </div>
-            `;
-        }
-
-        function createTennisGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🎾</h2>
-                </div>
-                <div class="game-canvas" style="position: relative;">
-                    <div style="position: absolute; width: 100%; height: 100%; background: #27ae60;"></div>
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 5rem;">🎾</div>
-                </div>
-            `;
-        }
-
-        // Racing Games
-        function createCarRacing(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🏎️</h2>
-                </div>
-                <div class="game-canvas" style="position: relative;">
-                    <div style="position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, #2c3e50, #3498db);"></div>
-                    <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 3rem;">🚗</div>
-                </div>
-            `;
-        }
-
-        function createBikeRacing(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🏍️</h2>
-                </div>
-                <div class="game-canvas" style="position: relative;">
-                    <div style="position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, #8e44ad, #c0392b);"></div>
-                    <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 3rem;">🏍️</div>
-                </div>
-            `;
-        }
-
-        // Girls Games
-        function createDressupGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 👗</h2>
-                </div>
-                <div class="game-canvas" style="display: flex; align-items: center; justify-content: center;">
-                    <div style="font-size: 8rem;">👸</div>
-                    <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <button class="control-btn" onclick="changeDress('👗')">فستان</button>
-                        <button class="control-btn" onclick="changeDress('👑')">تاج</button>
-                        <button class="control-btn" onclick="changeDress('👠')">حذاء</button>
-                    </div>
-                </div>
-            `;
-        }
-
-        function createCookingGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🍰</h2>
-                </div>
-                <div class="game-canvas" style="display: flex; align-items: center; justify-content: center;">
-                    <div style="font-size: 5rem;">🍰</div>
-                    <button class="control-btn" onclick="alert('تم اضافة المكونات!')">اطبخ</button>
-                </div>
-            `;
-        }
-
-        function createSalonGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} ✂️</h2>
-                </div>
-                <div class="game-canvas" style="display: flex; align-items: center; justify-content: center;">
-                    <div style="font-size: 5rem;">💇</div>
-                    <button class="control-btn" onclick="alert('تم تصفيف الشعر!')">قص</button>
-                </div>
-            `;
-        }
-
-        // Kids Games
-        function createColoringGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🖍️</h2>
-                </div>
-                <div class="game-canvas" style="display: flex; align-items: center; justify-content: center;">
-                    <div style="font-size: 5rem;">🦁</div>
-                    <div style="display: flex; gap: 10px;">
-                        <div style="width: 40px; height: 40px; background: red; border-radius: 50%; cursor: pointer;"></div>
-                        <div style="width: 40px; height: 40px; background: blue; border-radius: 50%; cursor: pointer;"></div>
-                        <div style="width: 40px; height: 40px; background: green; border-radius: 50%; cursor: pointer;"></div>
-                        <div style="width: 40px; height: 40px; background: yellow; border-radius: 50%; cursor: pointer;"></div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function createAnimalsGame(game) {
-            return `
-                <div class="game-header">
-                    <h2>${game.title} 🐶</h2>
-                </div>
-                <div class="game-canvas" style="display: flex; align-items: center; justify-content: center; gap: 30px;">
-                    <div style="font-size: 4rem; cursor: pointer;" onclick="playAnimalSound('🐶')">🐶</div>
-                    <div style="font-size: 4rem; cursor: pointer;" onclick="playAnimalSound('🐱')">🐱</div>
-                    <div style="font-size: 4rem; cursor: pointer;" onclick="playAnimalSound('🐮')">🐮</div>
-                    <div style="font-size: 4rem; cursor: pointer;" onclick="playAnimalSound('🐔')">🐔</div>
-                </div>
-            `;
-        }
-
-        // Default Game
-        function createDefaultGame(game) {
+        // 3. إكس أو
+        function createTicTacToeGame(game) {
             return `
                 <div class="game-header">
                     <h2>${game.title}</h2>
-                    <p style="color: #666;">${game.description}</p>
+                    <p style="color: #666;">العب ضد الكمبيوتر</p>
                 </div>
-                <div class="game-canvas" style="display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;">
-                    <i class="fas ${game.icon}" style="font-size: 8rem; margin-bottom: 2rem;"></i>
-                    <h2 style="font-size: 2rem;">استمتع باللعبة!</h2>
-                    <p style="font-size: 1.2rem;">العب واستمتع بوقتك</p>
+                <div class="game-canvas">
+                    <div class="ttt-grid" id="tttGrid"></div>
                 </div>
-                <div class="game-status" id="gameStatus">${game.title}</div>
+                <div class="game-status" id="gameStatus">دورك - X</div>
                 <div class="game-controls">
-                    <button class="control-btn" onclick="alert('ابدأ اللعب!')">
-                        <i class="fas fa-play"></i> ابدأ
-                    </button>
-                    <button class="control-btn danger" onclick="closeGame()">
-                        <i class="fas fa-times"></i> اغلاق
-                    </button>
+                    <button class="control-btn" onclick="resetTicTacToe()"><i class="fas fa-redo"></i> لعبة جديدة</button>
                 </div>
             `;
         }
 
-        // ==================== GAME INITIALIZATION ====================
-        function initGame(game) {
-            console.log(`بدء لعبة: ${game.title}`);
-            
-            // Initialize based on game type
-            switch(game.type) {
-                case 'adventure_collector':
-                case 'adventure_pirate':
-                case 'adventure_forest':
-                case 'adventure_hunter':
-                case 'adventure_egypt':
-                case 'adventure_space':
-                case 'adventure_ocean':
-                    initAdventureGame();
-                    break;
-                case 'war_future':
-                case 'war_strategy':
-                case 'war_tank':
-                case 'war_sniper':
-                case 'war_jet':
-                    initWarGame();
-                    break;
-                case 'action_fighting':
-                case 'action_ninja':
-                case 'action_boxing':
-                    initActionGame();
-                    break;
-                case 'puzzle_memory':
-                    initMemoryGame();
-                    break;
-                case 'racing_car':
-                case 'racing_bike':
-                    initRacingGame();
-                    break;
-            }
+        // 4. الثعبان الجائع
+        function createSnakeGame(game) {
+            return `
+                <div class="game-header">
+                    <h2>${game.title}</h2>
+                    <p style="color: #666;">استخدم الأسهم للتحرك</p>
+                </div>
+                <div class="game-canvas">
+                    <div class="snake-grid" id="snakeGrid"></div>
+                </div>
+                <div class="game-status" id="gameStatus">الطول: 3 | النقاط: 0</div>
+                <div class="game-controls">
+                    <button class="control-btn" onclick="changeDirection('up')"><i class="fas fa-arrow-up"></i></button>
+                    <button class="control-btn" onclick="changeDirection('left')"><i class="fas fa-arrow-left"></i></button>
+                    <button class="control-btn" onclick="changeDirection('down')"><i class="fas fa-arrow-down"></i></button>
+                    <button class="control-btn" onclick="changeDirection('right')"><i class="fas fa-arrow-right"></i></button>
+                    <button class="control-btn" onclick="resetSnakeGame()"><i class="fas fa-redo"></i></button>
+                </div>
+            `;
+        }
+
+        // 5. مطلق النار
+        function createShooterGame(game) {
+            return `
+                <div class="game-header">
+                    <h2>${game.title}</h2>
+                    <p style="color: #666;">اضغط على الأهداف</p>
+                </div>
+                <div class="game-canvas" id="shooterCanvas">
+                    <div class="player" style="background: #10b981;" id="shooter"><i class="fas fa-crosshairs"></i></div>
+                </div>
+                <div class="game-status" id="gameStatus">النقاط: 0</div>
+                <div class="game-controls">
+                    <button class="control-btn" onclick="moveShooter('left')"><i class="fas fa-arrow-left"></i></button>
+                    <button class="control-btn" onclick="moveShooter('right')"><i class="fas fa-arrow-right"></i></button>
+                    <button class="control-btn" onclick="shoot()"><i class="fas fa-bullseye"></i> اطلق</button>
+                    <button class="control-btn" onclick="resetShooterGame()"><i class="fas fa-redo"></i></button>
+                </div>
+            `;
+        }
+
+        // 6. حجر ورقة مقص
+        function createRPSGame(game) {
+            return `
+                <div class="game-header">
+                    <h2>${game.title}</h2>
+                    <p style="color: #666;">اختر حركتك</p>
+                </div>
+                <div class="game-canvas" style="display: flex; align-items: center; justify-content: center; gap: 2rem;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 5rem;" id="playerChoice">🤚</div>
+                        <p style="color: white;">أنت</p>
+                    </div>
+                    <div style="color: white; font-size: 2rem;">VS</div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 5rem;" id="computerChoice">🤚</div>
+                        <p style="color: white;">الكمبيوتر</p>
+                    </div>
+                </div>
+                <div class="game-status" id="gameStatus">اختر حركتك</div>
+                <div class="game-controls">
+                    <button class="control-btn" onclick="playRPS('rock')"><i class="fa-regular fa-hand-back-fist"></i> حجر</button>
+                    <button class="control-btn" onclick="playRPS('paper')"><i class="fa-regular fa-hand"></i> ورقة</button>
+                    <button class="control-btn" onclick="playRPS('scissors')"><i class="fa-regular fa-hand-peace"></i> مقص</button>
+                </div>
+            `;
+        }
+
+        // 7. تحدي الرياضيات
+        function createMathGame(game) {
+            return `
+                <div class="game-header">
+                    <h2>${game.title}</h2>
+                    <p style="color: #666;">حل المسائل بسرعة</p>
+                </div>
+                <div class="game-canvas" style="display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; color: white; margin-bottom: 1rem;" id="mathQuestion">5 + 3 = ?</div>
+                        <input type="number" id="mathAnswer" style="padding: 1rem; font-size: 1.5rem; width: 150px; text-align: center; border-radius: 10px; border: 2px solid #141e30; margin-bottom: 1rem;">
+                        <div>
+                            <button class="control-btn" onclick="checkMathAnswer()"><i class="fas fa-check"></i> تحقق</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-status" id="gameStatus">النقاط: 0</div>
+            `;
+        }
+
+        // 8. تطابق الألوان
+        function createColorsGame(game) {
+            return `
+                <div class="game-header">
+                    <h2>${game.title}</h2>
+                    <p style="color: #666;">اختر اللون الصحيح</p>
+                </div>
+                <div class="game-canvas" style="display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center;">
+                        <div style="width: 150px; height: 150px; border-radius: 20px; margin: 0 auto 2rem; box-shadow: 0 0 30px;" id="colorBox"></div>
+                        <div style="display: flex; gap: 1rem; justify-content: center;">
+                            <button class="control-btn" style="background: red;" onclick="guessColor('red')"></button>
+                            <button class="control-btn" style="background: blue;" onclick="guessColor('blue')"></button>
+                            <button class="control-btn" style="background: green;" onclick="guessColor('green')"></button>
+                            <button class="control-btn" style="background: yellow;" onclick="guessColor('yellow')"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-status" id="gameStatus">النقاط: 0</div>
+            `;
+        }
+
+        // 9. ألغاز ذكاء
+        function createPuzzleGame(game) {
+            return `
+                <div class="game-header">
+                    <h2>${game.title}</h2>
+                    <p style="color: #666;">حل الألغاز</p>
+                </div>
+                <div class="game-canvas" style="display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center; color: white;">
+                        <div style="font-size: 2rem; margin-bottom: 2rem;" id="puzzleQuestion"></div>
+                        <input type="text" id="puzzleAnswer" style="padding: 1rem; font-size: 1.2rem; width: 200px; border-radius: 10px; border: none; margin-bottom: 1rem;">
+                        <div>
+                            <button class="control-btn" onclick="checkPuzzle()"><i class="fas fa-check"></i> إجابة</button>
+                            <button class="control-btn" onclick="nextPuzzle()"><i class="fas fa-forward"></i> التالي</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-status" id="gameStatus">اللغز 1/5</div>
+            `;
+        }
+
+        // 10. الطيار الشجاع
+        function createPilotGame(game) {
+            return `
+                <div class="game-header">
+                    <h2>${game.title}</h2>
+                    <p style="color: #666;">تجنب العوائق</p>
+                </div>
+                <div class="game-canvas" id="pilotCanvas">
+                    <div class="player" style="background: #3b82f6;" id="pilot"><i class="fas fa-fighter-jet"></i></div>
+                </div>
+                <div class="game-status" id="gameStatus">المسافة: 0</div>
+                <div class="game-controls">
+                    <button class="control-btn" onclick="movePilot('up')"><i class="fas fa-arrow-up"></i></button>
+                    <button class="control-btn" onclick="movePilot('down')"><i class="fas fa-arrow-down"></i></button>
+                    <button class="control-btn" onclick="resetPilotGame()"><i class="fas fa-redo"></i></button>
+                </div>
+            `;
         }
 
         // ==================== GAME LOGIC ====================
-        let playerPosition = 50;
-        let score = 0;
-        let coins = [];
-        let enemies = [];
-        let gameInterval;
+        
+        // Game state variables
+        let collectorScore = 0;
+        let collectorInterval;
+        let collectorPosition = 50;
+        
+        let memoryCards = [];
+        let memoryFlipped = [];
+        let memoryMatched = [];
+        let memoryMoves = 0;
+        
+        let tttBoard = ['', '', '', '', '', '', '', '', ''];
+        let tttCurrentPlayer = 'X';
+        let tttGameOver = false;
+        
+        let snakeCells = [];
+        let snake = [7, 6, 5];
+        let snakeFood = 0;
+        let snakeDirection = 'right';
+        let snakeInterval;
+        let snakeScore = 0;
+        
+        let shooterScore = 0;
+        let shooterPosition = 50;
+        let shooterInterval;
+        
+        let mathScore = 0;
+        let mathAnswer = 0;
+        
+        let colorsScore = 0;
+        let currentColor = '';
+        
+        let puzzles = [
+            { q: "ما الشيء الذي كلما أخذت منه كبر؟", a: "الحفرة" },
+            { q: "ما الشيء الذي له أسنان ولا يعض؟", a: "المشط" },
+            { q: "ما الشيء الذي يكتب ولا يقرأ؟", a: "القلم" },
+            { q: "ما الشيء الذي كلما زاد نقص؟", a: "العمر" },
+            { q: "ما الشيء الذي يمشي بلا أرجل؟", a: "الساعة" }
+        ];
+        let currentPuzzle = 0;
+        
+        let pilotScore = 0;
+        let pilotPosition = 50;
+        let pilotInterval;
 
-        function initAdventureGame() {
-            const canvas = document.getElementById('gameCanvas');
-            if (!canvas) return;
-            
-            // Clear previous interval
-            if (gameInterval) clearInterval(gameInterval);
-            
-            // Create coins
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    createCoin();
-                }, i * 1000);
+        // Initialize game
+        function initGame(game) {
+            switch(game.type) {
+                case 'collector':
+                    initCollectorGame();
+                    break;
+                case 'memory':
+                    initMemoryGame();
+                    break;
+                case 'tictactoe':
+                    initTicTacToe();
+                    break;
+                case 'snake':
+                    initSnakeGame();
+                    break;
+                case 'shooter':
+                    initShooterGame();
+                    break;
+                case 'math':
+                    initMathGame();
+                    break;
+                case 'colors':
+                    initColorsGame();
+                    break;
+                case 'puzzle':
+                    initPuzzleGame();
+                    break;
+                case 'pilot':
+                    initPilotGame();
+                    break;
             }
+        }
+
+        // 1. Collector Game
+        function initCollectorGame() {
+            collectorScore = 0;
+            collectorPosition = 50;
+            updateCollectorScore();
             
-            // Create enemies
-            for (let i = 0; i < 3; i++) {
-                setTimeout(() => {
-                    createEnemy();
-                }, i * 2000);
-            }
+            if (collectorInterval) clearInterval(collectorInterval);
             
-            // Update game loop
-            gameInterval = setInterval(() => {
-                checkCollisions();
-                updateStatus();
-            }, 100);
-        }
-
-        function initWarGame() {
-            const status = document.getElementById('gameStatus');
-            if (status) status.innerHTML = '🎯 اضرب الاهداف';
-            
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    createEnemy();
-                }, i * 500);
-            }
-        }
-
-        function initActionGame() {
-            const status = document.getElementById('gameStatus');
-            if (status) status.innerHTML = '👊 قاتل بقوة';
-        }
-
-        function initMemoryGame() {
-            const status = document.getElementById('gameStatus');
-            if (status) status.innerHTML = '🧠 ابحث عن المتطابق';
-        }
-
-        function initRacingGame() {
-            const status = document.getElementById('gameStatus');
-            if (status) status.innerHTML = '🏁 انطلق';
+            collectorInterval = setInterval(() => {
+                createCoin();
+                if (Math.random() < 0.3) createEnemy();
+            }, 1000);
         }
 
         function createCoin() {
@@ -1302,27 +1195,19 @@
             coin.className = 'coin';
             coin.innerHTML = '💰';
             coin.style.left = Math.random() * 90 + '%';
-            coin.style.top = '0%';
+            coin.style.top = '-50px';
             
             coin.onclick = function() {
-                collectCoin(this);
+                this.remove();
+                collectorScore += 10;
+                updateCollectorScore();
             };
             
             canvas.appendChild(coin);
             
-            // Animate down
             setTimeout(() => {
-                if (coin.parentNode) {
-                    coin.style.top = '90%';
-                }
-            }, 50);
-            
-            // Remove after animation
-            setTimeout(() => {
-                if (coin.parentNode) {
-                    coin.remove();
-                }
-            }, 4000);
+                if (coin.parentNode) coin.remove();
+            }, 3000);
         }
 
         function createEnemy() {
@@ -1333,149 +1218,630 @@
             enemy.className = 'enemy';
             enemy.innerHTML = '👾';
             enemy.style.left = Math.random() * 90 + '%';
-            enemy.style.top = '0%';
+            enemy.style.top = '-50px';
             
             canvas.appendChild(enemy);
             
-            // Animate down
             setTimeout(() => {
-                if (enemy.parentNode) {
-                    enemy.style.top = '90%';
-                }
-            }, 50);
-            
-            // Remove after animation
-            setTimeout(() => {
-                if (enemy.parentNode) {
-                    enemy.remove();
-                }
+                if (enemy.parentNode) enemy.remove();
             }, 3000);
         }
 
-        function collectCoin(coinElement) {
-            coinElement.remove();
-            score += 10;
-            updateScore();
-            
-            // Create new coin
-            createCoin();
-        }
-
-        function updateScore() {
-            const status = document.getElementById('gameStatus');
-            if (status) {
-                status.innerHTML = `💰 النقاط: ${score}`;
-            }
-        }
-
-        function updateStatus() {
-            // Update game status
-        }
-
-        function checkCollisions() {
-            // Check for collisions between player and enemies
-        }
-
-        // Player movement
         function movePlayer(direction) {
             const player = document.getElementById('player');
             if (!player) return;
             
             if (direction === 'left') {
-                playerPosition = Math.max(0, playerPosition - 5);
+                collectorPosition = Math.max(0, collectorPosition - 5);
             } else {
-                playerPosition = Math.min(95, playerPosition + 5);
+                collectorPosition = Math.min(90, collectorPosition + 5);
             }
             
-            player.style.left = playerPosition + '%';
+            player.style.left = collectorPosition + '%';
         }
 
-        window.movePlayer = movePlayer;
+        function updateCollectorScore() {
+            const status = document.getElementById('gameStatus');
+            if (status) status.innerHTML = `النقاط: ${collectorScore}`;
+        }
 
-        // Memory game
-        window.flipCard = function(card) {
-            if (card.innerHTML === '?') {
-                const emojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
-                card.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-                card.style.background = 'var(--gradient-2)';
-            }
-        };
-
-        // Colors game
-        window.guessColor = function(color) {
-            alert(`اخترت اللون ${color}`);
-        };
-
-        // Dress up
-        window.changeDress = function(item) {
-            const princess = document.querySelector('.game-canvas div[style*="font-size: 8rem;"]');
-            if (princess) {
-                princess.innerHTML += item;
-            }
-        };
-
-        // Animal sounds
-        window.playAnimalSound = function(animal) {
-            const sounds = {
-                '🐶': 'هوهو',
-                '🐱': 'مياو',
-                '🐮': 'موو',
-                '🐔': 'كو كو'
-            };
-            alert(`الحيوان ${animal} يقول ${sounds[animal]}`);
-        };
-
-        // Reset game
-        window.resetGame = function() {
-            score = 0;
-            updateScore();
-            
+        function resetCollectorGame() {
             const canvas = document.getElementById('gameCanvas');
             if (canvas) {
-                const elements = canvas.querySelectorAll('.coin, .enemy');
-                elements.forEach(el => el.remove());
+                canvas.querySelectorAll('.coin, .enemy').forEach(el => el.remove());
             }
-            
-            playerPosition = 50;
+            collectorScore = 0;
+            collectorPosition = 50;
             const player = document.getElementById('player');
             if (player) player.style.left = '50%';
-        };
+            updateCollectorScore();
+        }
+
+        // 2. Memory Game
+        function initMemoryGame() {
+            const emojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
+            memoryCards = [...emojis, ...emojis];
+            memoryCards.sort(() => Math.random() - 0.5);
+            memoryFlipped = [];
+            memoryMatched = [];
+            memoryMoves = 0;
+            
+            const grid = document.getElementById('memoryGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = memoryCards.map((emoji, index) => `
+                <div class="memory-card" data-index="${index}" data-emoji="${emoji}" onclick="flipCard(${index})">
+                    ❓
+                </div>
+            `).join('');
+            
+            updateMemoryStatus();
+        }
+
+        function flipCard(index) {
+            if (memoryFlipped.length === 2) return;
+            if (memoryMatched.includes(index)) return;
+            if (memoryFlipped.includes(index)) return;
+            
+            const card = document.querySelector(`.memory-card[data-index="${index}"]`);
+            card.classList.add('flipped');
+            card.innerHTML = card.dataset.emoji;
+            
+            memoryFlipped.push(index);
+            
+            if (memoryFlipped.length === 2) {
+                memoryMoves++;
+                const [i1, i2] = memoryFlipped;
+                const card1 = memoryCards[i1];
+                const card2 = memoryCards[i2];
+                
+                if (card1 === card2) {
+                    memoryMatched.push(i1, i2);
+                    document.querySelectorAll(`.memory-card[data-index="${i1}"], .memory-card[data-index="${i2}"]`).forEach(c => {
+                        c.classList.add('matched');
+                    });
+                    memoryFlipped = [];
+                } else {
+                    setTimeout(() => {
+                        document.querySelectorAll('.memory-card.flipped').forEach(c => {
+                            c.classList.remove('flipped');
+                            c.innerHTML = '❓';
+                        });
+                        memoryFlipped = [];
+                    }, 1000);
+                }
+                
+                updateMemoryStatus();
+                
+                if (memoryMatched.length === 16) {
+                    setTimeout(() => {
+                        alert('🎉 تهانينا! لقد فزت!');
+                    }, 500);
+                }
+            }
+        }
+
+        function updateMemoryStatus() {
+            const status = document.getElementById('gameStatus');
+            if (status) {
+                const remaining = 8 - (memoryMatched.length / 2);
+                status.innerHTML = `عدد المحاولات: ${memoryMoves} | المتبقي: ${remaining}`;
+            }
+        }
+
+        function resetMemoryGame() {
+            initMemoryGame();
+        }
+
+        // 3. Tic Tac Toe
+        function initTicTacToe() {
+            tttBoard = ['', '', '', '', '', '', '', '', ''];
+            tttCurrentPlayer = 'X';
+            tttGameOver = false;
+            
+            const grid = document.getElementById('tttGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = tttBoard.map((_, index) => `
+                <div class="ttt-cell" onclick="makeMove(${index})"></div>
+            `).join('');
+            
+            updateTicTacToeStatus();
+        }
+
+        function makeMove(index) {
+            if (tttGameOver) return;
+            if (tttBoard[index] !== '') return;
+            
+            tttBoard[index] = tttCurrentPlayer;
+            const cell = document.querySelectorAll('.ttt-cell')[index];
+            cell.innerHTML = tttCurrentPlayer;
+            
+            if (checkWin()) {
+                tttGameOver = true;
+                highlightWinningLine();
+                setTimeout(() => {
+                    alert(`🎉 اللاعب ${tttCurrentPlayer} فاز!`);
+                }, 100);
+                updateTicTacToeStatus(`اللاعب ${tttCurrentPlayer} فاز!`);
+                return;
+            }
+            
+            if (!tttBoard.includes('')) {
+                tttGameOver = true;
+                setTimeout(() => {
+                    alert('🤝 تعادل!');
+                }, 100);
+                updateTicTacToeStatus('تعادل!');
+                return;
+            }
+            
+            tttCurrentPlayer = tttCurrentPlayer === 'X' ? 'O' : 'X';
+            updateTicTacToeStatus(`دور اللاعب ${tttCurrentPlayer}`);
+            
+            if (tttCurrentPlayer === 'O' && !tttGameOver) {
+                setTimeout(makeAIMove, 500);
+            }
+        }
+
+        function makeAIMove() {
+            if (tttGameOver) return;
+            
+            let emptyCells = [];
+            tttBoard.forEach((cell, index) => {
+                if (cell === '') emptyCells.push(index);
+            });
+            
+            if (emptyCells.length > 0) {
+                const randomIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                makeMove(randomIndex);
+            }
+        }
+
+        function checkWin() {
+            const winPatterns = [
+                [0,1,2], [3,4,5], [6,7,8],
+                [0,3,6], [1,4,7], [2,5,8],
+                [0,4,8], [2,4,6]
+            ];
+            
+            return winPatterns.some(pattern => {
+                const [a,b,c] = pattern;
+                return tttBoard[a] && tttBoard[a] === tttBoard[b] && tttBoard[a] === tttBoard[c];
+            });
+        }
+
+        function highlightWinningLine() {
+            const winPatterns = [
+                [0,1,2], [3,4,5], [6,7,8],
+                [0,3,6], [1,4,7], [2,5,8],
+                [0,4,8], [2,4,6]
+            ];
+            
+            winPatterns.forEach(pattern => {
+                const [a,b,c] = pattern;
+                if (tttBoard[a] && tttBoard[a] === tttBoard[b] && tttBoard[a] === tttBoard[c]) {
+                    const cells = document.querySelectorAll('.ttt-cell');
+                    cells[a].classList.add('win');
+                    cells[b].classList.add('win');
+                    cells[c].classList.add('win');
+                }
+            });
+        }
+
+        function updateTicTacToeStatus(message) {
+            const status = document.getElementById('gameStatus');
+            if (status) status.innerHTML = message || `دور اللاعب ${tttCurrentPlayer}`;
+        }
+
+        function resetTicTacToe() {
+            initTicTacToe();
+        }
+
+        // 4. Snake Game
+        function initSnakeGame() {
+            snake = [7, 6, 5];
+            snakeDirection = 'right';
+            snakeScore = 0;
+            
+            createSnakeGrid();
+            createFood();
+            
+            if (snakeInterval) clearInterval(snakeInterval);
+            snakeInterval = setInterval(moveSnake, 200);
+        }
+
+        function createSnakeGrid() {
+            const grid = document.getElementById('snakeGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            for (let i = 0; i < 225; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'snake-cell';
+                cell.id = `snake-${i}`;
+                grid.appendChild(cell);
+            }
+            
+            updateSnakeDisplay();
+        }
+
+        function updateSnakeDisplay() {
+            document.querySelectorAll('.snake-cell').forEach(cell => {
+                cell.classList.remove('snake', 'food');
+            });
+            
+            snake.forEach(segment => {
+                const cell = document.getElementById(`snake-${segment}`);
+                if (cell) cell.classList.add('snake');
+            });
+            
+            const foodCell = document.getElementById(`snake-${snakeFood}`);
+            if (foodCell) foodCell.classList.add('food');
+        }
+
+        function createFood() {
+            do {
+                snakeFood = Math.floor(Math.random() * 225);
+            } while (snake.includes(snakeFood));
+        }
+
+        function moveSnake() {
+            const head = snake[0];
+            let newHead;
+            
+            switch(snakeDirection) {
+                case 'right': newHead = head + 1; break;
+                case 'left': newHead = head - 1; break;
+                case 'up': newHead = head - 15; break;
+                case 'down': newHead = head + 15; break;
+            }
+            
+            if (newHead < 0 || newHead >= 225 || 
+                (snakeDirection === 'right' && head % 15 === 14) ||
+                (snakeDirection === 'left' && head % 15 === 0)) {
+                gameOver();
+                return;
+            }
+            
+            if (snake.includes(newHead)) {
+                gameOver();
+                return;
+            }
+            
+            snake.unshift(newHead);
+            
+            if (newHead === snakeFood) {
+                snakeScore += 10;
+                createFood();
+                updateSnakeStatus();
+            } else {
+                snake.pop();
+            }
+            
+            updateSnakeDisplay();
+        }
+
+        function gameOver() {
+            clearInterval(snakeInterval);
+            setTimeout(() => {
+                alert(`🐍 انتهت اللعبة! النقاط: ${snakeScore}`);
+            }, 100);
+        }
+
+        function changeDirection(dir) {
+            if ((dir === 'right' && snakeDirection !== 'left') ||
+                (dir === 'left' && snakeDirection !== 'right') ||
+                (dir === 'up' && snakeDirection !== 'down') ||
+                (dir === 'down' && snakeDirection !== 'up')) {
+                snakeDirection = dir;
+            }
+        }
+
+        function updateSnakeStatus() {
+            const status = document.getElementById('gameStatus');
+            if (status) status.innerHTML = `الطول: ${snake.length} | النقاط: ${snakeScore}`;
+        }
+
+        function resetSnakeGame() {
+            initSnakeGame();
+        }
+
+        // 5. Shooter Game
+        function initShooterGame() {
+            shooterScore = 0;
+            shooterPosition = 50;
+            updateShooterScore();
+            
+            if (shooterInterval) clearInterval(shooterInterval);
+            
+            shooterInterval = setInterval(() => {
+                createTarget();
+            }, 1000);
+        }
+
+        function createTarget() {
+            const canvas = document.getElementById('shooterCanvas');
+            if (!canvas) return;
+            
+            const target = document.createElement('div');
+            target.className = 'target';
+            target.style.left = Math.random() * 90 + '%';
+            target.style.top = '10px';
+            target.id = 'target-' + Date.now();
+            
+            canvas.appendChild(target);
+            
+            setTimeout(() => {
+                if (target.parentNode) target.remove();
+            }, 3000);
+        }
+
+        function moveShooter(direction) {
+            const shooter = document.getElementById('shooter');
+            if (!shooter) return;
+            
+            if (direction === 'left') {
+                shooterPosition = Math.max(0, shooterPosition - 5);
+            } else {
+                shooterPosition = Math.min(90, shooterPosition + 5);
+            }
+            
+            shooter.style.left = shooterPosition + '%';
+        }
+
+        function shoot() {
+            const targets = document.querySelectorAll('.target');
+            const shooter = document.getElementById('shooter');
+            if (!shooter) return;
+            
+            const shooterRect = shooter.getBoundingClientRect();
+            
+            targets.forEach(target => {
+                const targetRect = target.getBoundingClientRect();
+                if (Math.abs(targetRect.left - shooterRect.left) < 50) {
+                    target.remove();
+                    shooterScore += 10;
+                    updateShooterScore();
+                }
+            });
+        }
+
+        function updateShooterScore() {
+            const status = document.getElementById('gameStatus');
+            if (status) status.innerHTML = `النقاط: ${shooterScore}`;
+        }
+
+        function resetShooterGame() {
+            const canvas = document.getElementById('shooterCanvas');
+            if (canvas) {
+                canvas.querySelectorAll('.target').forEach(el => el.remove());
+            }
+            shooterScore = 0;
+            updateShooterScore();
+        }
+
+        // 6. RPS Game
+        function playRPS(playerChoice) {
+            const choices = ['rock', 'paper', 'scissors'];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+            
+            const emojis = {
+                rock: '✊',
+                paper: '✋',
+                scissors: '✌️'
+            };
+            
+            document.getElementById('playerChoice').innerHTML = emojis[playerChoice];
+            document.getElementById('computerChoice').innerHTML = emojis[computerChoice];
+            
+            let result = '';
+            if (playerChoice === computerChoice) {
+                result = '🤝 تعادل!';
+            } else if (
+                (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                (playerChoice === 'paper' && computerChoice === 'rock') ||
+                (playerChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                result = '🎉 فزت!';
+            } else {
+                result = '💻 الكمبيوتر فاز!';
+            }
+            
+            document.getElementById('gameStatus').innerHTML = result;
+        }
+
+        // 7. Math Game
+        function initMathGame() {
+            mathScore = 0;
+            newMathQuestion();
+        }
+
+        function newMathQuestion() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            mathAnswer = num1 + num2;
+            
+            const question = document.getElementById('mathQuestion');
+            if (question) question.innerHTML = `${num1} + ${num2} = ?`;
+            
+            const answer = document.getElementById('mathAnswer');
+            if (answer) answer.value = '';
+        }
+
+        function checkMathAnswer() {
+            const answer = parseInt(document.getElementById('mathAnswer').value);
+            if (answer === mathAnswer) {
+                mathScore += 10;
+                alert('✅ إجابة صحيحة!');
+                newMathQuestion();
+            } else {
+                alert('❌ إجابة خاطئة! حاول مرة أخرى');
+            }
+            
+            const status = document.getElementById('gameStatus');
+            if (status) status.innerHTML = `النقاط: ${mathScore}`;
+        }
+
+        // 8. Colors Game
+        function initColorsGame() {
+            colorsScore = 0;
+            newColor();
+        }
+
+        function newColor() {
+            const colors = ['red', 'blue', 'green', 'yellow'];
+            currentColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            const colorBox = document.getElementById('colorBox');
+            if (colorBox) colorBox.style.background = currentColor;
+        }
+
+        function guessColor(color) {
+            if (color === currentColor) {
+                colorsScore += 10;
+                alert('✅ أحسنت!');
+                newColor();
+            } else {
+                alert('❌ خطأ! حاول مرة أخرى');
+            }
+            
+            const status = document.getElementById('gameStatus');
+            if (status) status.innerHTML = `النقاط: ${colorsScore}`;
+        }
+
+        // 9. Puzzle Game
+        function initPuzzleGame() {
+            currentPuzzle = 0;
+            showPuzzle();
+        }
+
+        function showPuzzle() {
+            const question = document.getElementById('puzzleQuestion');
+            if (question) question.innerHTML = puzzles[currentPuzzle].q;
+            
+            const status = document.getElementById('gameStatus');
+            if (status) status.innerHTML = `اللغز ${currentPuzzle + 1}/${puzzles.length}`;
+        }
+
+        function checkPuzzle() {
+            const answer = document.getElementById('puzzleAnswer').value;
+            if (answer === puzzles[currentPuzzle].a) {
+                alert('✅ إجابة صحيحة!');
+                nextPuzzle();
+            } else {
+                alert('❌ إجابة خاطئة! حاول مرة أخرى');
+            }
+        }
+
+        function nextPuzzle() {
+            if (currentPuzzle < puzzles.length - 1) {
+                currentPuzzle++;
+                showPuzzle();
+                document.getElementById('puzzleAnswer').value = '';
+            } else {
+                alert('🎉 تهانينا! لقد حللت جميع الألغاز!');
+            }
+        }
+
+        // 10. Pilot Game
+        function initPilotGame() {
+            pilotScore = 0;
+            pilotPosition = 50;
+            updatePilotScore();
+            
+            if (pilotInterval) clearInterval(pilotInterval);
+            
+            pilotInterval = setInterval(() => {
+                createObstacle();
+            }, 1500);
+        }
+
+        function createObstacle() {
+            const canvas = document.getElementById('pilotCanvas');
+            if (!canvas) return;
+            
+            const obstacle = document.createElement('div');
+            obstacle.className = 'enemy';
+            obstacle.innerHTML = '🌪️';
+            obstacle.style.left = Math.random() * 90 + '%';
+            obstacle.style.top = '-50px';
+            
+            canvas.appendChild(obstacle);
+            
+            setTimeout(() => {
+                if (obstacle.parentNode) obstacle.remove();
+            }, 3000);
+        }
+
+        function movePilot(direction) {
+            const pilot = document.getElementById('pilot');
+            if (!pilot) return;
+            
+            if (direction === 'up') {
+                pilotPosition = Math.max(0, pilotPosition - 5);
+            } else {
+                pilotPosition = Math.min(90, pilotPosition + 5);
+            }
+            
+            pilot.style.top = pilotPosition + '%';
+            updatePilotScore();
+        }
+
+        function updatePilotScore() {
+            pilotScore += 10;
+            const status = document.getElementById('gameStatus');
+            if (status) status.innerHTML = `المسافة: ${pilotScore}`;
+        }
+
+        function resetPilotGame() {
+            const canvas = document.getElementById('pilotCanvas');
+            if (canvas) {
+                canvas.querySelectorAll('.enemy').forEach(el => el.remove());
+            }
+            pilotScore = 0;
+            pilotPosition = 50;
+            const pilot = document.getElementById('pilot');
+            if (pilot) pilot.style.top = '50%';
+            updatePilotScore();
+        }
 
         // Close game
-        window.closeGame = function() {
+        function closeGame() {
             document.getElementById('gameModal').style.display = 'none';
             document.getElementById('gameWrapper').innerHTML = '';
-            if (gameInterval) clearInterval(gameInterval);
-        };
+            
+            // Clear all intervals
+            if (collectorInterval) clearInterval(collectorInterval);
+            if (snakeInterval) clearInterval(snakeInterval);
+            if (shooterInterval) clearInterval(shooterInterval);
+            if (pilotInterval) clearInterval(pilotInterval);
+        }
 
+        // Expose functions to global scope
         window.openGame = openGame;
+        window.closeGame = closeGame;
+        window.movePlayer = movePlayer;
+        window.resetCollectorGame = resetCollectorGame;
+        window.flipCard = flipCard;
+        window.resetMemoryGame = resetMemoryGame;
+        window.makeMove = makeMove;
+        window.resetTicTacToe = resetTicTacToe;
+        window.changeDirection = changeDirection;
+        window.resetSnakeGame = resetSnakeGame;
+        window.moveShooter = moveShooter;
+        window.shoot = shoot;
+        window.resetShooterGame = resetShooterGame;
+        window.playRPS = playRPS;
+        window.checkMathAnswer = checkMathAnswer;
+        window.guessColor = guessColor;
+        window.checkPuzzle = checkPuzzle;
+        window.nextPuzzle = nextPuzzle;
+        window.movePilot = movePilot;
+        window.resetPilotGame = resetPilotGame;
 
-        // Category filtering
-        document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
-                currentCategory = e.target.dataset.category;
-                displayGames();
-            });
-        });
-
-        // Search
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            currentGames = games.filter(g => 
-                g.title.toLowerCase().includes(term) || 
-                g.description.toLowerCase().includes(term) ||
-                g.category.toLowerCase().includes(term)
-            );
-            displayGames();
-        });
-
-        // Initial display
+        // Initialize
         displayGames();
-
-        console.log(`تم تحميل ${games.length} لعبة`);
     </script>
 </body>
 </html>
-ألعاب ح
