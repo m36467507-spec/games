@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎀 صالون مودة ومريم للتجميل</title>
-    
+    <title>العابي - 100 لعبة متنوعة للجميع</title>
     <style>
         * {
             margin: 0;
@@ -14,1135 +13,561 @@
         }
 
         body {
-            background: linear-gradient(135deg, #f8e1e8, #fad0d9);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            direction: rtl;
         }
 
-        /* الهيدر */
+        /* Header */
         header {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            flex-wrap: wrap;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-icon {
-            font-size: 40px;
-            animation: sparkle 2s infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        .logo-text h1 {
-            color: #ff1493;
-            font-size: 28px;
-            margin-bottom: 5px;
-        }
-
-        .logo-text p {
-            color: #ff69b4;
-            font-size: 14px;
-        }
-
-        .points-card {
-            background: linear-gradient(135deg, #ff1493, #ff69b4);
-            padding: 15px 30px;
-            border-radius: 50px;
-            color: white;
+            font-size: 2rem;
             font-weight: bold;
-            font-size: 20px;
-            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
         }
 
-        /* القائمة الرئيسية */
-        .menu-section {
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 2rem;
         }
 
-        .section-title {
-            text-align: center;
-            color: #ff1493;
-            font-size: 36px;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.2);
+        .search-bar input {
+            width: 100%;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102,126,234,0.3);
+        }
+
+        .categories {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            background: #f0f0f0;
+            color: #333;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .category-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
         }
 
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
         .game-card {
             background: white;
-            border-radius: 30px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
             cursor: pointer;
-            transition: 0.3s;
-            border: 3px solid transparent;
+            position: relative;
         }
 
         .game-card:hover {
             transform: translateY(-10px);
-            border-color: #ff1493;
-            box-shadow: 0 20px 40px rgba(255, 20, 147, 0.3);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
         }
 
-        .card-image {
-            height: 180px;
-            background-size: cover;
-            background-position: center;
+        .game-image {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            overflow: hidden;
         }
 
-        .card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-            padding: 20px;
+        .game-image i {
+            font-size: 4rem;
             color: white;
+            opacity: 0.8;
         }
 
-        .card-overlay h3 {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .card-content {
-            padding: 20px;
-        }
-
-        .card-content p {
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .card-points {
-            display: inline-block;
-            background: #ff1493;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 14px;
-        }
-
-        /* منطقة اللعبة */
-        .game-section {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .back-btn {
-            background: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #ff1493;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.2s;
-        }
-
-        .back-btn:hover {
-            background: #ff1493;
-            color: white;
-            transform: scale(1.05);
+        .game-info {
+            padding: 1.5rem;
         }
 
         .game-title {
-            font-size: 32px;
-            color: #ff1493;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
         }
 
-        .reset-btn {
-            background: #ff1493;
-            border: none;
-            padding: 12px 30px;
+        .game-category {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: #f0f0f0;
             border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .game-description {
+            color: #777;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .play-btn {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
-            transition: 0.2s;
+            transition: all 0.3s;
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
         }
 
-        .reset-btn:hover {
+        .play-btn:hover {
             transform: scale(1.05);
-            background: #ff69b4;
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
         }
 
-        /* صالون التجميل */
-        .salon-container {
+        /* Game Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            position: relative;
             background: white;
-            border-radius: 40px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.2);
-        }
-
-        .model-container {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-
-        .model-card {
-            text-align: center;
-        }
-
-        .model-title {
-            color: #ff1493;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-
-        .model-display {
-            width: 250px;
-            height: 250px;
-            background: linear-gradient(135deg, #fff0f5, #ffe4e1);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 120px;
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
-            border: 3px solid white;
-        }
-
-        .tools-panel {
-            background: #fff0f5;
-            border-radius: 30px;
-            padding: 30px;
-            margin-top: 30px;
-        }
-
-        .tools-title {
-            color: #ff1493;
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 15px;
-        }
-
-        .tool-item {
-            background: white;
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
             border-radius: 20px;
-            padding: 15px;
-            text-align: center;
+            padding: 2rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 2rem;
+            color: #666;
             cursor: pointer;
-            transition: 0.2s;
-            border: 2px solid transparent;
+            transition: color 0.3s;
+            z-index: 1;
         }
 
-        .tool-item:hover {
-            border-color: #ff1493;
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+        .close-modal:hover {
+            color: #ff4444;
         }
 
-        .tool-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
+        .game-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
         }
 
-        .tool-name {
-            color: #ff1493;
-            font-weight: bold;
-            font-size: 14px;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .search-bar {
+                margin: 1rem 0;
+                max-width: 100%;
+            }
+            
+            .categories {
+                justify-content: center;
+            }
+            
+            .game-frame {
+                height: 400px;
+            }
         }
 
-        .color-palette {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin: 20px 0;
-            flex-wrap: wrap;
+        /* Loading Animation */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2500;
         }
 
-        .color-swatch {
-            width: 60px;
-            height: 60px;
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
             border-radius: 50%;
-            cursor: pointer;
-            transition: 0.2s;
-            border: 3px solid white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
         }
 
-        .color-swatch:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(255, 20, 147, 0.3);
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        .action-btn {
-            background: linear-gradient(135deg, #ff1493, #ff69b4);
+        .loading p {
             color: white;
-            border: none;
-            padding: 15px 40px;
+            font-size: 1.2rem;
+        }
+
+        /* Age Badge */
+        .age-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.3rem 0.8rem;
             border-radius: 50px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 20px auto;
-            display: block;
-            box-shadow: 0 10px 20px rgba(255, 20, 147, 0.3);
-            transition: 0.2s;
+            font-size: 0.8rem;
+            z-index: 1;
         }
 
-        .action-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 30px rgba(255, 20, 147, 0.4);
-        }
-
-        .status-message {
+        /* No Games Message */
+        .no-games {
+            grid-column: 1 / -1;
             text-align: center;
-            color: #ff1493;
-            font-size: 20px;
-            margin: 20px;
-            padding: 15px;
-            background: white;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
+            padding: 3rem;
+            color: white;
+            font-size: 1.2rem;
         }
 
-        /* ألعاب كلاسيكية */
-        .classic-game {
-            background: white;
-            border-radius: 40px;
-            padding: 40px;
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.95);
             text-align: center;
-            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.2);
-        }
-
-        .game-input {
-            padding: 15px 25px;
-            border: 3px solid #ff1493;
-            border-radius: 50px;
-            font-size: 18px;
-            margin: 15px;
-            width: 250px;
-            outline: none;
-        }
-
-        .game-input:focus {
-            box-shadow: 0 0 0 3px rgba(255, 20, 147, 0.3);
-        }
-
-        .choice-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-
-        .choice-btn {
-            background: white;
-            border: 3px solid #ff1493;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #ff1493;
-            cursor: pointer;
-            transition: 0.2s;
-            min-width: 120px;
-        }
-
-        .choice-btn:hover {
-            background: #ff1493;
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .tic-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 120px);
-            gap: 15px;
-            justify-content: center;
-            margin: 30px auto;
-        }
-
-        .tic-cell {
-            width: 120px;
-            height: 120px;
-            background: #fff0f5;
-            border: 3px solid #ff1493;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            font-weight: bold;
-            color: #ff1493;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .tic-cell:hover {
-            background: #ff1493;
-            color: white;
-            transform: scale(1.05);
+            padding: 2rem;
+            margin-top: 4rem;
+            color: #666;
         }
     </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">🎮 العابي</a>
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="ابحث عن لعبة...">
+            </div>
+            
+            <div class="categories">
+                <button class="category-btn active" data-category="all">الكل</button>
+                <button class="category-btn" data-category="ذكاء">🧠 العاب ذكاء</button>
+                <button class="category-btn" data-category="حرب">⚔️ العاب حرب</button>
+                <button class="category-btn" data-category="مغامرة">🏃 العاب مغامرة</button>
+                <button class="category-btn" data-category="بنات">👗 العاب بنات</button>
+                <button class="category-btn" data-category="اطفال">🧸 العاب اطفال</button>
+            </div>
+        </div>
+    </header>
 
-<header>
-    <div class="logo">
-        <span class="logo-icon">💄</span>
-        <div class="logo-text">
-            <h1>صالون مودة ومريم</h1>
-            <p>أجمل ألعاب التجميل للبنوتات</p>
+    <main class="main-container">
+        <div class="games-grid" id="gamesGrid"></div>
+    </main>
+
+    <footer>
+        <p>© 2024 العابي - 100 لعبة متنوعة للجميع | جميع الالعاب مجانية</p>
+    </footer>
+
+    <!-- Game Modal -->
+    <div class="modal" id="gameModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeGame()">&times;</span>
+            <iframe class="game-frame" id="gameFrame" src="" frameborder="0"></iframe>
         </div>
     </div>
-    <div class="points-card" id="points">
-        💎 0 نقطة
+
+    <!-- Loading Animation -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <p>جاري تحميل اللعبة...</p>
     </div>
-</header>
 
-<!-- القائمة الرئيسية -->
-<div id="menuSection" class="menu-section">
-    <h2 class="section-title">🎀 اختاري لعبتك المفضلة 🎀</h2>
-    <div class="games-grid" id="gamesGrid"></div>
-</div>
+    <script>
+        // Game data with 100 games
+        const games = [
+            // 20 ألعاب ذكاء
+            { id: 1, title: "سودوكو", category: "ذكاء", age: "8+", icon: "fa-puzzle-piece", description: "لعبة الاعداد المنطقية", url: "https://www.crazygames.com/embed/sudoku" },
+            { id: 2, title: "الشطرنج", category: "ذكاء", age: "6+", icon: "fa-chess", description: "لعبة الملوك والاستراتيجية", url: "https://www.crazygames.com/embed/chess" },
+            { id: 3, title: "كلمات متقاطعة", category: "ذكاء", age: "10+", icon: "fa-font", description: "اختبر معلوماتك العامة", url: "https://www.crazygames.com/embed/crossword" },
+            { id: 4, title: "الذاكرة", category: "ذكاء", age: "4+", icon: "fa-brain", description: "لعبة تقوية الذاكرة", url: "https://www.crazygames.com/embed/memory-game" },
+            { id: 5, title: "توصيل الاشكال", category: "ذكاء", age: "3+", icon: "fa-shapes", description: "لعبة توصيل الاشكال المتشابهة", url: "https://www.crazygames.com/embed/shape-match" },
+            { id: 6, title: "الرياضيات", category: "ذكاء", age: "6+", icon: "fa-calculator", description: "تحديات الرياضيات", url: "https://www.crazygames.com/embed/math-game" },
+            { id: 7, title: "الالغاز", category: "ذكاء", age: "8+", icon: "fa-question", description: "حل الالغاز المنطقية", url: "https://www.crazygames.com/embed/puzzle" },
+            { id: 8, title: "تذكر الالوان", category: "ذكاء", age: "4+", icon: "fa-palette", description: "لعبة تذكر تسلسل الالوان", url: "https://www.crazygames.com/embed/color-memory" },
+            { id: 9, title: "الارقام", category: "ذكاء", age: "3+", icon: "fa-sort-numeric-up", description: "تعلم الارقام", url: "https://www.crazygames.com/embed/number-game" },
+            { id: 10, title: "الحروف", category: "ذكاء", age: "3+", icon: "fa-font", description: "تعلم الحروف", url: "https://www.crazygames.com/embed/abc-game" },
+            { id: 11, title: "توصيل النقاط", category: "ذكاء", age: "4+", icon: "fa-draw-polygon", description: "توصيل النقاط لتكوين شكل", url: "https://www.crazygames.com/embed/dot-to-dot" },
+            { id: 12, title: "الاختلافات", category: "ذكاء", age: "5+", icon: "fa-eye", description: "اكتشاف الاختلافات بين الصور", url: "https://www.crazygames.com/embed/spot-difference" },
+            { id: 13, title: "الظلال", category: "ذكاء", age: "3+", icon: "fa-circle", description: "توصيل الشكل بظله", url: "https://www.crazygames.com/embed/shadow-match" },
+            { id: 14, title: "الاشكال الهندسية", category: "ذكاء", age: "4+", icon: "fa-square", description: "التعرف على الاشكال", url: "https://www.crazygames.com/embed/shapes" },
+            { id: 15, title: "الالوان", category: "ذكاء", age: "2+", icon: "fa-paint-brush", description: "تعلم الالوان", url: "https://www.crazygames.com/embed/colors" },
+            { id: 16, title: "الحيوانات", category: "ذكاء", age: "2+", icon: "fa-dog", description: "التعرف على الحيوانات", url: "https://www.crazygames.com/embed/animals" },
+            { id: 17, title: "الفواكه", category: "ذكاء", age: "2+", icon: "fa-apple-alt", description: "التعرف على الفواكه", url: "https://www.crazygames.com/embed/fruits" },
+            { id: 18, title: "الخضروات", category: "ذكاء", age: "3+", icon: "fa-carrot", description: "التعرف على الخضروات", url: "https://www.crazygames.com/embed/vegetables" },
+            { id: 19, title: "الوظائف", category: "ذكاء", age: "4+", icon: "fa-briefcase", description: "التعرف على المهن", url: "https://www.crazygames.com/embed/professions" },
+            { id: 20, title: "وسائل النقل", category: "ذكاء", age: "3+", icon: "fa-car", description: "التعرف على وسائل النقل", url: "https://www.crazygames.com/embed/transport" },
 
-<!-- منطقة اللعبة -->
-<div id="gameSection" class="game-section" style="display: none;">
-    <div class="game-header">
-        <button class="back-btn" onclick="backToMenu()">
-            <span>🔙</span> رجوع
-        </button>
-        <h2 class="game-title" id="currentGameTitle"></h2>
-        <button class="reset-btn" onclick="resetCurrentGame()">
-            <span>🔄</span> لعبة جديدة
-        </button>
-    </div>
-    <div id="gameContent"></div>
-</div>
+            // 20 ألعاب حرب
+            { id: 21, title: "الجيوش", category: "حرب", age: "10+", icon: "fa-users", description: "قيادة الجيوش في المعارك", url: "https://www.crazygames.com/embed/army-game" },
+            { id: 22, title: "الدبابات", category: "حرب", age: "8+", icon: "fa-tank", description: "معارك الدبابات", url: "https://www.crazygames.com/embed/tanks" },
+            { id: 23, title: "الطائرات", category: "حرب", age: "8+", icon: "fa-fighter-jet", description: "مقاتلات جوية", url: "https://www.crazygames.com/embed/air-force" },
+            { id: 24, title: "القلعة", category: "حرب", age: "7+", icon: "fa-castle", description: "الدفاع عن القلعة", url: "https://www.crazygames.com/embed/castle-defense" },
+            { id: 25, title: "الاسطول", category: "حرب", age: "8+", icon: "fa-ship", description: "معارك بحرية", url: "https://www.crazygames.com/embed/navy-battle" },
+            { id: 26, title: "القناص", category: "حرب", age: "12+", icon: "fa-crosshairs", description: "لعبة القنص", url: "https://www.crazygames.com/embed/sniper" },
+            { id: 27, title: "المدفعية", category: "حرب", age: "8+", icon: "fa-bomb", description: "قصف الاهداف", url: "https://www.crazygames.com/embed/artillery" },
+            { id: 28, title: "الجنود", category: "حرب", age: "6+", icon: "fa-child", description: "مغامرات الجنود", url: "https://www.crazygames.com/embed/soldiers" },
+            { id: 29, title: "القاعدة", category: "حرب", age: "8+", icon: "fa-baseball", description: "بناء القاعدة العسكرية", url: "https://www.crazygames.com/embed/base-building" },
+            { id: 30, title: "الاسلحة", category: "حرب", age: "10+", icon: "fa-gun", description: "تجميع الاسلحة", url: "https://www.crazygames.com/embed/weapons" },
+            { id: 31, title: "الغواصات", category: "حرب", age: "8+", icon: "fa-subway", description: "حرب الغواصات", url: "https://www.crazygames.com/embed/submarine" },
+            { id: 32, title: "المروحيات", category: "حرب", age: "7+", icon: "fa-helicopter", description: "هجمات جوية", url: "https://www.crazygames.com/embed/helicopter" },
+            { id: 33, title: "الدوريات", category: "حرب", age: "6+", icon: "fa-motorcycle", description: "دوريات استطلاع", url: "https://www.crazygames.com/embed/patrol" },
+            { id: 34, title: "الكمين", category: "حرب", age: "8+", icon: "fa-street-view", description: "نصب الكمائن", url: "https://www.crazygames.com/embed/ambush" },
+            { id: 35, title: "الرادار", category: "حرب", age: "6+", icon: "fa-satellite-dish", description: "مراقبة الرادار", url: "https://www.crazygames.com/embed/radar" },
+            { id: 36, title: "المعسكر", category: "حرب", age: "5+", icon: "fa-campground", description: "ادارة المعسكر", url: "https://www.crazygames.com/embed/camp" },
+            { id: 37, title: "التمويه", category: "حرب", age: "5+", icon: "fa-paint-roller", description: "التخفي والتمويه", url: "https://www.crazygames.com/embed/camouflage" },
+            { id: 38, title: "الاشارات", category: "حرب", age: "6+", icon: "fa-signal", description: "فك الشيفرات", url: "https://www.crazygames.com/embed/signals" },
+            { id: 39, title: "الاسرى", category: "حرب", age: "8+", icon: "fa-handcuffs", description: "انقاذ الاسرى", url: "https://www.crazygames.com/embed/rescue" },
+            { id: 40, title: "النصر", category: "حرب", age: "6+", icon: "fa-trophy", description: "تحقيق الانتصار", url: "https://www.crazygames.com/embed/victory" },
 
-<script>
-///////////////////////////////////////////
-// نظام النقاط
-///////////////////////////////////////////
-let points = parseInt(localStorage.getItem('points')) || 0;
-updatePointsDisplay();
+            // 20 ألعاب مغامرة
+            { id: 41, title: "الكنز", category: "مغامرة", age: "6+", icon: "fa-map", description: "البحث عن الكنز", url: "https://www.crazygames.com/embed/treasure-hunt" },
+            { id: 42, title: "الغابة", category: "مغامرة", age: "5+", icon: "fa-tree", description: "مغامرة في الغابة", url: "https://www.crazygames.com/embed/jungle-adventure" },
+            { id: 43, title: "الصحراء", category: "مغامرة", age: "6+", icon: "fa-sun", description: "عبور الصحراء", url: "https://www.crazygames.com/embed/desert" },
+            { id: 44, title: "الجبل", category: "مغامرة", age: "7+", icon: "fa-mountain", description: "تسلق الجبال", url: "https://www.crazygames.com/embed/mountain" },
+            { id: 45, title: "النهر", category: "مغامرة", age: "5+", icon: "fa-water", description: "عبور النهر", url: "https://www.crazygames.com/embed/river" },
+            { id: 46, title: "الكهف", category: "مغامرة", age: "6+", icon: "fa-cave", description: "استكشاف الكهوف", url: "https://www.crazygames.com/embed/cave" },
+            { id: 47, title: "الجزيرة", category: "مغامرة", age: "6+", icon: "fa-umbrella-beach", description: "جزيرة الكنز", url: "https://www.crazygames.com/embed/island" },
+            { id: 48, title: "الفضاء", category: "مغامرة", age: "5+", icon: "fa-rocket", description: "رحلة الى الفضاء", url: "https://www.crazygames.com/embed/space" },
+            { id: 49, title: "الهرم", category: "مغامرة", age: "7+", icon: "fa-pyramid", description: "الاهرامات والفراعنة", url: "https://www.crazygames.com/embed/pyramid" },
+            { id: 50, title: "القلعة المسكونة", category: "مغامرة", age: "8+", icon: "fa-ghost", description: "مغامرة مخيفة", url: "https://www.crazygames.com/embed/haunted" },
+            { id: 51, title: "الديناصور", category: "مغامرة", age: "4+", icon: "fa-dragon", description: "عصر الديناصورات", url: "https://www.crazygames.com/embed/dinosaur" },
+            { id: 52, title: "القراصنة", category: "مغامرة", age: "5+", icon: "fa-skull", description: "قراصنة الكاريبي", url: "https://www.crazygames.com/embed/pirates" },
+            { id: 53, title: "الفارس", category: "مغامرة", age: "6+", icon: "fa-shield-halved", description: "فارس وشجعان", url: "https://www.crazygames.com/embed/knight" },
+            { id: 54, title: "الساحر", category: "مغامرة", age: "6+", icon: "fa-hat-wizard", description: "عالم السحر", url: "https://www.crazygames.com/embed/wizard" },
+            { id: 55, title: "التنين", category: "مغامرة", age: "7+", icon: "fa-dragon", description: "محاربة التنين", url: "https://www.crazygames.com/embed/dragon" },
+            { id: 56, title: "الاميرة", category: "مغامرة", age: "4+", icon: "fa-crown", description: "انقاذ الاميرة", url: "https://www.crazygames.com/embed/princess" },
+            { id: 57, title: "الوحش", category: "مغامرة", age: "6+", icon: "fa-paw", description: "الوحوش والوحوش", url: "https://www.crazygames.com/embed/monster" },
+            { id: 58, title: "الغواص", category: "مغامرة", age: "5+", icon: "fa-fish", description: "الغوص في البحر", url: "https://www.crazygames.com/embed/diver" },
+            { id: 59, title: "المتسلق", category: "مغامرة", age: "5+", icon: "fa-hiking", description: "تسلق الجبال", url: "https://www.crazygames.com/embed/climber" },
+            { id: 60, title: "الطيار", category: "مغامرة", age: "4+", icon: "fa-plane", description: "التحليق بالطائرة", url: "https://www.crazygames.com/embed/pilot" },
 
-function updatePointsDisplay() {
-    document.getElementById('points').innerHTML = `💎 ${points} نقطة`;
-}
+            // 20 ألعاب بنات
+            { id: 61, title: "تلبيس", category: "بنات", age: "3+", icon: "fa-tshirt", description: "تلبيس ومكياج", url: "https://www.crazygames.com/embed/dress-up" },
+            { id: 62, title: "طبخ", category: "بنات", age: "4+", icon: "fa-utensils", description: "طبخ وحلويات", url: "https://www.crazygames.com/embed/cooking" },
+            { id: 63, title: "صالون", category: "بنات", age: "3+", icon: "fa-cut", description: "تصفيف الشعر", url: "https://www.crazygames.com/embed/salon" },
+            { id: 64, title: "مكياج", category: "بنات", age: "5+", icon: "fa-magic", description: "مكياج وتجميل", url: "https://www.crazygames.com/embed/makeup" },
+            { id: 65, title: "ديكور", category: "بنات", age: "4+", icon: "fa-couch", description: "تزيين المنزل", url: "https://www.crazygames.com/embed/decor" },
+            { id: 66, title: "حديقة", category: "بنات", age: "3+", icon: "fa-seedling", description: "زراعة الازهار", url: "https://www.crazygames.com/embed/garden" },
+            { id: 67, title: "مهرجانات", category: "بنات", age: "4+", icon: "fa-music", description: "الحفلات", url: "https://www.crazygames.com/embed/party" },
+            { id: 68, title: "حيوانات اليفة", category: "بنات", age: "3+", icon: "fa-cat", description: "تربية الحيوانات", url: "https://www.crazygames.com/embed/pets" },
+            { id: 69, title: "اميرات", category: "بنات", age: "3+", icon: "fa-crown", description: "اميرات ديزني", url: "https://www.crazygames.com/embed/princess-game" },
+            { id: 70, title: "مجوهرات", category: "بنات", age: "4+", icon: "fa-gem", description: "تصميم المجوهرات", url: "https://www.crazygames.com/embed/jewelry" },
+            { id: 71, title: "موضة", category: "بنات", age: "5+", icon: "fa-vest", description: "تصميم الازياء", url: "https://www.crazygames.com/embed/fashion" },
+            { id: 72, title: "بوتيك", category: "بنات", age: "3+", icon: "fa-store", description: "شراء ملابس", url: "https://www.crazygames.com/embed/boutique" },
+            { id: 73, title: "كوفي", category: "بنات", age: "4+", icon: "fa-mug-hot", description: "مقهى وحلويات", url: "https://www.crazygames.com/embed/cafe" },
+            { id: 74, title: "مستشفى", category: "بنات", age: "4+", icon: "fa-hospital", description: "لعبة الطبيبات", url: "https://www.crazygames.com/embed/hospital" },
+            { id: 75, title: "مدرسة", category: "بنات", age: "3+", icon: "fa-school", description: "المدرسة والمعلمات", url: "https://www.crazygames.com/embed/school" },
+            { id: 76, title: "سبا", category: "بنات", age: "5+", icon: "fa-spa", description: "حمامات سبا", url: "https://www.crazygames.com/embed/spa" },
+            { id: 77, title: "عرائس", category: "بنات", age: "2+", icon: "fa-doll", description: "تلبيس العرائس", url: "https://www.crazygames.com/embed/dolls" },
+            { id: 78, title: "بيبي", category: "بنات", age: "3+", icon: "fa-baby", description: "العناية بالاطفال", url: "https://www.crazygames.com/embed/baby-care" },
+            { id: 79, title: "ورود", category: "بنات", age: "3+", icon: "fa-leaf", description: "تنسيق الورود", url: "https://www.crazygames.com/embed/flowers" },
+            { id: 80, title: "كعك", category: "بنات", age: "3+", icon: "fa-cake-candles", description: "تزيين الكعك", url: "https://www.crazygames.com/embed/cake" },
 
-function addPoints(p) {
-    points += p;
-    localStorage.setItem('points', points);
-    updatePointsDisplay();
-    
-    // رسالة منبثقة لطيفة
-    const message = document.createElement('div');
-    message.style.cssText = `
-        position: fixed;
-        top: 100px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: linear-gradient(135deg, #ff1493, #ff69b4);
-        color: white;
-        padding: 15px 40px;
-        border-radius: 50px;
-        font-size: 20px;
-        font-weight: bold;
-        z-index: 1000;
-        box-shadow: 0 10px 30px rgba(255,20,147,0.3);
-        animation: slideDown 0.5s ease;
-    `;
-    message.innerHTML = `🎀 +${p} نقطة!`;
-    document.body.appendChild(message);
-    
-    setTimeout(() => {
-        message.style.animation = 'slideUp 0.5s ease';
-        setTimeout(() => message.remove(), 500);
-    }, 2000);
-}
+            // 20 ألعاب اطفال
+            { id: 81, title: "تلوين", category: "اطفال", age: "2+", icon: "fa-paint-brush", description: "تلوين الصور", url: "https://www.crazygames.com/embed/coloring" },
+            { id: 82, title: "الغزال", category: "اطفال", age: "2+", icon: "fa-deer", description: "مغامرات الغزال", url: "https://www.crazygames.com/embed/deer" },
+            { id: 83, title: "الارنب", category: "اطفال", age: "2+", icon: "fa-rabbit", description: "الارنب والنمر", url: "https://www.crazygames.com/embed/rabbit" },
+            { id: 84, title: "القط", category: "اطفال", age: "2+", icon: "fa-cat", description: "القطط اللطيفة", url: "https://www.crazygames.com/embed/cat" },
+            { id: 85, title: "الكلب", category: "اطفال", age: "2+", icon: "fa-dog", description: "الكلب الوفي", url: "https://www.crazygames.com/embed/dog" },
+            { id: 86, title: "البطريق", category: "اطفال", age: "2+", icon: "fa-penguin", description: "البطريق في القطب", url: "https://www.crazygames.com/embed/penguin" },
+            { id: 87, title: "الزرافة", category: "اطفال", age: "2+", icon: "fa-giraffe", description: "الزرافة الطويلة", url: "https://www.crazygames.com/embed/giraffe" },
+            { id: 88, title: "الفيل", category: "اطفال", age: "2+", icon: "fa-elephant", description: "الفيل الضخم", url: "https://www.crazygames.com/embed/elephant" },
+            { id: 89, title: "الاسد", category: "اطفال", age: "3+", icon: "fa-lion", description: "ملك الغابة", url: "https://www.crazygames.com/embed/lion" },
+            { id: 90, title: "القرد", category: "اطفال", age: "2+", icon: "fa-monkey", description: "القرد الشقي", url: "https://www.crazygames.com/embed/monkey" },
+            { id: 91, title: "البقرة", category: "اطفال", age: "1+", icon: "fa-cow", description: "البقرة الحلوب", url: "https://www.crazygames.com/embed/cow" },
+            { id: 92, title: "الحصان", category: "اطفال", age: "2+", icon: "fa-horse", description: "الخيول الجميلة", url: "https://www.crazygames.com/embed/horse" },
+            { id: 93, title: "النحلة", category: "اطفال", age: "2+", icon: "fa-bug", description: "النحلة والعسل", url: "https://www.crazygames.com/embed/bee" },
+            { id: 94, title: "الفراشة", category: "اطفال", age: "2+", icon: "fa-butterfly", description: "الفراشات الملونة", url: "https://www.crazygames.com/embed/butterfly" },
+            { id: 95, title: "البطة", category: "اطفال", age: "1+", icon: "fa-duck", description: "البطة والبركة", url: "https://www.crazygames.com/embed/duck" },
+            { id: 96, title: "الدجاجة", category: "اطفال", age: "1+", icon: "fa-egg", description: "الدجاجة والبيض", url: "https://www.crazygames.com/embed/chicken" },
+            { id: 97, title: "الخروف", category: "اطفال", age: "1+", icon: "fa-sheep", description: "الخروف والقطيع", url: "https://www.crazygames.com/embed/sheep" },
+            { id: 98, title: "الجمل", category: "اطفال", age: "2+", icon: "fa-camel", description: "الجمل في الصحراء", url: "https://www.crazygames.com/embed/camel" },
+            { id: 99, title: "الكنغر", category: "اطفال", age: "2+", icon: "fa-kangaroo", description: "الكنغر والقفز", url: "https://www.crazygames.com/embed/kangaroo" },
+            { id: 100, title: "الباندا", category: "اطفال", age: "2+", icon: "fa-panda", description: "الباندا اللطيفة", url: "https://www.crazygames.com/embed/panda" }
+        ];
 
-///////////////////////////////////////////
-// الألعاب - تصميم واقعي
-///////////////////////////////////////////
-const games = [
-    {
-        id: 1,
-        name: 'صالون الشعر',
-        icon: '💇',
-        description: 'قصفي وصبغي شعرك بتسريحات عصرية',
-        points: '5-10 نقاط',
-        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917996.png',
-        bgColor: '#FFB6C1'
-    },
-    {
-        id: 2,
-        name: 'مانيكير الأظافر',
-        icon: '💅',
-        description: 'تزيين الأظافر بأجمل الألوان',
-        points: '3-8 نقاط',
-        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917980.png',
-        bgColor: '#FFC0CB'
-    },
-    {
-        id: 3,
-        name: 'فساتين الأميرات',
-        icon: '👗',
-        description: 'تصميم فساتين ساحرة للأميرات',
-        points: '7-15 نقاط',
-        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917994.png',
-        bgColor: '#DDA0DD'
-    },
-    {
-        id: 4,
-        name: 'مكياج احترافي',
-        icon: '👁️',
-        description: 'تطبيق أجمل مكياج للعيون',
-        points: '6-12 نقاط',
-        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917985.png',
-        bgColor: '#E6E6FA'
-    },
-    {
-        id: 5,
-        name: 'تزيين الكعكات',
-        icon: '🍰',
-        description: 'ديكورات كعكات عيد الميلاد',
-        points: '8-15 نقاط',
-        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917992.png',
-        bgColor: '#FFE4E1'
-    },
-    {
-        id: 6,
-        name: 'مجوهرات فاخرة',
-        icon: '💎',
-        description: 'تصميم إكسسوارات براقة',
-        points: '6-10 نقاط',
-        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917988.png',
-        bgColor: '#F0E68C'
-    },
-    {
-        id: 7,
-        name: 'لعبة إكس-أو',
-        icon: '❌⭕',
-        description: 'لعبة كلاسيكية ضد الكمبيوتر',
-        points: '5 نقاط',
-        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917975.png',
-        bgColor: '#B0E0E6'
-    },
-    {
-        id: 8,
-        name: 'مقهى الحلوى',
-        icon: '🧁',
-        description: 'تحضير أشهى الحلويات',
-        points: '10-20 نقاط',
-        image: 'https://cdn-icons-png.flaticon.com/512/2917/2917983.png',
-        bgColor: '#F0FFF0'
-    }
-];
+        let currentCategory = 'all';
+        let currentGames = [...games];
 
-// عرض الألعاب
-function displayGames() {
-    let html = '';
-    games.forEach(game => {
-        html += `
-            <div class="game-card" onclick="playGame(${game.id})">
-                <div class="card-image" style="background-image: url('${game.image}'); background-color: ${game.bgColor};">
-                    <div class="card-overlay">
-                        <h3>${game.name}</h3>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <p>${game.description}</p>
-                    <span class="card-points">🏆 ${game.points}</span>
-                </div>
-            </div>
-        `;
-    });
-    document.getElementById('gamesGrid').innerHTML = html;
-}
+        // Display games
+        function displayGames() {
+            const grid = document.getElementById('gamesGrid');
+            const filteredGames = currentCategory === 'all' 
+                ? currentGames 
+                : currentGames.filter(game => game.category === currentCategory);
 
-// التنقل
-function backToMenu() {
-    document.getElementById('menuSection').style.display = 'block';
-    document.getElementById('gameSection').style.display = 'none';
-}
-
-function playGame(id) {
-    document.getElementById('menuSection').style.display = 'none';
-    document.getElementById('gameSection').style.display = 'block';
-    
-    const game = games.find(g => g.id === id);
-    document.getElementById('currentGameTitle').innerHTML = game.name;
-    
-    let content = '';
-    
-    switch(id) {
-        case 1: content = hairSalonGame(); break;
-        case 2: content = nailsGame(); break;
-        case 3: content = dressGame(); break;
-        case 4: content = makeupGame(); break;
-        case 5: content = cakeGame(); break;
-        case 6: content = jewelryGame(); break;
-        case 7: content = ticTacToeGame(); break;
-        case 8: content = candyGame(); break;
-    }
-    
-    document.getElementById('gameContent').innerHTML = content;
-}
-
-function resetCurrentGame() {
-    const title = document.getElementById('currentGameTitle').innerHTML;
-    const game = games.find(g => g.name === title);
-    if(game) playGame(game.id);
-}
-
-///////////////////////////////////////////
-// صالون الشعر (واقعي)
-///////////////////////////////////////////
-function hairSalonGame() {
-    return `
-        <div class="salon-container">
-            <div class="model-container">
-                <div class="model-card">
-                    <div class="model-title">قبل</div>
-                    <div class="model-display" id="beforeHair">👧</div>
-                </div>
-                <div class="model-card">
-                    <div class="model-title">بعد</div>
-                    <div class="model-display" id="afterHair">👩‍🦰</div>
-                </div>
-            </div>
-            
-            <div class="tools-panel">
-                <h3 class="tools-title">أدوات التصفيف</h3>
-                <div class="tools-grid">
-                    <div class="tool-item" onclick="applyHairTool('💇', 'قص')">
-                        <div class="tool-icon">💇</div>
-                        <div class="tool-name">قص الشعر</div>
-                    </div>
-                    <div class="tool-item" onclick="applyHairTool('👩‍🦰', 'تمليس')">
-                        <div class="tool-icon">👩‍🦰</div>
-                        <div class="tool-name">تمليس</div>
-                    </div>
-                    <div class="tool-item" onclick="applyHairTool('👩‍🦱', 'تجعيد')">
-                        <div class="tool-icon">👩‍🦱</div>
-                        <div class="tool-name">تجعيد</div>
-                    </div>
-                    <div class="tool-item" onclick="applyHairTool('👸', 'تاج')">
-                        <div class="tool-icon">👸</div>
-                        <div class="tool-name">تاج أميرة</div>
-                    </div>
-                </div>
-                
-                <h3 class="tools-title" style="margin-top: 30px;">ألوان الصبغة</h3>
-                <div class="color-palette">
-                    <div class="color-swatch" style="background: #000000;" onclick="applyHairColor('#000000')"></div>
-                    <div class="color-swatch" style="background: #8B4513;" onclick="applyHairColor('#8B4513')"></div>
-                    <div class="color-swatch" style="background: #FFD700;" onclick="applyHairColor('#FFD700')"></div>
-                    <div class="color-swatch" style="background: #FF69B4;" onclick="applyHairColor('#FF69B4')"></div>
-                    <div class="color-swatch" style="background: #FF4500;" onclick="applyHairColor('#FF4500')"></div>
-                </div>
-            </div>
-            
-            <div class="status-message" id="hairStatus">⚡ اختاري تسريحة وألوان</div>
-            <button class="action-btn" onclick="saveHairStyle()">✨ حفظ التسريحة ✨</button>
-        </div>
-        <script>
-            window.applyHairTool = function(tool, name) {
-                document.getElementById('afterHair').innerHTML = tool;
-                document.getElementById('hairStatus').innerHTML = '🎀 تم تطبيق: ' + name;
-            };
-            
-            window.applyHairColor = function(color) {
-                document.getElementById('afterHair').style.color = color;
-                document.getElementById('hairStatus').innerHTML = '💗 لون رائع!';
-            };
-            
-            window.saveHairStyle = function() {
-                const points = Math.floor(Math.random() * 6) + 5;
-                document.getElementById('hairStatus').innerHTML = '🎉 تسريحة رائعة! +' + points + ' نقاط';
-                addPoints(points);
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// مانيكير الأظافر
-///////////////////////////////////////////
-function nailsGame() {
-    return `
-        <div class="salon-container">
-            <div class="model-container">
-                <div class="model-card">
-                    <div class="model-title">أظافرك</div>
-                    <div class="model-display" id="nails">🖐️</div>
-                </div>
-            </div>
-            
-            <div class="tools-panel">
-                <h3 class="tools-title">ألوان الطلاء</h3>
-                <div class="color-palette">
-                    <div class="color-swatch" style="background: #FF1493;" onclick="applyNailColor('#FF1493')"></div>
-                    <div class="color-swatch" style="background: #FF0000;" onclick="applyNailColor('#FF0000')"></div>
-                    <div class="color-swatch" style="background: #FF69B4;" onclick="applyNailColor('#FF69B4')"></div>
-                    <div class="color-swatch" style="background: #9370DB;" onclick="applyNailColor('#9370DB')"></div>
-                    <div class="color-swatch" style="background: #4169E1;" onclick="applyNailColor('#4169E1')"></div>
-                </div>
-                
-                <h3 class="tools-title" style="margin-top: 30px;">إكسسوارات</h3>
-                <div class="tools-grid">
-                    <div class="tool-item" onclick="applyNailSticker('⭐')">
-                        <div class="tool-icon">⭐</div>
-                        <div class="tool-name">نجمة</div>
-                    </div>
-                    <div class="tool-item" onclick="applyNailSticker('❤️')">
-                        <div class="tool-icon">❤️</div>
-                        <div class="tool-name">قلب</div>
-                    </div>
-                    <div class="tool-item" onclick="applyNailSticker('💎')">
-                        <div class="tool-icon">💎</div>
-                        <div class="tool-name">كريستال</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="status-message" id="nailsStatus">💅 اختاري لون رائع</div>
-            <button class="action-btn" onclick="saveNails()">✨ حفظ التصميم ✨</button>
-        </div>
-        <script>
-            window.applyNailColor = function(color) {
-                document.getElementById('nails').style.color = color;
-                document.getElementById('nailsStatus').innerHTML = 'لون جميل!';
-            };
-            
-            window.applyNailSticker = function(sticker) {
-                document.getElementById('nails').innerHTML = '🖐️' + sticker;
-                document.getElementById('nailsStatus').innerHTML = 'إضافة ' + sticker;
-            };
-            
-            window.saveNails = function() {
-                const points = Math.floor(Math.random() * 6) + 3;
-                document.getElementById('nailsStatus').innerHTML = '💅 أظافر رائعة! +' + points + ' نقاط';
-                addPoints(points);
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// فساتين الأميرات
-///////////////////////////////////////////
-function dressGame() {
-    return `
-        <div class="salon-container">
-            <div class="model-container">
-                <div class="model-card">
-                    <div class="model-display" id="princess">👸</div>
-                </div>
-            </div>
-            
-            <div class="tools-panel">
-                <h3 class="tools-title">فساتين ساحرة</h3>
-                <div class="tools-grid">
-                    <div class="tool-item" onclick="applyDress('👗')">
-                        <div class="tool-icon">👗</div>
-                        <div class="tool-name">فستان قصير</div>
-                    </div>
-                    <div class="tool-item" onclick="applyDress('👘')">
-                        <div class="tool-icon">👘</div>
-                        <div class="tool-name">فستان طويل</div>
-                    </div>
-                    <div class="tool-item" onclick="applyDress('👰')">
-                        <div class="tool-icon">👰</div>
-                        <div class="tool-name">فستان زفاف</div>
-                    </div>
-                    <div class="tool-item" onclick="applyDress('👸')">
-                        <div class="tool-icon">👸</div>
-                        <div class="tool-name">فستان ملكي</div>
-                    </div>
-                </div>
-                
-                <h3 class="tools-title" style="margin-top: 30px;">ألوان الفستان</h3>
-                <div class="color-palette">
-                    <div class="color-swatch" style="background: #FF69B4;" onclick="applyDressColor('#FF69B4')"></div>
-                    <div class="color-swatch" style="background: #87CEEB;" onclick="applyDressColor('#87CEEB')"></div>
-                    <div class="color-swatch" style="background: #98FB98;" onclick="applyDressColor('#98FB98')"></div>
-                    <div class="color-swatch" style="background: #FFD700;" onclick="applyDressColor('#FFD700')"></div>
-                </div>
-            </div>
-            
-            <div class="status-message" id="dressStatus">👗 صممي فستان أحلامك</div>
-            <button class="action-btn" onclick="saveDress()">✨ حفظ الفستان ✨</button>
-        </div>
-        <script>
-            window.applyDress = function(dress) {
-                document.getElementById('princess').innerHTML = dress;
-                document.getElementById('dressStatus').innerHTML = 'فستان جميل!';
-            };
-            
-            window.applyDressColor = function(color) {
-                document.getElementById('princess').style.color = color;
-            };
-            
-            window.saveDress = function() {
-                const points = Math.floor(Math.random() * 9) + 7;
-                document.getElementById('dressStatus').innerHTML = '👸 أميرة متألقة! +' + points + ' نقاط';
-                addPoints(points);
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// مكياج عيون
-///////////////////////////////////////////
-function makeupGame() {
-    return `
-        <div class="salon-container">
-            <div class="model-container">
-                <div class="model-display" id="eyes">👀</div>
-            </div>
-            
-            <div class="tools-panel">
-                <h3 class="tools-title">ظلال العيون</h3>
-                <div class="color-palette">
-                    <div class="color-swatch" style="background: #FFB6C1;" onclick="applyEyeshadow('#FFB6C1')"></div>
-                    <div class="color-swatch" style="background: #9370DB;" onclick="applyEyeshadow('#9370DB')"></div>
-                    <div class="color-swatch" style="background: #4169E1;" onclick="applyEyeshadow('#4169E1')"></div>
-                    <div class="color-swatch" style="background: #32CD32;" onclick="applyEyeshadow('#32CD32')"></div>
-                </div>
-                
-                <h3 class="tools-title" style="margin-top: 30px;">أدوات المكياج</h3>
-                <div class="tools-grid">
-                    <div class="tool-item" onclick="applyMascara()">
-                        <div class="tool-icon">👁️</div>
-                        <div class="tool-name">ماسكارا</div>
-                    </div>
-                    <div class="tool-item" onclick="applyEyeliner()">
-                        <div class="tool-icon">✏️</div>
-                        <div class="tool-name">آيلاينر</div>
-                    </div>
-                    <div class="tool-item" onclick="applyGlitter()">
-                        <div class="tool-icon">✨</div>
-                        <div class="tool-name">جليتر</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="status-message" id="makeupStatus">👁️ طبقي مكياج رائع</div>
-            <button class="action-btn" onclick="saveMakeup()">✨ حفظ المكياج ✨</button>
-        </div>
-        <script>
-            window.applyEyeshadow = function(color) {
-                document.getElementById('eyes').innerHTML = '👁️✨';
-                document.getElementById('eyes').style.color = color;
-                document.getElementById('makeupStatus').innerHTML = 'ظلال عيون جميلة';
-            };
-            
-            window.applyMascara = function() {
-                document.getElementById('eyes').innerHTML = '👁️👁️';
-                document.getElementById('makeupStatus').innerHTML = 'رموش طويلة';
-            };
-            
-            window.applyEyeliner = function() {
-                document.getElementById('eyes').innerHTML = '◀️👁️';
-                document.getElementById('makeupStatus').innerHTML = 'آيلاينر مثالي';
-            };
-            
-            window.applyGlitter = function() {
-                document.getElementById('eyes').innerHTML = '✨👁️✨';
-                document.getElementById('makeupStatus').innerHTML = 'عيون لامعة';
-            };
-            
-            window.saveMakeup = function() {
-                const points = Math.floor(Math.random() * 7) + 6;
-                document.getElementById('makeupStatus').innerHTML = '🎉 مكياج رائع! +' + points + ' نقاط';
-                addPoints(points);
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// تزيين الكعكات
-///////////////////////////////////////////
-function cakeGame() {
-    return `
-        <div class="salon-container">
-            <div class="model-container">
-                <div class="model-display" id="cake">🎂</div>
-            </div>
-            
-            <div class="tools-panel">
-                <h3 class="tools-title">زينة الكعكة</h3>
-                <div class="tools-grid">
-                    <div class="tool-item" onclick="addCakeTopping('🍓')">
-                        <div class="tool-icon">🍓</div>
-                        <div class="tool-name">فراولة</div>
-                    </div>
-                    <div class="tool-item" onclick="addCakeTopping('🍫')">
-                        <div class="tool-icon">🍫</div>
-                        <div class="tool-name">شوكولاتة</div>
-                    </div>
-                    <div class="tool-item" onclick="addCakeTopping('🍒')">
-                        <div class="tool-icon">🍒</div>
-                        <div class="tool-name">كرز</div>
-                    </div>
-                    <div class="tool-item" onclick="addCakeTopping('🕯️')">
-                        <div class="tool-icon">🕯️</div>
-                        <div class="tool-name">شمعة</div>
-                    </div>
-                </div>
-                
-                <h3 class="tools-title" style="margin-top: 30px;">ألوان الكريمة</h3>
-                <div class="color-palette">
-                    <div class="color-swatch" style="background: #FF69B4;" onclick="changeCakeColor('#FF69B4')"></div>
-                    <div class="color-swatch" style="background: #87CEEB;" onclick="changeCakeColor('#87CEEB')"></div>
-                    <div class="color-swatch" style="background: #98FB98;" onclick="changeCakeColor('#98FB98')"></div>
-                </div>
-            </div>
-            
-            <div class="status-message" id="cakeStatus">🍰 زيني كعكتك</div>
-            <button class="action-btn" onclick="saveCake()">✨ حفظ الكعكة ✨</button>
-        </div>
-        <script>
-            window.addCakeTopping = function(topping) {
-                document.getElementById('cake').innerHTML = '🎂' + topping;
-                document.getElementById('cakeStatus').innerHTML = 'إضافة ' + topping;
-            };
-            
-            window.changeCakeColor = function(color) {
-                document.getElementById('cake').style.color = color;
-            };
-            
-            window.saveCake = function() {
-                const points = Math.floor(Math.random() * 8) + 8;
-                document.getElementById('cakeStatus').innerHTML = '🍰 كعكة رائعة! +' + points + ' نقاط';
-                addPoints(points);
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// مجوهرات فاخرة
-///////////////////////////////////////////
-function jewelryGame() {
-    return `
-        <div class="salon-container">
-            <div class="model-container">
-                <div class="model-display" id="jewelry">👸💎</div>
-            </div>
-            
-            <div class="tools-panel">
-                <h3 class="tools-title">مجوهرات فاخرة</h3>
-                <div class="tools-grid">
-                    <div class="tool-item" onclick="addJewelry('💍')">
-                        <div class="tool-icon">💍</div>
-                        <div class="tool-name">خاتم</div>
-                    </div>
-                    <div class="tool-item" onclick="addJewelry('📿')">
-                        <div class="tool-icon">📿</div>
-                        <div class="tool-name">عقد</div>
-                    </div>
-                    <div class="tool-item" onclick="addJewelry('👑')">
-                        <div class="tool-icon">👑</div>
-                        <div class="tool-name">تاج</div>
-                    </div>
-                    <div class="tool-item" onclick="addJewelry('✨')">
-                        <div class="tool-icon">✨</div>
-                        <div class="tool-name">لمعان</div>
-                    </div>
-                </div>
-                
-                <h3 class="tools-title" style="margin-top: 30px;">ألوان المجوهرات</h3>
-                <div class="color-palette">
-                    <div class="color-swatch" style="background: gold;" onclick="changeJewelryColor('gold')"></div>
-                    <div class="color-swatch" style="background: silver;" onclick="changeJewelryColor('silver')"></div>
-                    <div class="color-swatch" style="background: #FF69B4;" onclick="changeJewelryColor('#FF69B4')"></div>
-                </div>
-            </div>
-            
-            <div class="status-message" id="jewelryStatus">💎 تألقي بالمجوهرات</div>
-            <button class="action-btn" onclick="saveJewelry()">✨ حفظ الإطلالة ✨</button>
-        </div>
-        <script>
-            window.addJewelry = function(item) {
-                document.getElementById('jewelry').innerHTML = '👸' + item;
-                document.getElementById('jewelryStatus').innerHTML = 'إضافة ' + item;
-            };
-            
-            window.changeJewelryColor = function(color) {
-                document.getElementById('jewelry').style.color = color;
-            };
-            
-            window.saveJewelry = function() {
-                const points = Math.floor(Math.random() * 5) + 6;
-                document.getElementById('jewelryStatus').innerHTML = '👸 أميرة متألقة! +' + points + ' نقاط';
-                addPoints(points);
-            };
-        <\/script>
-    `;
-}
-
-///////////////////////////////////////////
-// لعبة إكس-أو
-///////////////////////////////////////////
-function ticTacToeGame() {
-    return `
-        <div class="classic-game">
-            <h2 style="color: #ff1493; margin-bottom: 20px;">❌⭕ إكس-أو</h2>
-            <div class="tic-grid" id="ticGrid"></div>
-            <div class="status-message" id="ticStatus">دورك</div>
-        </div>
-        <script>
-            let ticBoard = ['','','','','','','','',''];
-            let ticTurn = 'X';
-            let ticGameOver = false;
-            
-            function renderTic() {
-                let html = '';
-                for(let i = 0; i < 9; i++) {
-                    html += '<div class="tic-cell" onclick="window.ticMove('+i+')">'+ticBoard[i]+'</div>';
-                }
-                document.getElementById('ticGrid').innerHTML = html;
+            if (filteredGames.length === 0) {
+                grid.innerHTML = '<div class="no-games">لا توجد العاب في هذا التصنيف</div>';
+                return;
             }
+
+            grid.innerHTML = filteredGames.map(game => `
+                <div class="game-card" onclick="playGame('${game.url}')">
+                    <div class="age-badge">${game.age}</div>
+                    <div class="game-image">
+                        <i class="fas ${game.icon}"></i>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">${game.title}</h3>
+                        <span class="game-category">${game.category}</span>
+                        <p class="game-description">${game.description}</p>
+                        <button class="play-btn">العب الان</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter by category
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentCategory = e.target.dataset.category;
+                displayGames();
+            });
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            currentGames = games.filter(game => 
+                game.title.toLowerCase().includes(searchTerm) ||
+                game.description.toLowerCase().includes(searchTerm)
+            );
+            displayGames();
+        });
+
+        // Play game
+        function playGame(url) {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('gameFrame').src = url;
+            document.getElementById('gameModal').style.display = 'block';
             
-            window.ticMove = function(i) {
-                if(ticGameOver || ticBoard[i] !== '') return;
-                ticBoard[i] = 'X';
-                renderTic();
-                if(!checkTicWin()) {
-                    setTimeout(window.ticAIMove, 500);
-                }
-            };
-            
-            window.ticAIMove = function() {
-                let empty = [];
-                for(let i = 0; i < 9; i++) if(ticBoard[i] === '') empty.push(i);
-                if(empty.length > 0) {
-                    ticBoard[empty[Math.floor(Math.random() * empty.length)]] = 'O';
-                    renderTic();
-                    checkTicWin();
-                }
-            };
-            
-            function checkTicWin() {
-                let wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-                for(let w of wins) {
-                    if(ticBoard[w[0]] && ticBoard[w[0]] === ticBoard[w[1]] && ticBoard[w[0]] === ticBoard[w[2]]) {
-                        ticGameOver = true;
-                        if(ticBoard[w[0]] === 'X') {
-                            document.getElementById('ticStatus').innerHTML = '🎉 فزتي! +5 نقاط';
-                            addPoints(5);
-                        } else {
-                            document.getElementById('ticStatus').innerHTML = 'الكمبيوتر فاز';
-                        }
-                        return true;
-                    }
-                }
-                if(!ticBoard.includes('')) {
-                    ticGameOver = true;
-                    document.getElementById('ticStatus').innerHTML = 'تعادل';
-                    return true;
-                }
-                return false;
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+            }, 1000);
+        }
+
+        window.playGame = playGame;
+
+        // Close game
+        window.closeGame = function() {
+            document.getElementById('gameModal').style.display = 'none';
+            document.getElementById('gameFrame').src = '';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('gameModal');
+            if (event.target === modal) {
+                closeGame();
             }
-            
-            renderTic();
-        <\/script>
-    `;
-}
+        }
 
-///////////////////////////////////////////
-// مقهى الحلوى
-///////////////////////////////////////////
-function candyGame() {
-    return `
-        <div class="classic-game">
-            <h2 style="color: #ff1493; margin-bottom: 20px;">🧁 مقهى الحلوى</h2>
-            <div style="font-size: 120px; margin: 30px;" id="candy">🧁</div>
-            <div class="tools-grid" style="max-width: 400px; margin: 0 auto;">
-                <div class="tool-item" onclick="makeCandy('🍪')">
-                    <div class="tool-icon">🍪</div>
-                    <div class="tool-name">بسكويت</div>
-                </div>
-                <div class="tool-item" onclick="makeCandy('🍩')">
-                    <div class="tool-icon">🍩</div>
-                    <div class="tool-name">دونات</div>
-                </div>
-                <div class="tool-item" onclick="makeCandy('🍫')">
-                    <div class="tool-icon">🍫</div>
-                    <div class="tool-name">شوكولاتة</div>
-                </div>
-                <div class="tool-item" onclick="makeCandy('🍦')">
-                    <div class="tool-icon">🍦</div>
-                    <div class="tool-name">آيس كريم</div>
-                </div>
-            </div>
-            <div class="status-message" id="candyStatus">🍭 حضري أشهى الحلويات</div>
-            <button class="action-btn" onclick="saveCandy()">✨ تحضير +10 نقاط ✨</button>
-        </div>
-        <script>
-            window.makeCandy = function(candy) {
-                document.getElementById('candy').innerHTML = candy;
-                document.getElementById('candyStatus').innerHTML = 'حلوى لذيذة!';
-            };
-            
-            window.saveCandy = function() {
-                document.getElementById('candyStatus').innerHTML = '🧁 أحسنت! +10 نقاط';
-                addPoints(10);
-            };
-        <\/script>
-    `;
-}
-
-// بدء التطبيق
-displayGames();
-</script>
-
+        // Initialize
+        displayGames();
+    </script>
 </body>
 </html>
